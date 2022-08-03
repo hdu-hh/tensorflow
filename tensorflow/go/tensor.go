@@ -541,7 +541,7 @@ func copyPtr(w *bytes.Buffer, ptr unsafe.Pointer, l int) (int, error) {
 }
 
 func bug(format string, args ...interface{}) error {
-	return fmt.Errorf("BUG: Please report at https://github.com/tensorflow/tensorflow/issues with the note: Go TensorFlow %v: %v", Version(), fmt.Sprintf(format, args...))
+	return fmt.Errorf("BUG: Please report at https://github.com/hdu-hh/tensorflow/issues with the note: Go TensorFlow %v: %v", Version(), fmt.Sprintf(format, args...))
 }
 
 func isTensorSerializable(dataType DataType) error {

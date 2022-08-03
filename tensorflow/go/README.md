@@ -2,11 +2,11 @@
 
 Construct and execute TensorFlow graphs in Go.
 
-[![GoDoc](https://godoc.org/github.com/tensorflow/tensorflow/tensorflow/go?status.svg)](https://godoc.org/github.com/tensorflow/tensorflow/tensorflow/go)
+[![GoDoc](https://godoc.org/github.com/hdu-hh/tensorflow/tensorflow/go?status.svg)](https://godoc.org/github.com/hdu-hh/tensorflow/tensorflow/go)
 
 > *WARNING*: The API defined in this package is not stable and can change
 > without notice. The same goes for the package path:
-> (`github.com/tensorflow/tensorflow/tensorflow/go`).
+> (`github.com/hdu-hh/tensorflow/tensorflow/go`).
 
 ## Building the TensorFlow C library from source
 
@@ -33,13 +33,13 @@ from source.
 1.  Download the source code
 
     ```sh
-    go get -d github.com/tensorflow/tensorflow/tensorflow/go
+    go get -d github.com/hdu-hh/tensorflow/tensorflow/go
     ```
 
 2.  Build the TensorFlow C library:
 
     ```sh
-    cd ${GOPATH}/src/github.com/tensorflow/tensorflow
+    cd ${GOPATH}/src/github.com/hdu-hh/tensorflow
     ./configure
     bazel build -c opt //tensorflow:libtensorflow.so
     ```
@@ -52,8 +52,8 @@ from source.
     a. Copying it to a system location, e.g.,
 
     ```sh
-    sudo cp ${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow/libtensorflow.so /usr/local/lib
-    sudo cp ${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib
+    sudo cp ${GOPATH}/src/github.com/hdu-hh/tensorflow/bazel-bin/tensorflow/libtensorflow.so /usr/local/lib
+    sudo cp ${GOPATH}/src/github.com/hdu-hh/tensorflow/bazel-bin/tensorflow/libtensorflow_framework.so /usr/local/lib
     ```
 
     OR
@@ -61,18 +61,18 @@ from source.
     b. Setting environment variables:
 
     ```sh
-    export LIBRARY_PATH=${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow
+    export LIBRARY_PATH=${GOPATH}/src/github.com/hdu-hh/tensorflow/bazel-bin/tensorflow
     # Linux
-    export LD_LIBRARY_PATH=${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow
+    export LD_LIBRARY_PATH=${GOPATH}/src/github.com/hdu-hh/tensorflow/bazel-bin/tensorflow
     # OS X
-    export DYLD_LIBRARY_PATH=${GOPATH}/src/github.com/tensorflow/tensorflow/bazel-bin/tensorflow
+    export DYLD_LIBRARY_PATH=${GOPATH}/src/github.com/hdu-hh/tensorflow/bazel-bin/tensorflow
     ```
 
 4.  Build and test:
 
     ```sh
-    go generate github.com/tensorflow/tensorflow/tensorflow/go/op
-    go test github.com/tensorflow/tensorflow/tensorflow/go
+    go generate github.com/hdu-hh/tensorflow/tensorflow/go/op
+    go test github.com/hdu-hh/tensorflow/tensorflow/go
     ```
 
 ### Generate wrapper functions for ops
@@ -84,7 +84,7 @@ Prerequisites:
 - The TensorFlow repository under GOPATH
 
 ```sh
-go generate github.com/tensorflow/tensorflow/tensorflow/go/op
+go generate github.com/hdu-hh/tensorflow/tensorflow/go/op
 ```
 
 ## Support
