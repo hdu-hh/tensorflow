@@ -33,6 +33,24 @@ to
 [announce@tensorflow.org](https://groups.google.com/a/tensorflow.org/forum/#!forum/announce).
 See all the [mailing lists](https://www.tensorflow.org/community/forums).
 
+## tf2go: Tensorflow with Go
+
+Tensorflow with Go is a match made in heaven, considering the power and elegance of
+both projects. This is a reasonable assessment until you use the upstream Golang
+integration for more than running existing models.
+
+The upstream Golang integration has many strong points but
+* even seemingly trivial code can cause direct or subtle errors
+* coding with it requires plenty of boilerplate code and manual error checking
+* delayed error reporting makes it harder than needed to find problems
+* many operands needed for training non-trivial graphs are missing
+* etc.
+
+The `tf2go` branch is an experiment
+* to remedy the most striking problems mentioned above
+* to add convenience that is only available with TF's python integration now
+* to allow running as "close to the metal" as desired
+
 ## Install
 
 See the [TensorFlow install guide](https://www.tensorflow.org/install) for the
