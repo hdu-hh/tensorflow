@@ -2,19 +2,37 @@
   <img src="https://www.tensorflow.org/images/tf_logo_horizontal.png">
 </div>
 
-[![Python](https://img.shields.io/pypi/pyversions/tensorflow.svg?style=plastic)](https://badge.fury.io/py/tensorflow)
-[![PyPI](https://badge.fury.io/py/tensorflow.svg)](https://badge.fury.io/py/tensorflow)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4724125.svg)](https://doi.org/10.5281/zenodo.4724125)
-[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/1486/badge)](https://bestpractices.coreinfrastructure.org/projects/1486)
-[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow/badge)](https://api.securityscorecards.dev/projects/github.com/tensorflow/tensorflow)
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:tensorflow)
-[![Fuzzing Status](https://oss-fuzz-build-logs.storage.googleapis.com/badges/tensorflow-py.svg)](https://bugs.chromium.org/p/oss-fuzz/issues/list?sort=-opened&can=1&q=proj:tensorflow-py)
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+# An experiment to revive Tensorflow with Go
+
+## Background
+
+Tensorflow with Go is a match made in heaven, considering the power and elegance of
+both projects. This is a reasonable assessment until you use the upstream Golang
+integration for more than running existing models.
+
+The upstream Golang integration has many strong points but
+* it considers the Golang binding as [archived or unsupported](https://www.tensorflow.org/api_docs)
+* even seemingly trivial code can cause direct or subtle errors
+* coding with it requires plenty of boilerplate code and manual error checking
+* delayed error reporting makes it harder than needed to find problems
+* many operands needed for training non-trivial graphs are missing
+* etc.
+
+The `tf2go` branch is an experiment
+* to remedy the most striking problems mentioned above
+* to add convenience that is only available with TF's python integration now
+* to allow running as "close to the metal" as desired
+
+To use it you should start with these imports
+    import (
+        tf "github.com/hdu-hh/tensorflow/tensorflow/go"
+        "github.com/hdu-hh/tensorflow/tensorflow/go/op"
+    )
 
 **`Documentation`** |
 ------------------- |
 [![Documentation](https://img.shields.io/badge/api-reference-blue.svg)](https://www.tensorflow.org/api_docs/) |
-
+[Tensorflow with Go](https://pkg.go.dev/github.com/tensorflow/tensorflow/tensorflow/go) Docs for the now unsupported community supported Golang binding
 [TensorFlow](https://www.tensorflow.org/) is an end-to-end open source platform
 for machine learning. It has a comprehensive, flexible ecosystem of
 [tools](https://www.tensorflow.org/resources/tools),
@@ -41,49 +59,11 @@ See all the [mailing lists](https://www.tensorflow.org/community/forums).
 ## Install
 
 See the [TensorFlow install guide](https://www.tensorflow.org/install) for the
-[pip package](https://www.tensorflow.org/install/pip), to
-[enable GPU support](https://www.tensorflow.org/install/gpu), use a
-[Docker container](https://www.tensorflow.org/install/docker), and
-[build from source](https://www.tensorflow.org/install/source).
+[CPU or GPU library](https://github.com/tensorflow/build/tree/master/golang_install_guide).
 
-To install the current release, which includes support for
-[CUDA-enabled GPU cards](https://www.tensorflow.org/install/gpu) *(Ubuntu and
-Windows)*:
-
-```
-$ pip install tensorflow
-```
-
-A smaller CPU-only package is also available:
-
-```
-$ pip install tensorflow-cpu
-```
-
-To update TensorFlow to the latest version, add `--upgrade` flag to the above
-commands.
-
-*Nightly binaries are available for testing using the
-[tf-nightly](https://pypi.python.org/pypi/tf-nightly) and
-[tf-nightly-cpu](https://pypi.python.org/pypi/tf-nightly-cpu) packages on PyPi.*
-
-#### *Try your first TensorFlow program*
-
-```shell
-$ python
-```
-
-```python
->>> import tensorflow as tf
->>> tf.add(1, 2).numpy()
-3
->>> hello = tf.constant('Hello, TensorFlow!')
->>> hello.numpy()
-b'Hello, TensorFlow!'
-```
-
-For more examples, see the
-[TensorFlow tutorials](https://www.tensorflow.org/tutorials/).
+The [TensorFlow tutorials](https://www.tensorflow.org/tutorials/) and
+[TensorFlow guides](https://www.tensorflow.org/guide/) provide some great
+reading material. Most is focussed on python though.
 
 ## Contribution guidelines
 
