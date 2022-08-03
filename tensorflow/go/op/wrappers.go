@@ -20,7 +20,11 @@
 
 package op
 
-import tf "github.com/tensorflow/tensorflow/tensorflow/go"
+import (
+	"math/rand"
+	"strconv"
+	tf "github.com/tensorflow/tensorflow/tensorflow/go"
+)
 
 // optionalAttr is an intentionally un-exported type to hide
 // details of how optional attributes to operations are implemented.
@@ -55047,7 +55051,7 @@ func VarHandleOpContainer(value string) VarHandleOpAttr {
 // VarHandleOpSharedName sets the optional shared_name attribute to value.
 //
 // value: the name by which this variable is referred to.
-// If not specified, defaults to ""
+// If not specified, default to a unique name that cannot be shared.
 func VarHandleOpSharedName(value string) VarHandleOpAttr {
 	return func(m optionalAttr) {
 		m["shared_name"] = value
@@ -55082,9 +55086,11 @@ func VarHandleOp(scope *Scope, dtype tf.DataType, shape tf.Shape, optional ...Va
 	for _, a := range optional {
 		a(attrs)
 	}
+	if _, ok := attrs["shared_name"]; !ok {
+		attrs["shared_name"] = "_" + strconv.FormatInt(rand.Int63(), 36)
+	}
 	opspec := tf.OpSpec{
-		Type: "VarHandleOp",
-
+		Type:  "VarHandleOp",
 		Attrs: attrs,
 	}
 	op := scope.AddOperation(opspec)
