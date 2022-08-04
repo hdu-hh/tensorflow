@@ -209,10 +209,13 @@ func TestValidateGradientsNames(t *testing.T) {
 		t.Fatalf("Got name %v, wanted started with sub/Gradients/", grads1[0].Op.Name())
 	}
 
+	// prepare to recover from expected panic
+	defer func() {
+		if e := recover(); e == nil {
+			t.Error("Gradients should have failed if executed more than once for scope of the same namespace")
+		}
+	}()
 	Gradients(sub, []tf.Output{y0}, []tf.Output{x})
-	if err := s.Err(); err == nil {
-		t.Error("Gradients should have failed if executed more than once for scope of the same namespace")
-	}
 }
 
 func TestAddGradientsWithControlDependencies(t *testing.T) {
@@ -225,11 +228,14 @@ func TestAddGradientsWithControlDependencies(t *testing.T) {
 		init     = AssignVariableOp(s, variable, zero)
 		readDeps = []*tf.Operation{init}
 	)
+	// prepare to recover from expected panic
+	defer func() {
+		if e := recover(); e == nil {
+			t.Error("Gradients should have failed when control dependencies are set")
+		}
+	}()
 	s = s.WithControlDependencies(readDeps...)
 	Gradients(s, []tf.Output{y0}, []tf.Output{x})
-	if err := s.Err(); err == nil {
-		t.Error("Gradients should have failed when control dependencies are set")
-	}
 }
 
 func TestAddGradientsWithDevice(t *testing.T) {
@@ -238,9 +244,12 @@ func TestAddGradientsWithDevice(t *testing.T) {
 		x  = Placeholder(s.SubScope("x"), tf.Float)
 		y0 = Square(s.SubScope("y0"), x)
 	)
+	// prepare to recover from expected panic
+	defer func() {
+		if e := recover(); e == nil {
+			t.Error("Gradients should have failed when device is set")
+		}
+	}()
 	s = s.WithDevice("/device:GPU:0")
 	Gradients(s, []tf.Output{y0}, []tf.Output{x})
-	if err := s.Err(); err == nil {
-		t.Error("Gradients should have failed when device is set")
-	}
 }
