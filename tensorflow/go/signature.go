@@ -16,7 +16,7 @@ limitations under the License.
 
 package tensorflow
 
-import corepb "github.com/hdu-hh/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto"
+import corepb "github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 
 // #include "tensorflow/c/c_api.h"
 import "C"
