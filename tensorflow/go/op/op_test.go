@@ -19,7 +19,6 @@ limitations under the License.
 package op
 
 import (
-	"strings"
 	"testing"
 
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
@@ -36,27 +35,17 @@ func TestPlaceholder(t *testing.T) {
 }
 
 func TestAddOperationFailure(t *testing.T) {
+	// prepare to recover from expected panic
+	defer func() {
+		if e := recover(); e == nil {
+			t.Fatal("ResizeArea expects an int32 Tensor for size, should fail when an int64 is provided")
+		}
+	}()
+
 	// Inspired from https://github.com/tensorflow/tensorflow/issues/9931
 	s := NewScope()
 
-	resize := ResizeArea(s, Placeholder(s, tf.Float), Const(s, []int64{80, 80}))
-	if err := s.Err(); err == nil {
-		t.Fatal("ResizeArea expects an int32 Tensor for size, should fail when an int64 is provided")
-	}
-	// And any use of resize should panic with an error message more informative than SIGSEGV
-	defer func() {
-		r := recover()
-		if r == nil {
-			return
-		}
-		s, ok := r.(string)
-		if ok && strings.Contains(s, "see Scope.Err() for details") {
-			return
-		}
-		t.Errorf("Expected panic string to Scope.Err(), found %T: %q", r, r)
-	}()
-	_ = resize.Shape()
-	t.Errorf("resize.Shape() should have paniced since the underlying Operation was not created")
+	ResizeArea(s, Placeholder(s, tf.Float), Const(s, []int64{80, 80}))
 }
 
 func TestShapeAttribute(t *testing.T) {
