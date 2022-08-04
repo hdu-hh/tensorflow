@@ -49,3 +49,15 @@ func Const(scope *Scope, value interface{}) (output tf.Output) {
 			"value": t,
 		}}).Output(0)
 }
+
+// Func adds the tensorflow function to the graph
+func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
+	fnOp := scope.AddOperation(tf.OpSpec{
+		Type:  fn.Name(),
+		Input: inputs,
+	})
+	if scope.Err() != nil {
+		return nil
+	}
+	return fnOp.Outputs()
+}
