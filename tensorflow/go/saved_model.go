@@ -22,7 +22,7 @@ import (
 	"unsafe"
 
 	"google.golang.org/protobuf/proto"
-	corepb "github.com/hdu-hh/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto"
+	corepb "github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 // #include <stdlib.h>

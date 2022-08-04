@@ -23,14 +23,13 @@ import (
 
 	"google.golang.org/protobuf/encoding/prototext"
 
-	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
-	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 // Creates an ApiDef based on opdef and applies overrides
 // from apidefText (ApiDef text proto).
-func GetAPIDef(t *testing.T, opdef *odpb.OpDef, apidefText string) *adpb.ApiDef {
-	opdefList := &odpb.OpList{Op: []*odpb.OpDef{opdef}}
+func GetAPIDef(t *testing.T, opdef *pbs.OpDef, apidefText string) *pbs.ApiDef {
+	opdefList := &pbs.OpList{Op: []*pbs.OpDef{opdef}}
 	apimap, err := newAPIDefMap(opdefList)
 	if err != nil {
 		t.Fatal(err)
@@ -798,8 +797,8 @@ func SampleDistortedBoundingBox(scope *Scope, image_size tf.Output, bounding_box
 
 	for _, test := range testdata {
 		t.Run(test.tag, func(t *testing.T) {
-			var opdef odpb.OpDef
-			var apidef *adpb.ApiDef
+			var opdef pbs.OpDef
+			var apidef *pbs.ApiDef
 			var buf bytes.Buffer
 			if err := prototext.Unmarshal([]byte(test.opdef), &opdef); err != nil {
 				t.Fatal(err)

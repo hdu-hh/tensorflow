@@ -32,8 +32,7 @@ import (
 
 	"google.golang.org/protobuf/proto"
 
-	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
-	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 // Encapsulates a collection of API definitions.
@@ -52,7 +51,7 @@ type apiDefMap struct {
 // https://www.tensorflow.org/code/tensorflow/core/framework/op_def.proto
 // for OpList proto definition).
 
-func newAPIDefMap(oplist *odpb.OpList) (*apiDefMap, error) {
+func newAPIDefMap(oplist *pbs.OpList) (*apiDefMap, error) {
 	// Create a buffer containing the serialized OpList.
 	opdefSerialized, err := proto.Marshal(oplist)
 	if err != nil {
@@ -99,7 +98,7 @@ func (m *apiDefMap) Put(data string) error {
 
 // Returns ApiDef proto instance for the TensorFlow operation
 // named `opname`.
-func (m *apiDefMap) Get(opname string) (*adpb.ApiDef, error) {
+func (m *apiDefMap) Get(opname string) (*pbs.ApiDef, error) {
 	cname := C.CString(opname)
 	defer C.free(unsafe.Pointer(cname))
 	status := C.TF_NewStatus()
@@ -115,7 +114,7 @@ func (m *apiDefMap) Get(opname string) (*adpb.ApiDef, error) {
 	}
 
 	var (
-		apidef = new(adpb.ApiDef)
+		apidef = new(pbs.ApiDef)
 		size   = int(apidefBuf.length)
 		// A []byte backed by C memory.
 		// See: https://github.com/golang/go/wiki/cgo#turning-c-arrays-into-go-slices
