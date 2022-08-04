@@ -50,8 +50,8 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 
-	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
-	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
+	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
+	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 // GenerateFunctionsForRegisteredOps writes a Go source code file to w
