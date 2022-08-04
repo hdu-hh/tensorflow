@@ -23,6 +23,18 @@ import (
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 )
 
+func TestScopeDefaultName(t *testing.T) {
+	s := NewScope()
+	c1 := Const(s, int64(1))
+	c2 := Const(s, int64(1))
+	if err := s.Err(); err != nil {
+		t.Fatalf("failed to create test graph: %q", err.Error())
+	}
+	if n1, n2 := c1.Op.Name(), c2.Op.Name(); n1 == n2 {
+		t.Errorf("node names %q and %q conflict", n1, n2)
+	}
+}
+
 func TestScopeSubScope(t *testing.T) {
 	var (
 		root  = NewScope()
@@ -35,11 +47,11 @@ func TestScopeSubScope(t *testing.T) {
 		scope *Scope
 		name  string
 	}{
-		{root, "Const"},
-		{sub1, "x/Const"},
-		{sub1a, "x/y/Const"},
-		{sub2, "x_1/Const"},
-		{sub2a, "x_1/y/Const"},
+		{root, "Const_1"},
+		{sub1, "x/Const_1"},
+		{sub1a, "x/y/Const_1"},
+		{sub2, "x_1/Const_1"},
+		{sub2a, "x_1/y/Const_1"},
 	}
 	for _, test := range testdata {
 		c := Const(test.scope, int64(1))
@@ -197,5 +209,5 @@ func ExampleScope_SubScope() {
 		panic(s.Err())
 	}
 	fmt.Println(c1.Op.Name(), c2.Op.Name())
-	// Output: x/Const x_1/Const
+	// Output: x/Const_1 x_1/Const_1
 }
