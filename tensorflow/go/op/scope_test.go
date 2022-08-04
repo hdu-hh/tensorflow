@@ -64,21 +64,18 @@ func TestScopeSubScope(t *testing.T) {
 	}
 }
 
-func TestScopeSubScopeErrors(t *testing.T) {
-	var (
-		root = NewScope()
-		sub  = root.SubScope("x")
-	)
-	// Error on the root, even after sub has been created should be propagated.
+func TestScopeScopeError(t *testing.T) {
+	// prepare to recover from expected panic
+	defer func() {
+		if e := recover(); e == nil {
+			t.Fatal("Expected error")
+		}
+	}()
+
 	// Force an error by creating a Const which has a type that does not
 	// translate to the TensorFlow type system.
-	Const(root, int(1))
-	if err := root.Err(); err == nil {
-		t.Fatal("Expected error")
-	}
-	if err := sub.Err(); err == nil {
-		t.Errorf("Root scope had error [%v], but sub-scope did not", root.Err())
-	}
+	root := NewScope()
+	Const(root, &struct{ int }{3})
 }
 
 func TestControlDependencies(t *testing.T) {
