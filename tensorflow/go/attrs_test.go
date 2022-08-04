@@ -22,9 +22,7 @@ import (
 	"testing"
 )
 
-func TestOperationAttrs(t *testing.T) {
-	g := NewGraph()
-
+func getTestCases(g *Graph, t* testing.T) (cases []OpSpec) {
 	i := 0
 	makeConst := func(v interface{}) Output {
 		op, err := Const(g, fmt.Sprintf("const/%d/%+v", i, v), v)
@@ -43,7 +41,7 @@ func TestOperationAttrs(t *testing.T) {
 		return tensor
 	}
 
-	cases := []OpSpec{
+	cases = []OpSpec{
 		{
 			Name: "type",
 			Type: "Placeholder",
@@ -71,7 +69,7 @@ func TestOperationAttrs(t *testing.T) {
 				"boundaries": []float32(nil),
 			},
 		},
-    /* TODO(ashankar): debug this issue and add it back later.
+		/* TODO(ashankar): debug this issue and add it back later.
 		{
 			Name: "list(type),list(shape)",
 			Type: "InfeedEnqueueTuple",
@@ -112,7 +110,7 @@ func TestOperationAttrs(t *testing.T) {
 				"device_ordinal": int64(0),
 			},
 		},
-    */
+		*/
 		{
 			Name: "list(int),int",
 			Type: "StringToHashBucketStrong",
@@ -166,8 +164,13 @@ func TestOperationAttrs(t *testing.T) {
 			},
 		},
 	}
+	return
+}
 
-	for i, spec := range cases {
+func TestOperationAttrs(t *testing.T) {
+	g := NewGraph()
+
+	for i, spec := range getTestCases(g, t) {
 		op, err := g.AddOperation(spec)
 		if err != nil {
 			t.Fatal(err)
@@ -187,6 +190,28 @@ func TestOperationAttrs(t *testing.T) {
 				if !reflect.DeepEqual(outVal, wantVal) {
 					t.Fatalf("%d. %q: Got %#v, wanted %#v", i, key, outVal, wantVal)
 				}
+			}
+		}
+	}
+}
+
+func TestOperationAttrMap(t *testing.T) {
+	g := NewGraph()
+
+	for i, spec := range getTestCases(g, t) {
+		op, err := g.AddOperation(spec)
+		if err != nil {
+			t.Fatal(err)
+		}
+		gotMap, err := op.AttrMap()
+		if err != nil {
+			t.Fatal(err)
+		}
+		for key, want := range spec.Attrs {
+			if got, ok := gotMap[key]; !ok {
+				t.Errorf("failed to get key %#v for %#v", key, want)
+			} else if !reflect.DeepEqual(got, want) {
+				t.Errorf("%d. %q: Got %#v, wanted %#v", i, key, got, want)
 			}
 		}
 	}
