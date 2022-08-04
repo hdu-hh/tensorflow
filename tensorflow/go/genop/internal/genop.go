@@ -50,8 +50,7 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 
-	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
-	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 // GenerateFunctionsForRegisteredOps writes a Go source code file to w
@@ -73,11 +72,11 @@ func GenerateFunctionsForRegisteredOps(
 	return generateFunctionsForOps(w, ops, apimap)
 }
 
-func registeredOps() (*odpb.OpList, *apiDefMap, error) {
+func registeredOps() (*pbs.OpList, *apiDefMap, error) {
 	buf := C.TF_GetAllOpList()
 	defer C.TF_DeleteBuffer(buf)
 	var (
-		list = new(odpb.OpList)
+		list = new(pbs.OpList)
 		size = int(buf.length)
 		// A []byte backed by C memory.
 		// See: https://github.com/golang/go/wiki/cgo#turning-c-arrays-into-go-slices
@@ -115,7 +114,7 @@ func updateAPIDefs(m *apiDefMap, dir string) error {
 	return nil
 }
 
-func generateFunctionsForOps(w io.Writer, ops *odpb.OpList, apimap *apiDefMap) error {
+func generateFunctionsForOps(w io.Writer, ops *pbs.OpList, apimap *apiDefMap) error {
 	thisPackage := reflect.TypeOf(tmplArgs{}).PkgPath()
 	if err := tmplHeader.Execute(w, thisPackage); err != nil {
 		return err
@@ -140,7 +139,7 @@ func generateFunctionsForOps(w io.Writer, ops *odpb.OpList, apimap *apiDefMap) e
 	return nil
 }
 
-func generateFunctionForOp(w io.Writer, op *odpb.OpDef, apidef *adpb.ApiDef) error {
+func generateFunctionForOp(w io.Writer, op *pbs.OpDef, apidef *pbs.ApiDef) error {
 	if strings.HasPrefix(op.Name, "_") { // Internal operation
 		return nil
 	}
@@ -366,8 +365,8 @@ func {{.Op.Name}}
 )
 
 type attrWrapper struct {
-	op  *odpb.OpDef_AttrDef
-	api *adpb.ApiDef_Attr
+	op  *pbs.OpDef_AttrDef
+	api *pbs.ApiDef_Attr
 }
 
 func (a *attrWrapper) Name() string              { return a.api.Name }
@@ -380,8 +379,8 @@ func (a *attrWrapper) Minimum() int64            { return a.op.Minimum }
 func (a *attrWrapper) DefaultValue() interface{} { return a.api.DefaultValue }
 
 type argWrapper struct {
-	op  *odpb.OpDef_ArgDef
-	api *adpb.ApiDef_Arg
+	op  *pbs.OpDef_ArgDef
+	api *pbs.ApiDef_Arg
 }
 
 func (a *argWrapper) Name() string        { return a.api.Name }
@@ -390,8 +389,8 @@ func (a *argWrapper) Description() string { return a.api.Description }
 func (a *argWrapper) IsListArg() bool     { return isListArg(a.op) }
 
 type tmplArgs struct {
-	Op     *odpb.OpDef
-	APIDef *adpb.ApiDef
+	Op     *pbs.OpDef
+	APIDef *pbs.ApiDef
 	// Op.Attr is split into two categories
 	// (1) Required: These must be specified by the client and are thus
 	//     included in the function signature.
@@ -405,7 +404,7 @@ type tmplArgs struct {
 	OutArgs         []*argWrapper
 }
 
-func newTmplArgs(op *odpb.OpDef, apidef *adpb.ApiDef) (*tmplArgs, error) {
+func newTmplArgs(op *pbs.OpDef, apidef *pbs.ApiDef) (*tmplArgs, error) {
 	ret := tmplArgs{Op: op, APIDef: apidef}
 
 	// Setup InArgs field
@@ -563,11 +562,11 @@ func identifier(s string) string {
 	return s
 }
 
-func isListArg(argdef *odpb.OpDef_ArgDef) bool {
+func isListArg(argdef *pbs.OpDef_ArgDef) bool {
 	return argdef.TypeListAttr != "" || argdef.NumberAttr != ""
 }
 
-func isListAttr(attrdef *odpb.OpDef_AttrDef) bool {
+func isListAttr(attrdef *pbs.OpDef_AttrDef) bool {
 	list, _ := parseTFType(attrdef.Type)
 	return list
 }

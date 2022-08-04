@@ -20,34 +20,32 @@ import (
 	"fmt"
 	"testing"
 
-	tspb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/tensor_shape_go_proto"
-	typb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/types_go_proto"
-	corepb "github.com/hdu-hh/tensorflow/tensorflow/go/core/protobuf/for_core_protos_go_proto"
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 )
 
 func TestSignatureFromProto(t *testing.T) {
-	got := signatureDefFromProto(&corepb.SignatureDef{
-		Inputs: map[string]*corepb.TensorInfo{
-			"input_1": &corepb.TensorInfo{
-				Encoding: &corepb.TensorInfo_Name{
+	got := signatureDefFromProto(&pbs.SignatureDef{
+		Inputs: map[string]*pbs.TensorInfo{
+			"input_1": &pbs.TensorInfo{
+				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_1",
 				},
-				Dtype: typb.DataType_DT_INT8,
-				TensorShape: &tspb.TensorShapeProto{
-					Dim: []*tspb.TensorShapeProto_Dim{
+				Dtype: pbs.DataType_DT_INT8,
+				TensorShape: &pbs.TensorShapeProto{
+					Dim: []*pbs.TensorShapeProto_Dim{
 						{Size: 1},
 						{Size: 2},
 						{Size: 3},
 					},
 				},
 			},
-			"input_2": &corepb.TensorInfo{
-				Encoding: &corepb.TensorInfo_Name{
+			"input_2": &pbs.TensorInfo{
+				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_2",
 				},
-				Dtype: typb.DataType_DT_FLOAT,
-				TensorShape: &tspb.TensorShapeProto{
-					Dim: []*tspb.TensorShapeProto_Dim{
+				Dtype: pbs.DataType_DT_FLOAT,
+				TensorShape: &pbs.TensorShapeProto{
+					Dim: []*pbs.TensorShapeProto_Dim{
 						{Size: 4},
 						{Size: 5},
 						{Size: 6},
@@ -55,27 +53,27 @@ func TestSignatureFromProto(t *testing.T) {
 				},
 			},
 		},
-		Outputs: map[string]*corepb.TensorInfo{
-			"output_1": &corepb.TensorInfo{
-				Encoding: &corepb.TensorInfo_Name{
+		Outputs: map[string]*pbs.TensorInfo{
+			"output_1": &pbs.TensorInfo{
+				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_3",
 				},
-				Dtype: typb.DataType_DT_STRING,
-				TensorShape: &tspb.TensorShapeProto{
-					Dim: []*tspb.TensorShapeProto_Dim{
+				Dtype: pbs.DataType_DT_STRING,
+				TensorShape: &pbs.TensorShapeProto{
+					Dim: []*pbs.TensorShapeProto_Dim{
 						{Size: 1},
 						{Size: 2},
 						{Size: 3},
 					},
 				},
 			},
-			"output_2": &corepb.TensorInfo{
-				Encoding: &corepb.TensorInfo_Name{
+			"output_2": &pbs.TensorInfo{
+				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_4",
 				},
-				Dtype: typb.DataType_DT_BOOL,
-				TensorShape: &tspb.TensorShapeProto{
-					Dim: []*tspb.TensorShapeProto_Dim{
+				Dtype: pbs.DataType_DT_BOOL,
+				TensorShape: &pbs.TensorShapeProto{
+					Dim: []*pbs.TensorShapeProto_Dim{
 						{Size: 4},
 						{Size: 5},
 						{Size: 6},
@@ -140,13 +138,13 @@ func TestSignatureFromProto(t *testing.T) {
 }
 
 func TestTensorInfoFromProto(t *testing.T) {
-	got := tensorInfoFromProto(&corepb.TensorInfo{
-		Encoding: &corepb.TensorInfo_Name{
+	got := tensorInfoFromProto(&pbs.TensorInfo{
+		Encoding: &pbs.TensorInfo_Name{
 			Name: "tensor",
 		},
-		Dtype: typb.DataType_DT_INT8,
-		TensorShape: &tspb.TensorShapeProto{
-			Dim: []*tspb.TensorShapeProto_Dim{
+		Dtype: pbs.DataType_DT_INT8,
+		TensorShape: &pbs.TensorShapeProto{
+			Dim: []*pbs.TensorShapeProto_Dim{
 				{Size: 1},
 				{Size: 2},
 				{Size: 3},
