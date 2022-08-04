@@ -50,8 +50,8 @@ import (
 	"google.golang.org/protobuf/encoding/prototext"
 	"google.golang.org/protobuf/proto"
 
-	adpb "github.com/tensorflow/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
-	odpb "github.com/tensorflow/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
+	adpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/api_def_go_proto"
+	odpb "github.com/hdu-hh/tensorflow/tensorflow/go/core/framework/op_def_go_proto"
 )
 
 // GenerateFunctionsForRegisteredOps writes a Go source code file to w
@@ -192,7 +192,7 @@ var (
 
 package op
 
-import tf "github.com/tensorflow/tensorflow/tensorflow/go"
+import tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 
 // optionalAttr is an intentionally un-exported type to hide
 // details of how optional attributes to operations are implemented.
