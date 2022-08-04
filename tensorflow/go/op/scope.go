@@ -77,7 +77,8 @@ func (s *Scope) AddOperation(args tf.OpSpec) *tf.Operation {
 		return nil
 	}
 	if args.Name == "" {
-		args.Name = args.Type
+		s.namemap[args.Type]++
+		args.Name += fmt.Sprintf("%s_%d", args.Type, s.namemap[args.Type])
 	}
 	if s.namespace != "" {
 		args.Name = s.namespace + "/" + args.Name
