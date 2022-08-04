@@ -23,6 +23,18 @@ import (
 	tf "github.com/tensorflow/tensorflow/tensorflow/go"
 )
 
+func TestScopeDefaultName(t *testing.T) {
+	s := NewScope()
+	c1 := Const(s, int64(1))
+	c2 := Const(s, int64(1))
+	if err := s.Err(); err != nil {
+		t.Fatalf("failed to create test graph: %q", err.Error())
+	}
+	if n1, n2 := c1.Op.Name(), c2.Op.Name(); n1 == n2 {
+		t.Errorf("node names %q and %q conflict", n1, n2)
+	}
+}
+
 func TestScopeSubScope(t *testing.T) {
 	var (
 		root  = NewScope()
