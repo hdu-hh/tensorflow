@@ -110,10 +110,19 @@ func (g *Graph) WriteTo(w io.Writer) (int64, error) {
 	if err := status.Err(); err != nil {
 		return 0, err
 	}
+	proto, err := getBufferAsSlice(buf)
+	if err != nil {
+		return 0, err
+	}
+	n, err := w.Write(proto)
+	return int64(n), err
+}
+
+func getBufferAsSlice(buf *C.TF_Buffer) ([]byte, error) {
 	if buf.length > (1 << 30) {
 		// For very large graphs, the writes can be chunked.
 		// Punt on that for now.
-		return 0, fmt.Errorf("Graph is too large to write out, Graph.WriteTo needs to be updated")
+		return nil, fmt.Errorf("Graph is too large to write out, Graph.WriteTo needs to be updated")
 	}
 	// A []byte slice backed by C memory.
 	// See: https://github.com/golang/go/wiki/cgo#turning-c-arrays-into-go-slices
@@ -124,8 +133,7 @@ func (g *Graph) WriteTo(w io.Writer) (int64, error) {
 	} else {
 		slice = (*[1 << 30]byte)(unsafe.Pointer(buf.data))[:length:length]
 	}
-	n, err := w.Write(slice)
-	return int64(n), err
+	return slice, nil
 }
 
 // ImportWithOptions imports the nodes and edges from a serialized representation of
@@ -490,6 +498,11 @@ func setAttr(cdesc *C.TF_OperationDescription, status *status, name string, valu
 			}
 			C.TF_SetAttrShapeList_Helper(cdesc, cAttrName, flatDimsp, &ndims[0], C.int(len(value)))
 		}
+	case *Func:
+		funcName := value.Name()
+		cstr := C.CString(funcName)
+		C.TF_SetAttrFuncName(cdesc, cAttrName, (*C.char)(unsafe.Pointer(cstr)), C.size_t(len(funcName)))
+		C.free(unsafe.Pointer(cstr))
 	default:
 		return fmt.Errorf("attribute %q has a type (%T) which is not valid for operation attributes", name, value)
 	}

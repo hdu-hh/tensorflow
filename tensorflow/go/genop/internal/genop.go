@@ -144,7 +144,7 @@ func generateFunctionForOp(w io.Writer, op *pbs.OpDef, apidef *pbs.ApiDef) error
 		return nil
 	}
 	// Ignore operations where the Go types corresponding to the TensorFlow
-	// type haven't been worked out (such as "func"s).
+	// type haven't been worked out (such as "variants"s).
 	for _, a := range op.Attr {
 		if _, err := goType(a.Type); err != nil {
 			return nil
@@ -526,6 +526,8 @@ func goType(tfType string) (string, error) {
 		gotype = "tf.Tensor"
 	case "string":
 		gotype = "string"
+	case "func":
+		gotype = "*tf.Func"
 	default:
 		return "", fmt.Errorf("%q is not a recognized DataType", tfType)
 	}

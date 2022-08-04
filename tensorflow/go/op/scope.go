@@ -186,3 +186,13 @@ func (s *Scope) opName(typ string) string {
 	}
 	return s.namespace + "/" + typ
 }
+
+// RegisterFunc copies and registers the tensorflow function
+// and its eventual gradient into the graph and makes it available.
+// The function must not be nil.
+func (s *Scope) RegisterFunc(fn, grad *tf.Func) error {
+	if err := s.graph.RegisterFunc(fn, grad); err != nil {
+		s.UpdateErr("RegisterFunc", err)
+	}
+	return nil
+}

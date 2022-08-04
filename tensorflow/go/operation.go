@@ -71,6 +71,15 @@ func (op *Operation) Output(i int) Output {
 	return Output{op, i}
 }
 
+// Outputs returns all outputs of op.
+func (op *Operation) Outputs() []Output {
+	var outs []Output
+	for i, n := 0, op.NumOutputs(); i < n; i++ {
+		outs[i] = Output{op, i}
+	}
+	return outs
+}
+
 // NumInputs returns the number of inputs of op.
 func (op *Operation) NumInputs() int {
 	return int(C.TF_OperationNumInputs(op.c))
