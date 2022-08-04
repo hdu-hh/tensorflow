@@ -20,7 +20,7 @@ import (
 	"fmt"
 	"testing"
 
-	tf "github.com/tensorflow/tensorflow/tensorflow/go"
+	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
 func TestScopeDefaultName(t *testing.T) {
