@@ -244,3 +244,51 @@ func scalarAttribute(op *Operation, cname *C.char, meta C.TF_AttrMetadata) (inte
 		return nil, fmt.Errorf("type %v not supported", meta._type)
 	}
 }
+
+// GetAttrNames returns the attribute map of an op or nil when the op has no attributes
+func (op *Operation) AttrMap() (attrMap map[string]interface{}, err error) {
+	n := C.TF_OperationGetNumAttrs(op.c)
+	if n == 0 {
+		return
+	}
+	nameLens := make([]C.int, n)
+	attrMap = make(map[string]interface{}, n)
+	var maxLen C.int
+	for i := range nameLens {
+		l := C.TF_OperationGetAttrNameLength(op.c, C.int(i))
+		nameLens[i] = l
+		if maxLen < l {
+			maxLen = l
+		}
+	}
+	v := make([]C.char, maxLen+1)
+	status := newStatus()
+	for i, l := range nameLens {
+		C.TF_OperationGetAttrName(op.c, C.int(i), (*C.char)(unsafe.Pointer(&v[0])), status.c)
+		if err = status.Err(); err != nil {
+			return
+		}
+		v[l] = 0
+		attrCname := &v[0]
+		attrName := C.GoStringN(attrCname, l)
+		var value interface{}
+		meta := C.TF_OperationGetAttrMetadata(op.c, attrCname, status.c)
+		if err = status.Err(); err != nil {
+			opName := C.TF_OperationName(op.c)
+			err = fmt.Errorf("failed to get attribute \"%s\" of \"%s\": %w",
+				attrName, C.GoString(opName), err,
+			)
+			return
+		}
+		if meta.is_list == 1 {
+			value, err = listAttribute(op, attrCname, meta)
+		} else {
+			value, err = scalarAttribute(op, attrCname, meta)
+		}
+		if err != nil {
+			return
+		}
+		attrMap[attrName] = value
+	}
+	return
+}
