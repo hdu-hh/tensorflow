@@ -96,7 +96,7 @@ func TestFuncImportExport(t *testing.T) {
 		t.Errorf("exported sizes don't match: n=%d, len=%d", n1, buf1.Len())
 	}
 
-	fn2, err := ImportFuncFrom(buf1.Bytes())
+	fn2, err := ImportFunc(buf1.Bytes())
 	if err != nil {
 		t.Fatal(err)
 	}

@@ -24,55 +24,46 @@ import (
 
 func TestWhile1(t *testing.T) {
 	// get function for While condition
-	var (
-		s1        = NewScope()
-		limit1    = Placeholder(s1, tf.Float)
-		value1    = Placeholder(s1, tf.Float)
-		counter1  = Placeholder(s1, tf.Int64)
-		compare   = Sub(s1, value1, limit1)
-		flatShape = Const(s1, []int32{-1})
-		flatVals  = Reshape(s1, compare, flatShape)
-		const0i   = Const(s1, int32(0))
-		flatMax   = Max(s1, flatVals, const0i)
-		const0f   = Const(s1, float32(0))
-		oneCond   = Less(s1, flatMax, const0f)
-		g1, _     = s1.Finalize()
-		condFn, _ = g1.AsFunc("condFn",
-			[]tf.Output{limit1, value1, counter1},
-			[]tf.Output{oneCond}, nil,
-			"get condition from inputs",
+	mkCondFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
+		limit, value := x[0], x[1]
+		var (
+			compare   = Sub(s, value, limit)
+			flatShape = Const(s, []int32{-1})
+			flatVals  = Reshape(s, compare, flatShape)
+			const0i   = Const(s, int32(0))
+			flatMax   = Max(s, flatVals, const0i)
+			const0f   = Const(s, float32(0))
+			oneCond   = Less(s, flatMax, const0f)
 		)
-	)
+		return []tf.Output{oneCond}, nil, "get condition from inputs"
+	}
+	condFn := BuildFunc("condFn", mkCondFn, tf.Float, tf.Float, tf.Int64)
 
 	// get function for While body
-	var (
-		s2        = NewScope()
-		limit2    = Placeholder(s2, tf.Float)
-		value2    = Placeholder(s2, tf.Float)
-		counter2  = Placeholder(s2, tf.Int64)
-		cFactor   = Const(s2, float32(1.01))
-		outVal    = Mul(s2, value2, cFactor)
-		const1    = Const(s2, int64(1))
-		outCount  = Add(s2, counter2, const1)
-		g2, _     = s2.Finalize()
-		bodyFn, _ = g2.AsFunc("bodyFn",
-			[]tf.Output{limit2, value2, counter2},
-			[]tf.Output{limit2, outVal, outCount}, nil,
-			"get next loop values")
-	)
+	mkBodyFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
+		limit, value, counter := x[0], x[1], x[2]
+		var (
+			cFactor  = Const(s, float32(1.01))
+			outVal   = Mul(s, value, cFactor)
+			const1   = Const(s, int64(1))
+			outCount = Add(s, counter, const1)
+		)
+		return []tf.Output{limit, outVal, outCount}, nil, "get next loop values"
+	}
+	bodyFn := BuildFunc("bodyFn", mkBodyFn, tf.Float, tf.Float, tf.Int64)
 
 	// get graph with While-op using the functions above
-	s3 := NewScope()
-	s3.RegisterFunc(condFn, nil)
-	s3.RegisterFunc(bodyFn, nil)
+	s := NewScope()
+	s.RegisterFunc(condFn, nil)
+	s.RegisterFunc(bodyFn, nil)
 
 	var (
 		limitVal     = float32(100)
-		cLimit       = Const(s3, limitVal)
-		initVals     = Const(s3, []float32{+1, -2})
-		initCounter  = Const(s3, int64(0))
-		loopVals     = While(s3, []tf.Output{cLimit, initVals, initCounter}, condFn, bodyFn)
-		g3, _        = s3.Finalize()
+		cLimit       = Const(s, limitVal)
+		initVals     = Const(s, []float32{+1, -2})
+		initCounter  = Const(s, int64(0))
+		loopVals     = While(s, []tf.Output{cLimit, initVals, initCounter}, condFn, bodyFn)
+		g3, _        = s.Finalize()
 		sess, _      = tf.NewSession(g3, nil)
 		fetched, err = sess.Run(nil, loopVals, nil)
 	)
