@@ -40,6 +40,8 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
+	"os"
 	"path"
 	"reflect"
 	"sort"
@@ -108,7 +110,8 @@ func updateAPIDefs(m *apiDefMap, dir string) error {
 			return fmt.Errorf("failed to read %q: %v", file.Name(), err)
 		}
 		if err = m.Put(string(data)); err != nil {
-			return fmt.Errorf("failed to process %q: %v", file.Name(), err)
+			err := fmt.Errorf("failed to process %q: %v", file.Name(), err)
+			fmt.Fprintln(os.Stderr, err.Error())
 		}
 	}
 	return nil
@@ -141,29 +144,43 @@ func generateFunctionsForOps(w io.Writer, ops *pbs.OpList, apimap *apiDefMap) er
 
 func generateFunctionForOp(w io.Writer, op *pbs.OpDef, apidef *pbs.ApiDef) error {
 	if strings.HasPrefix(op.Name, "_") { // Internal operation
+		log.Printf("ignored op \"%s\": name with underline", op.Name)
 		return nil
 	}
 	// Ignore operations where the Go types corresponding to the TensorFlow
 	// type haven't been worked out (such as "func"s).
 	for _, a := range op.Attr {
 		if _, err := goType(a.Type); err != nil {
+			log.Printf("ignored op \"%s\": type \"%v\" not handled yet", op.Name, a.Type)
 			return nil
 		}
 	}
 	// Also, haven't figured out reference types yet, so ignore those too.
 	for _, a := range op.InputArg {
 		if a.IsRef {
-			return nil
+			log.Printf("should ignore op \"%s\": ref-type input", op.Name)
+			break
 		}
 	}
 	for _, a := range op.OutputArg {
 		if a.IsRef {
-			return nil
+			log.Printf("should ignore op \"%s\": ref-type output", op.Name)
+			break
 		}
 	}
 	if apidef.Summary == "" {
 		// Undocumented operation, perhaps a sign of not being ready to
 		// export.
+		log.Printf("should ignore op \"%s\": no summary yet", op.Name)
+	}
+	if apidef.Visibility >= 2 {
+		log.Printf("op \"%s\": ignoring %s visibility", op.Name,
+			map[int]string{2: "SKIP", 3: "HIDDEN"}[int(apidef.Visibility)])
+	}
+	if false && op.Deprecation != nil {
+		// ignore deprecated ops
+		log.Printf("ignoring op \"%s\" as it is deprecated in version %d: %s", op.Name,
+			op.Deprecation.Version, op.Deprecation.Explanation)
 		return nil
 	}
 	tmplArgs, err := newTmplArgs(op, apidef)
