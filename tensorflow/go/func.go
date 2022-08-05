@@ -57,23 +57,24 @@ func (g *Graph) RegisterFunc(fn, grad *Func) error {
 	return status.Err()
 }
 
-// ListFuncs returns the list of functions registered in the graph
-func (g *Graph) ListFuncs() ([]*Func, error) {
+// Functions returns the list of functions registered in the graph
+func (g *Graph) Functions() []*Func {
 	numFuncs := C.TF_GraphNumFunctions(g.c)
 	if numFuncs <= 0 {
-		return nil, nil
+		return nil
 	}
 	cFuncs := make([]*C.TF_Function, numFuncs)
 	status := newStatus()
 	gotFuncs := C.TF_GraphGetFunctions(g.c, &cFuncs[0], numFuncs, status.c)
 	if err := status.Err(); err != nil {
-		return nil, err
+		err = fmt.Errorf("failed to get functions for graph: %w", err)
+		panic(err)
 	}
 	goFuncs := make([]*Func, gotFuncs)
 	for i := range goFuncs {
 		goFuncs[i] = &Func{cFuncs[i]}
 	}
-	return goFuncs, nil
+	return goFuncs
 }
 
 // AsFunc returns the tensorflow function corresponding to the graph
@@ -187,8 +188,7 @@ func (fn *Func) SetAttrProto(attrName string, proto []byte) error {
 	return status.Err()
 }
 
-// WriteAttrTo writes out a serialized representation of the
-// function attribute.
+// WriteAttrTo writes out a serialized representation of the function attribute.
 func (fn *Func) WriteAttrProto(attrName string, w io.Writer) (int64, error) {
 	cName := C.CString(attrName)
 	defer C.free(unsafe.Pointer(cName))

@@ -49,9 +49,7 @@ func TestPlainFunc(t *testing.T) {
 	if err := g2.RegisterFunc(fn, nil); err != nil {
 		t.Fatal(err)
 	}
-	if fns, err := g2.ListFuncs(); err != nil {
-		t.Error(err)
-	} else if len(fns) != 1 {
+	if fns := g2.Functions(); len(fns) != 1 {
 		t.Errorf("wrong number of functions: got %d, want 1", len(fns))
 	} else if gotName := fns[0].Name(); gotName != funcName {
 		t.Errorf("wrong function name: got %q, want %q", gotName, funcName)
