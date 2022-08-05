@@ -26,17 +26,22 @@ import (
 )
 
 // Func represents a tensorflow function.
+//
+// It can be created from a
+//  * graph with its [Graph.AsFunc] method
+//  * go function with the [op.BuildFunc] function
+//  * [pbs.FunctionDef] protobuf with [ImportFunc]
 type Func struct {
 	c *C.TF_Function
 }
 
-// Name returns the name of the tensorflow function
+// Name returns the name of the tensorflow function.
 func (fn *Func) Name() string {
 	cName := C.TF_FunctionName(fn.c)
 	return C.GoString(cName)
 }
 
-// Delete the tensorflow function
+// Delete the tensorflow function.
 // Deleting a function does not remove it from any graphs it was copied to.
 func (fn *Func) Delete() {
 	C.TF_DeleteFunction(fn.c)
@@ -44,7 +49,7 @@ func (fn *Func) Delete() {
 
 // RegisterFunc copies and registers the tensorflow function
 // and its eventual gradient into the graph.
-// The function must not be nil.
+// The function must not be nil but the gradient may be nil.
 func (g *Graph) RegisterFunc(fn, grad *Func) error {
 	if fn == nil {
 		return fmt.Errorf("cannot register a nil Func")
@@ -57,7 +62,7 @@ func (g *Graph) RegisterFunc(fn, grad *Func) error {
 	return status.Err()
 }
 
-// Functions returns the list of functions registered in the graph
+// Functions returns the list of functions registered in the graph.
 func (g *Graph) Functions() []*Func {
 	numFuncs := C.TF_GraphNumFunctions(g.c)
 	if numFuncs <= 0 {
@@ -77,7 +82,7 @@ func (g *Graph) Functions() []*Func {
 	return goFuncs
 }
 
-// AsFunc returns the tensorflow function corresponding to the graph
+// AsFunc returns the tensorflow function corresponding to the graph.
 func (g *Graph) AsFunc(name string, inputs, outputs []Output, outNames []string, desc string) (*Func, error) {
 	if numOuts, numNames := len(outputs), len(outNames); numOuts != numNames && numNames != 0 {
 		return nil, fmt.Errorf("mismatch of outputs and their names: %d vs %d", numOuts, numNames)
@@ -140,7 +145,8 @@ func (g *Graph) addFunc(fn *Func, name string, inputs ...Input) (*Operation, err
 	})
 }
 
-// WriteTo writes out a serialized representation.
+// WriteTo writes out the function as a binary serialization
+// of a [pbs.FunctionDef] protocol buffer.
 //
 // Implements the io.WriterTo interface.
 func (fn *Func) WriteTo(w io.Writer) (int64, error) {
@@ -159,8 +165,9 @@ func (fn *Func) WriteTo(w io.Writer) (int64, error) {
 	return int64(n), err
 }
 
-// ImportFunc creates a Func from a serialized representation.
-func ImportFuncFrom(proto []byte) (*Func, error) {
+// ImportFunc creates a Func from the binary serialization
+// of a [pbs.FunctionDef] protocol buffer.
+func ImportFunc(proto []byte) (*Func, error) {
 	if len(proto) == 0 {
 		return nil, fmt.Errorf("cannot import from empty buffer")
 	}
@@ -173,9 +180,9 @@ func ImportFuncFrom(proto []byte) (*Func, error) {
 	return &Func{cFn}, nil
 }
 
-// SetAttrProto sets the function attribute to the
-// binary serialization of an AttrValue protocol buffer.
-func (fn *Func) SetAttrProto(attrName string, proto []byte) error {
+// SetAttrFrom sets the function attribute from the
+// binary serialization of a [pbs.AttrValue] protocol buffer.
+func (fn *Func) SetAttrFrom(attrName string, proto []byte) error {
 	cLen := C.size_t(len(proto))
 	if len(proto) == 0 {
 		proto = []byte{0}
@@ -188,8 +195,9 @@ func (fn *Func) SetAttrProto(attrName string, proto []byte) error {
 	return status.Err()
 }
 
-// WriteAttrTo writes out a serialized representation of the function attribute.
-func (fn *Func) WriteAttrProto(attrName string, w io.Writer) (int64, error) {
+// WriteAttrTo writes out the function attribute
+// as a binary serialization of a [pbs.AttrValue] protocol buffer.
+func (fn *Func) WriteAttrTo(attrName string, w io.Writer) (int64, error) {
 	cName := C.CString(attrName)
 	defer C.free(unsafe.Pointer(cName))
 	buf := C.TF_NewBuffer()

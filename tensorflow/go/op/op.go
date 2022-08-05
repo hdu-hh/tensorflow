@@ -51,6 +51,11 @@ func Const(scope *Scope, value interface{}) (output tf.Output) {
 }
 
 // Func adds the tensorflow function to the graph
+//
+// The easiest way to get a [tf.Func] is to
+//  * use [BuildFunc] or [BuildFuncPair] when building function graphs from scratch
+//  * use the [tf.Graph.AsFunc] method when converting an existing graph
+//  * use the [tf.ImportFunc] function when a FunctionDef protobuf is available
 func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
 	fnOp := scope.AddOperation(tf.OpSpec{
 		Type:  fn.Name(),
@@ -60,4 +65,44 @@ func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
 		return nil
 	}
 	return fnOp.Outputs()
+}
+
+// GoFunc is a function signature used for building a [tf.Func] from a go function.
+// It returns the outputs, their names and a description string.
+// Please see [BuildFunc] for an example.
+type GoFunc func(s *Scope, inputs ...tf.Output) (outputs []tf.Output, outNames []string, desc string)
+
+// BuildFunc returns a `tf.Func`` matching to a go function.
+// The provided go function must have the GoFunc signature.
+// e.g.
+//	 goFunc := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
+//		return []tf.Output{op.Add(s, x[0], x[1])}, nil, "just adding"
+// 	 }
+// 	 tfFunc := BuildFunc("adder", goFunc, tf.Float, tf.Float)
+func BuildFunc(name string, goFunc GoFunc, dtypes ...tf.DataType) *tf.Func {
+	// create placeholders for the inputs
+	s := NewScope()
+	var phs []tf.Output
+	if l := len(dtypes); l > 0 {
+		phs = make([]tf.Output, l)
+		for i, dt := range dtypes {
+			phs[i] = Placeholder(s, dt)
+		}
+	}
+	// trace the go function
+	outs, outNames, desc := goFunc(s, phs...)
+	if err := s.Err(); err != nil {
+		panic(err)
+	}
+	// build the graph
+	g, err := s.Finalize()
+	if err != nil {
+		panic(err)
+	}
+	// get the function for the graph
+	tfFunc, err := g.AsFunc(name, phs, outs, outNames, desc)
+	if err != nil {
+		panic(err)
+	}
+	return tfFunc
 }

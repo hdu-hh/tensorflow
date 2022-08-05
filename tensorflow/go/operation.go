@@ -72,12 +72,14 @@ func (op *Operation) Output(i int) Output {
 }
 
 // Outputs returns all outputs of op.
-func (op *Operation) Outputs() []Output {
-	var outs []Output
-	for i, n := 0, op.NumOutputs(); i < n; i++ {
-		outs[i] = Output{op, i}
+func (op *Operation) Outputs() (outs []Output) {
+	if n := op.NumOutputs(); n > 0 {
+		outs = make([]Output, n)
+		for i := 0; i < n; i++ {
+			outs[i] = Output{op, i}
+		}
 	}
-	return outs
+	return
 }
 
 // NumInputs returns the number of inputs of op.
