@@ -245,7 +245,11 @@ func {{$.Op.Name}}{{CamelCase .RenameTo}}(value {{GoType .Type}}) {{$.Op.Name}}A
 
 {{- /* Create a godoc friendly comment. */ -}}
 
+{{- if .APIDef.Summary}}
 // {{MakeComment .APIDef.Summary}}
+{{- else -}}
+// {{MakeComment .Op.Name}} APIDef has no summary yet
+{{- end -}}
 
 {{- with .Op.Deprecation}}
 //
