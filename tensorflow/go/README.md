@@ -8,6 +8,12 @@ Construct and execute TensorFlow graphs in Go.
 > without notice. The same goes for the package path:
 > (`github.com/hdu-hh/tensorflow/tensorflow/go`).
 
+## GoDocs for the provided packages
+
+The API documentation of the packages can be read online at `go.pkg.dev`. Please see
+* Tensorflow API: https://pkg.go.dev/github.com/hdu-hh/tensorflow/tensorflow/go
+* Operations API: https://pkg.go.dev/github.com/hdu-hh/tensorflow/tensorflow/go/op
+
 ## Support
 
 This experimental fork of tensorflow has no support.
