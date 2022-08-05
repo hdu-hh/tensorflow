@@ -101,7 +101,6 @@ func TestWhile1(t *testing.T) {
 		)
 		return []tf.Output{oneCond}, nil, "get condition from inputs"
 	}
-	condFn := BuildFunc("condFn", mkCondFn, tf.Float, tf.Float, tf.Int64)
 
 	// get function for While body
 	mkBodyFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
@@ -114,7 +113,9 @@ func TestWhile1(t *testing.T) {
 		)
 		return []tf.Output{limit, outVal, outCount}, nil, "get next loop values"
 	}
-	bodyFn := BuildFunc("bodyFn", mkBodyFn, tf.Float, tf.Float, tf.Int64)
+
+	condFn, bodyFn := BuildFuncPair("condFn", "bodyFn", mkCondFn, mkBodyFn,
+		tf.Float, tf.Float, tf.Int64)
 
 	// get graph with While-op using the functions above
 	var (
