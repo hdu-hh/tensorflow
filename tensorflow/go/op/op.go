@@ -106,3 +106,11 @@ func BuildFunc(name string, goFunc GoFunc, dtypes ...tf.DataType) *tf.Func {
 	}
 	return tfFunc
 }
+
+// BuildFuncPair returns two tf.Pair for functions sharing the signature.
+// This simplifies handling op.While that requires such a pair.
+func BuildFuncPair(name1, name2 string, goFn1, goFn2 GoFunc, dtypes ...tf.DataType) (*tf.Func, *tf.Func) {
+	tfFn1 := BuildFunc(name1, goFn1, dtypes...)
+	tfFn2 := BuildFunc(name2, goFn2, dtypes...)
+	return tfFn1, tfFn2
+}
