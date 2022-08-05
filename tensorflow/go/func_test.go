@@ -18,6 +18,7 @@ package tensorflow
 
 import (
 	"bytes"
+	"strings"
 	"testing"
 )
 
@@ -33,8 +34,8 @@ func getNegFunc(t *testing.T, funcName string) *Func {
 	if fn == nil {
 		t.Fatal("returned function is nil")
 	}
-	if gotName := fn.Name(); gotName != funcName {
-		t.Errorf("function has wrong name: got %q, want %q", gotName, funcName)
+	if gotName := fn.Name(); !strings.HasPrefix(gotName, funcName) {
+		t.Errorf("function name has wrong prefix: got %q for %q", gotName, funcName)
 	}
 	return fn
 }
@@ -51,8 +52,10 @@ func TestPlainFunc(t *testing.T) {
 	}
 	if fns := g2.Functions(); len(fns) != 1 {
 		t.Errorf("wrong number of functions: got %d, want 1", len(fns))
-	} else if gotName := fns[0].Name(); gotName != funcName {
-		t.Errorf("wrong function name: got %q, want %q", gotName, funcName)
+	} else if gotName := fns[0].Name(); !strings.HasPrefix(gotName, funcName) {
+		t.Errorf("function name has wrong prefix: got %q for %q", gotName, funcName)
+	} else if gotName != fn.Name() {
+		t.Errorf("registered function name wrong: got %q, want %q", gotName, fn.Name())
 	}
 
 	// add Func operation to other graph

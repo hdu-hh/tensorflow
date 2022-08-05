@@ -112,9 +112,9 @@ func (g *Graph) AsFunc(name string, inputs, outputs []Output, outNames []string,
 	defer C.free(unsafe.Pointer(cName))
 	cDesc := C.CString(desc)
 	defer C.free(unsafe.Pointer(cDesc))
-	cHashFnName := C.uchar(0)
+	cHashFnName := C.uchar(1) // name hashing enabled
 
-	// TODO: select subset of ops needed for inputs to outputs
+	// TODO? select subset of ops needed for inputs to outputs
 	cNumOpers := C.int(-1)      // all ops for now -> -1
 	var pOpers **C.TF_Operation // all graph ops for now -> nil
 
