@@ -105,7 +105,7 @@ so splitting the Golang binding off into a separate project has become feasible.
 This would also reduce the size of the Golang packages considerably.
 
 On the other hand there is no urgency for that and keeping up with upstream
-and eventual merge requests into upstream is much simpler.
+and eventual merge requests into upstream are much simpler.
 
 ### Does it work with [Tensorboard](https://github.com/tensorflow/tensorboard)?
 
