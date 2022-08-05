@@ -95,6 +95,12 @@ work:
   }
 ```
 
+## GoDocs for the provided packages
+
+The API documentation of the packages can be read online at `go.pkg.dev`. Please see
+* Tensorflow API: https://pkg.go.dev/github.com/hdu-hh/tensorflow/tensorflow/go
+* Operations API: https://pkg.go.dev/github.com/hdu-hh/tensorflow/tensorflow/go/op
+
 ## FAQ
 
 ### Is it possible and reasonable to split off the Golang binding into an own project?
