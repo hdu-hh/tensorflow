@@ -17,6 +17,8 @@ limitations under the License.
 package op
 
 import (
+	"math"
+	"math/rand"
 	"testing"
 
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
@@ -44,6 +46,43 @@ func TestFuncCall1(t *testing.T) {
 	}
 	if want, got := int32(27), ft[1].Value().(int32); got != want {
 		t.Errorf("bad power result: got %d, want %d", got, want)
+	}
+}
+func TestForOperation(t *testing.T) {
+	mkBodyFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
+		y1 := Cast(s, x[0], tf.Double)
+		y2 := Add(s, x[1], y1)
+		return []tf.Output{y2}, nil, "dummy for-loop body"
+	}
+
+	inpVals := make([]float64, 10)
+	for i := range inpVals {
+		inpVals[i] = rand.Float64()
+	}
+
+	var (
+		bodyFn = BuildFunc("bodyFn", mkBodyFn, tf.Int32, tf.Double)
+		s      = NewScope()
+		_      = s.RegisterFunc(bodyFn, nil)
+
+		cStart   = Const(s, int32(3))
+		cLimit   = Const(s, int32(9))
+		cDelta   = Const(s, int32(5))
+		cSamples = Const(s, inpVals)
+		loopVals = For(s, cStart, cLimit, cDelta, []tf.Output{cSamples}, bodyFn)
+
+		graph, _     = s.Finalize()
+		sess, _      = tf.NewSession(graph, nil)
+		fetched, err = sess.Run(nil, loopVals, nil)
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	gotVals := fetched[0].Value().([]float64)
+	for i, got := range gotVals {
+		if want := inpVals[i] + 3 + 8; math.Abs(got-want) > 1e-10 {
+			t.Errorf("bad result at index %d: got %f, want %f, delta=%+e", i, got, want, got-want)
+		}
 	}
 }
 
