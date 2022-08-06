@@ -22,6 +22,31 @@ import (
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
+func TestFuncCall1(t *testing.T) {
+	mkFn1 := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
+		y1 := Add(s, x[0], x[1])
+		y2 := Pow(s, x[0], x[1])
+		y2 = Cast(s, y2, tf.Int32)
+		return []tf.Output{y1, y2}, nil, "just playing"
+	}
+	var (
+		fn1     = BuildFunc("func1", mkFn1, tf.Float, tf.Float)
+		s       = NewScope()
+		_       = s.RegisterFunc(fn1, nil)
+		c3      = Const(s, float32(3.0))
+		y       = Func(s, fn1, c3, c3)
+		g, _    = s.Finalize()
+		sess, _ = tf.NewSession(g, nil)
+		ft, _   = sess.Run(nil, y, nil)
+	)
+	if want, got := float32(6.0), ft[0].Value().(float32); got != want {
+		t.Errorf("bad addition result: got %f, want %f", got, want)
+	}
+	if want, got := int32(27), ft[1].Value().(int32); got != want {
+		t.Errorf("bad power result: got %d, want %d", got, want)
+	}
+}
+
 func TestWhile1(t *testing.T) {
 	// get function for While condition
 	mkCondFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
@@ -53,18 +78,19 @@ func TestWhile1(t *testing.T) {
 	bodyFn := BuildFunc("bodyFn", mkBodyFn, tf.Float, tf.Float, tf.Int64)
 
 	// get graph with While-op using the functions above
-	s := NewScope()
-	s.RegisterFunc(condFn, nil)
-	s.RegisterFunc(bodyFn, nil)
-
 	var (
-		limitVal     = float32(100)
-		cLimit       = Const(s, limitVal)
-		initVals     = Const(s, []float32{+1, -2})
-		initCounter  = Const(s, int64(0))
-		loopVals     = While(s, []tf.Output{cLimit, initVals, initCounter}, condFn, bodyFn)
-		g3, _        = s.Finalize()
-		sess, _      = tf.NewSession(g3, nil)
+		s = NewScope()
+		_ = s.RegisterFunc(condFn, nil)
+		_ = s.RegisterFunc(bodyFn, nil)
+
+		limitVal    = float32(100)
+		cLimit      = Const(s, limitVal)
+		initVals    = Const(s, []float32{+1, -2})
+		initCounter = Const(s, int64(0))
+		loopVals    = While(s, []tf.Output{cLimit, initVals, initCounter}, condFn, bodyFn)
+
+		graph, _     = s.Finalize()
+		sess, _      = tf.NewSession(graph, nil)
 		fetched, err = sess.Run(nil, loopVals, nil)
 	)
 	if err != nil {
