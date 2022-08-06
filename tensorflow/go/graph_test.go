@@ -59,11 +59,11 @@ func TestGraphWriteToAndImport(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	input, err := Placeholder(g, "input", v.DataType())
+	input, err := _Placeholder(g, "input", v.DataType())
 	if err != nil {
 		t.Fatal(err)
 	}
-	if _, err := Neg(g, "neg", input); err != nil {
+	if _, err := _Neg(g, "neg", input); err != nil {
 		t.Fatal(err)
 	}
 
@@ -89,11 +89,11 @@ func TestGraphInputMapping(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	input, err := Placeholder(g, "input", v.DataType())
+	input, err := _Placeholder(g, "input", v.DataType())
 	if err != nil {
 		t.Fatal(err)
 	}
-	neg, err := Neg(g, "neg", input)
+	neg, err := _Neg(g, "neg", input)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -110,7 +110,7 @@ func TestGraphInputMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	replacement, err := Placeholder(g, "replacement", v.DataType())
+	replacement, err := _Placeholder(g, "replacement", v.DataType())
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -151,11 +151,11 @@ func TestGraphInputMapping(t *testing.T) {
 
 func TestGraphAddGradients(t *testing.T) {
 	g := NewGraph()
-	x1, err := Placeholder(g, "x1", Float)
+	x1, err := _Placeholder(g, "x1", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
-	x2, err := Placeholder(g, "x2", Float)
+	x2, err := _Placeholder(g, "x2", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -241,7 +241,7 @@ func TestGraphAddGradients(t *testing.T) {
 
 func TestGraphAddGradientsSums(t *testing.T) {
 	g := NewGraph()
-	x, err := Placeholder(g, "x", Float)
+	x, err := _Placeholder(g, "x", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -292,7 +292,7 @@ func TestGraphAddGradientsSums(t *testing.T) {
 
 func TestGraphAddGradientsWithInitialValues(t *testing.T) {
 	g := NewGraph()
-	x, err := Placeholder(g, "x", Float)
+	x, err := _Placeholder(g, "x", Float)
 	op0, err := g.AddOperation(OpSpec{
 		Type:  "Square",
 		Name:  "y0",
@@ -354,7 +354,7 @@ func TestGraphAddGradientsWithInitialValues(t *testing.T) {
 
 func TestGraphValidateGradientsNames(t *testing.T) {
 	g := NewGraph()
-	x, err := Placeholder(g, "x", Float)
+	x, err := _Placeholder(g, "x", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
