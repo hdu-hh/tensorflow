@@ -30,10 +30,7 @@ func createGraphAndOp() (*Operation, error) {
 		return nil, err
 	}
 	g := NewGraph()
-	output, err := _Placeholder(g, "my_placeholder", t.DataType())
-	if err != nil {
-		return nil, err
-	}
+	output := _Placeholder(g, "my_placeholder", t.DataType())
 	return output.Op, nil
 }
 
@@ -55,22 +52,13 @@ func TestOperationLifetime(t *testing.T) {
 
 func TestOperationOutputListSize(t *testing.T) {
 	graph := NewGraph()
-	c1, err := _Const(graph, "c1", int64(1))
-	if err != nil {
-		t.Fatal(err)
-	}
-	c2, err := _Const(graph, "c2", [][]int64{{1, 2}, {3, 4}})
-	if err != nil {
-		t.Fatal(err)
-	}
+	c1 := _Const(graph, "c1", int64(1))
+	c2 := _Const(graph, "c2", [][]int64{{1, 2}, {3, 4}})
 	// The ShapeN op takes a list of tensors as input and a list as output.
 	op, err := graph.AddOperation(OpSpec{
 		Type:  "ShapeN",
 		Input: []Input{OutputList{c1, c2}},
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
 	n, err := op.OutputListSize("output")
 	if err != nil {
 		t.Fatal(err)
@@ -134,10 +122,7 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 	}
 	for idx, test := range testdata {
 		t.Run(fmt.Sprintf("#%d Value %T", idx, test.Value), func(t *testing.T) {
-			c, err := _Const(graph, fmt.Sprintf("const%d", idx), test.Value)
-			if err != nil {
-				t.Fatal(err)
-			}
+			c := _Const(graph, fmt.Sprintf("const%d", idx), test.Value)
 			if got, want := c.DataType(), test.dtype; got != want {
 				t.Errorf("Got DataType %v, want %v", got, want)
 			}
@@ -157,10 +142,7 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	placeholder, err := _Placeholder(graph, "placeholder", dummyTensor.DataType())
-	if err != nil {
-		t.Fatal(err)
-	}
+	placeholder := _Placeholder(graph, "placeholder", dummyTensor.DataType())
 	if shape := placeholder.Shape(); shape.NumDimensions() != -1 {
 		t.Errorf("Got shape %v, wanted an unknown number of dimensions", shape)
 	}
@@ -168,18 +150,9 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 
 func TestOperationInputs(t *testing.T) {
 	g := NewGraph()
-	x, err := _Placeholder(g, "x", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
-	y, err := _Placeholder(g, "y", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
-	add, err := _Add(g, "add", x, y)
-	if err != nil {
-		t.Fatal(err)
-	}
+	x := _Placeholder(g, "x", Float)
+	y := _Placeholder(g, "y", Float)
+	add := _Add(g, "add", x, y)
 	addOp := add.Op
 
 	if out := addOp.NumInputs(); out != 2 {
@@ -189,18 +162,9 @@ func TestOperationInputs(t *testing.T) {
 
 func TestOperationConsumers(t *testing.T) {
 	g := NewGraph()
-	x, err := _Placeholder(g, "x", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
-	a, err := _Neg(g, "a", x)
-	if err != nil {
-		t.Fatal(err)
-	}
-	b, err := _Neg(g, "b", x)
-	if err != nil {
-		t.Fatal(err)
-	}
+	x := _Placeholder(g, "x", Float)
+	a := _Neg(g, "a", x)
+	b := _Neg(g, "b", x)
 
 	consumers := []*Operation{a.Op, b.Op}
 

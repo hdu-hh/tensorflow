@@ -59,13 +59,8 @@ func TestGraphWriteToAndImport(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	input, err := _Placeholder(g, "input", v.DataType())
-	if err != nil {
-		t.Fatal(err)
-	}
-	if _, err := _Neg(g, "neg", input); err != nil {
-		t.Fatal(err)
-	}
+	input := _Placeholder(g, "input", v.DataType())
+	_ = _Neg(g, "neg", input)
 
 	// Serialize the graph
 	buf := new(bytes.Buffer)
@@ -89,14 +84,8 @@ func TestGraphInputMapping(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	input, err := _Placeholder(g, "input", v.DataType())
-	if err != nil {
-		t.Fatal(err)
-	}
-	neg, err := _Neg(g, "neg", input)
-	if err != nil {
-		t.Fatal(err)
-	}
+	input := _Placeholder(g, "input", v.DataType())
+	neg := _Neg(g, "neg", input)
 
 	// Serialize the graph
 	buf := new(bytes.Buffer)
@@ -110,11 +99,7 @@ func TestGraphInputMapping(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	replacement, err := _Placeholder(g, "replacement", v.DataType())
-	if err != nil {
-		t.Fatal(err)
-	}
-
+	replacement := _Placeholder(g, "replacement", v.DataType())
 	options := GraphImportOptions{
 		Prefix: "imported",
 	}
@@ -151,14 +136,8 @@ func TestGraphInputMapping(t *testing.T) {
 
 func TestGraphAddGradients(t *testing.T) {
 	g := NewGraph()
-	x1, err := _Placeholder(g, "x1", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
-	x2, err := _Placeholder(g, "x2", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
+	x1 := _Placeholder(g, "x1", Float)
+	x2 := _Placeholder(g, "x2", Float)
 	op0, err := g.AddOperation(OpSpec{
 		Type:  "Square",
 		Name:  "y0",
@@ -241,10 +220,7 @@ func TestGraphAddGradients(t *testing.T) {
 
 func TestGraphAddGradientsSums(t *testing.T) {
 	g := NewGraph()
-	x, err := _Placeholder(g, "x", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
+	x := _Placeholder(g, "x", Float)
 	op0, err := g.AddOperation(OpSpec{
 		Type:  "Square",
 		Name:  "y0",
@@ -292,7 +268,7 @@ func TestGraphAddGradientsSums(t *testing.T) {
 
 func TestGraphAddGradientsWithInitialValues(t *testing.T) {
 	g := NewGraph()
-	x, err := _Placeholder(g, "x", Float)
+	x := _Placeholder(g, "x", Float)
 	op0, err := g.AddOperation(OpSpec{
 		Type:  "Square",
 		Name:  "y0",
@@ -354,10 +330,7 @@ func TestGraphAddGradientsWithInitialValues(t *testing.T) {
 
 func TestGraphValidateGradientsNames(t *testing.T) {
 	g := NewGraph()
-	x, err := _Placeholder(g, "x", Float)
-	if err != nil {
-		t.Fatal(err)
-	}
+	x := _Placeholder(g, "x", Float)
 	op0, err := g.AddOperation(OpSpec{
 		Type:  "Square",
 		Name:  "y0",
