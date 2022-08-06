@@ -20,9 +20,13 @@ package tensorflow
 import "C"
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"unsafe"
+
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
+	"google.golang.org/protobuf/proto"
 )
 
 // Func represents a tensorflow function.
@@ -217,4 +221,19 @@ func (fn *Func) WriteAttrTo(attrName string, w io.Writer) (int64, error) {
 	}
 	n, err := w.Write(proto)
 	return int64(n), err
+}
+
+// Signature returns the function signature as OpDef object
+func (fn *Func) Signature() *pbs.OpDef {
+	buf := bytes.Buffer{}
+	if _, err := fn.WriteTo(&buf); err != nil {
+		err = fmt.Errorf("failed to get signature of function %q: %w", fn.Name(), err)
+		panic(err)
+	}
+	fnProto := pbs.FunctionDef{}
+	if err := proto.Unmarshal(buf.Bytes(), &fnProto); err != nil {
+		err = fmt.Errorf("failed to unmarshal function defintion for %q: %w", fn.Name(), err)
+		panic(err)
+	}
+	return fnProto.Signature
 }
