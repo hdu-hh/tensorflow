@@ -16,7 +16,7 @@ limitations under the License.
 
 package tensorflow
 
-func _Placeholder(g *Graph, name string, dt DataType) (Output, error) {
+func _Placeholder(g *Graph, name string, dt DataType) Output {
 	op, err := g.AddOperation(OpSpec{
 		Type: "Placeholder",
 		Name: name,
@@ -24,15 +24,18 @@ func _Placeholder(g *Graph, name string, dt DataType) (Output, error) {
 			"dtype": dt,
 		},
 	})
-	return op.Output(0), err
+	if err != nil {
+		panic(err)
+	}
+	return op.Output(0)
 }
 
-func _Const(g *Graph, name string, value interface{}) (Output, error) {
+func _Const(g *Graph, name string, value interface{}) Output {
 	t, ok := value.(*Tensor)
 	if !ok {
 		var err error
 		if t, err = NewTensor(value); err != nil {
-			return Output{}, err
+			return Output{}
 		}
 	}
 	op, err := g.AddOperation(OpSpec{
@@ -43,23 +46,32 @@ func _Const(g *Graph, name string, value interface{}) (Output, error) {
 			"value": t,
 		},
 	})
-	return op.Output(0), err
+	if err != nil {
+		panic(err)
+	}
+	return op.Output(0)
 }
 
-func _Neg(g *Graph, name string, port Output) (Output, error) {
+func _Neg(g *Graph, name string, port Output) Output {
 	op, err := g.AddOperation(OpSpec{
 		Type:  "Neg",
 		Name:  name,
 		Input: []Input{port},
 	})
-	return op.Output(0), err
+	if err != nil {
+		panic(err)
+	}
+	return op.Output(0)
 }
 
-func _Add(g *Graph, name string, x, y Output) (Output, error) {
+func _Add(g *Graph, name string, x, y Output) Output {
 	op, err := g.AddOperation(OpSpec{
 		Type:  "Add",
 		Name:  name,
 		Input: []Input{x, y},
 	})
-	return op.Output(0), err
+	if err != nil {
+		panic(err)
+	}
+	return op.Output(0)
 }

@@ -24,14 +24,8 @@ import (
 
 func createTestGraph(t *testing.T, dt DataType) (*Graph, Output, Output) {
 	g := NewGraph()
-	inp, err := _Placeholder(g, "p1", dt)
-	if err != nil {
-		t.Fatalf("Placeholder() for %v: %v", dt, err)
-	}
-	out, err := _Neg(g, "neg1", inp)
-	if err != nil {
-		t.Fatalf("Neg() for %v: %v", dt, err)
-	}
+	inp := _Placeholder(g, "p1", dt)
+	out := _Neg(g, "neg1", inp)
 	return g, inp, out
 }
 
@@ -82,16 +76,10 @@ func TestMultipleInput(t *testing.T) {
 	inputs := make([]Output, 20)
 	layer2 := make([]Output, len(inputs))
 	for i := range inputs {
-		in, err := _Placeholder(graph, fmt.Sprintf("input%d", i), Int64)
-		if err != nil {
-			t.Fatal(err)
-		}
+		in := _Placeholder(graph, fmt.Sprintf("input%d", i), Int64)
 		inputs[i] = in
 
-		factor, err := _Const(graph, fmt.Sprintf("factor%d", i), int64(i+1))
-		if err != nil {
-			t.Fatal(err)
-		}
+		factor := _Const(graph, fmt.Sprintf("factor%d", i), int64(i+1))
 		l2, err := graph.AddOperation(OpSpec{
 			Type: "Mul",
 			Name: fmt.Sprintf("Mul%d", i),
@@ -160,10 +148,7 @@ func TestInputOrderStable(t *testing.T) {
 
 	inputs := make([]Output, 20)
 	for i := range inputs {
-		in, err := _Placeholder(graph, fmt.Sprintf("input%d", i), Int64)
-		if err != nil {
-			t.Fatal(err)
-		}
+		in := _Placeholder(graph, fmt.Sprintf("input%d", i), Int64)
 		in.Index = i
 		inputs[i] = in
 	}
@@ -194,13 +179,13 @@ func TestSessionRunConcat(t *testing.T) {
 	// This tests the use of both Output and OutputList as inputs to the
 	// Concat operation.
 	var (
-		g       = NewGraph()
-		dim1, _ = _Const(g, "dim1", int32(1))
-		m1, _   = _Const(g, "m1", [][]int64{
+		g    = NewGraph()
+		dim1 = _Const(g, "dim1", int32(1))
+		m1   = _Const(g, "m1", [][]int64{
 			{1, 2, 3},
 			{4, 5, 6},
 		})
-		m2, _ = _Const(g, "m2", [][]int64{
+		m2 = _Const(g, "m2", [][]int64{
 			{7, 8, 9},
 			{10, 11, 12},
 		})
@@ -242,7 +227,7 @@ func TestSessionWithStringTensors(t *testing.T) {
 	// constructed from first principles.
 	var (
 		g       = NewGraph()
-		feed, _ = _Const(g, "input", "PleaseHashMe")
+		feed    = _Const(g, "input", "PleaseHashMe")
 		hash, _ = g.AddOperation(OpSpec{
 			Type:  "StringToHashBucketFast",
 			Input: []Input{feed},
@@ -305,15 +290,15 @@ func ExamplePartialRun() {
 		// Skipping error handling for brevity of this example.
 		// The 'op' package can be used to make graph construction code
 		// with error handling more succinct.
-		g        = NewGraph()
-		a, _     = _Placeholder(g, "a", Int32)
-		b, _     = _Placeholder(g, "b", Int32)
-		two, _   = _Const(g, "Two", int32(2))
-		three, _ = _Const(g, "Three", int32(3))
+		g     = NewGraph()
+		a     = _Placeholder(g, "a", Int32)
+		b     = _Placeholder(g, "b", Int32)
+		two   = _Const(g, "Two", int32(2))
+		three = _Const(g, "Three", int32(3))
 
-		plus2, _ = _Add(g, "plus2", a, two)       // a + 2
-		plus3, _ = _Add(g, "plus3", plus2, three) // (a + 2) + 3
-		plusB, _ = _Add(g, "plusB", plus3, b)     // ((a + 2) + 3) + b
+		plus2 = _Add(g, "plus2", a, two)       // a + 2
+		plus3 = _Add(g, "plus3", plus2, three) // (a + 2) + 3
+		plusB = _Add(g, "plusB", plus3, b)     // ((a + 2) + 3) + b
 
 	)
 	sess, err := NewSession(g, nil)
@@ -380,10 +365,7 @@ func TestSessionConfig(t *testing.T) {
 	 print c.SerializeToString()
 	*/
 	graph := NewGraph()
-	c, err := _Const(graph, "Const", int32(14))
-	if err != nil {
-		t.Fatal(err)
-	}
+	c := _Const(graph, "Const", int32(14))
 	opts := SessionOptions{Config: []byte("(\x01")}
 	s, err := NewSession(graph, &opts)
 	if err != nil {
