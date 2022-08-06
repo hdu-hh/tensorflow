@@ -13,8 +13,8 @@
 package pbs
 
 import (
-	any "github.com/golang/protobuf/ptypes/any"
-	duration "github.com/golang/protobuf/ptypes/duration"
+	any "google.golang.org/protobuf/types/known/anypb"
+	duration "google.golang.org/protobuf/types/known/durationpb"
 
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
