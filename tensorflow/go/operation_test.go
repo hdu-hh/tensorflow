@@ -251,6 +251,13 @@ func TestOperationDevice(t *testing.T) {
 	}
 }
 
+func TestAllOpList(t *testing.T) {
+	list := GetAllOpList()
+	if l := len(list.Op); l < 1500 || 2000 < l {
+		t.Errorf("unexpected number of ops in AllOps: got %d", l)
+	}
+}
+
 func forceGC() {
 	var mem runtime.MemStats
 	runtime.ReadMemStats(&mem)

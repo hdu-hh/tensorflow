@@ -22,7 +22,11 @@ import "C"
 
 import (
 	"fmt"
+	"sort"
 	"unsafe"
+
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
+	"google.golang.org/protobuf/proto"
 )
 
 // Operation that has been added to the graph.
@@ -263,4 +267,35 @@ func (op *Operation) ControlOutputs() []*Operation {
 		out[i] = &Operation{c, op.g}
 	}
 	return out
+}
+
+// GetAllOpList() lists all Operations available.
+//
+// The list provides interesting details even of operations
+// that are not yet wrapped by the op package. This can help
+// to experiment with these missing operations and to resolve
+// issues that prevent them from being wrapped by the op package.
+func GetAllOpList() *pbs.OpList {
+	buf := C.TF_GetAllOpList()
+	if buf == nil || buf.length == 0 {
+		return nil
+	}
+	defer C.TF_DeleteBuffer(buf)
+
+	slice, err := getBufferAsSlice(buf)
+	if err != nil {
+		err = fmt.Errorf("failed to slice AllOpList: %w", err)
+		panic(err)
+	}
+
+	opList := pbs.OpList{}
+	if err := proto.Unmarshal(slice, &opList); err != nil {
+		err = fmt.Errorf("failed to unmarshal AllOpList: %w", err)
+		panic(err)
+	}
+
+	sort.Slice(opList.Op, func(i, j int) bool {
+		return opList.Op[i].Name < opList.Op[j].Name
+	})
+	return &opList
 }
