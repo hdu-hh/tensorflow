@@ -18,6 +18,7 @@ package tensorflow
 
 import (
 	"bytes"
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -111,5 +112,31 @@ func TestFuncImportExport(t *testing.T) {
 	}
 	if !bytes.Equal(buf1.Bytes(), buf2.Bytes()) {
 		t.Errorf("exported functions mismatch:\n%q\nvs\n%q", buf1.String(), buf2.String())
+	}
+}
+
+func TestFuncSignature(t *testing.T) {
+	fn := getNegFunc(t, "negFunc")
+	defer fn.Delete()
+
+	s := fn.Signature()
+	if s == nil {
+		t.Fatalf("signature is nil")
+	}
+	if want, got := "negFunc", s.Name; !strings.HasPrefix(got, want) {
+		t.Errorf("wrong name prefix: got %q, want %q", got, want)
+	}
+	for _, s := range []struct{ want, got, info string }{
+		{"", s.Summary, "summary"},
+		{"TestFunc1", s.Description, "description"},
+		{"1", fmt.Sprint(len(s.InputArg)), "number of inputs"},
+		{"x", s.InputArg[0].Name, "input name"},
+		{"DT_INT8", s.InputArg[0].Type.String(), "input type"},
+		{"y1", s.OutputArg[0].Name, "output name"},
+		{"DT_INT8", s.OutputArg[0].Type.String(), "output type"},
+	} {
+		if s.want != s.got {
+			t.Errorf("wrong %s: got %q, want %q", s.info, s.got, s.want)
+		}
 	}
 }
