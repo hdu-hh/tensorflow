@@ -30,7 +30,7 @@ func createGraphAndOp() (*Operation, error) {
 		return nil, err
 	}
 	g := NewGraph()
-	output, err := Placeholder(g, "my_placeholder", t.DataType())
+	output, err := _Placeholder(g, "my_placeholder", t.DataType())
 	if err != nil {
 		return nil, err
 	}
@@ -55,11 +55,11 @@ func TestOperationLifetime(t *testing.T) {
 
 func TestOperationOutputListSize(t *testing.T) {
 	graph := NewGraph()
-	c1, err := Const(graph, "c1", int64(1))
+	c1, err := _Const(graph, "c1", int64(1))
 	if err != nil {
 		t.Fatal(err)
 	}
-	c2, err := Const(graph, "c2", [][]int64{{1, 2}, {3, 4}})
+	c2, err := _Const(graph, "c2", [][]int64{{1, 2}, {3, 4}})
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -134,7 +134,7 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 	}
 	for idx, test := range testdata {
 		t.Run(fmt.Sprintf("#%d Value %T", idx, test.Value), func(t *testing.T) {
-			c, err := Const(graph, fmt.Sprintf("const%d", idx), test.Value)
+			c, err := _Const(graph, fmt.Sprintf("const%d", idx), test.Value)
 			if err != nil {
 				t.Fatal(err)
 			}
@@ -157,7 +157,7 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	placeholder, err := Placeholder(graph, "placeholder", dummyTensor.DataType())
+	placeholder, err := _Placeholder(graph, "placeholder", dummyTensor.DataType())
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -168,15 +168,15 @@ func TestOutputDataTypeAndShape(t *testing.T) {
 
 func TestOperationInputs(t *testing.T) {
 	g := NewGraph()
-	x, err := Placeholder(g, "x", Float)
+	x, err := _Placeholder(g, "x", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
-	y, err := Placeholder(g, "y", Float)
+	y, err := _Placeholder(g, "y", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
-	add, err := Add(g, "add", x, y)
+	add, err := _Add(g, "add", x, y)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -189,15 +189,15 @@ func TestOperationInputs(t *testing.T) {
 
 func TestOperationConsumers(t *testing.T) {
 	g := NewGraph()
-	x, err := Placeholder(g, "x", Float)
+	x, err := _Placeholder(g, "x", Float)
 	if err != nil {
 		t.Fatal(err)
 	}
-	a, err := Neg(g, "a", x)
+	a, err := _Neg(g, "a", x)
 	if err != nil {
 		t.Fatal(err)
 	}
-	b, err := Neg(g, "b", x)
+	b, err := _Neg(g, "b", x)
 	if err != nil {
 		t.Fatal(err)
 	}

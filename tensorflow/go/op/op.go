@@ -31,7 +31,8 @@ import (
 
 // Const adds an operation to graph that produces value as output.
 func Const(scope *Scope, value interface{}) (output tf.Output) {
-	if scope.Err() != nil {
+	if err := scope.Err(); err != nil {
+		panic(err)
 		return
 	}
 	t, ok := value.(*tf.Tensor)
