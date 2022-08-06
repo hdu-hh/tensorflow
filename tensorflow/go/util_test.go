@@ -16,7 +16,7 @@ limitations under the License.
 
 package tensorflow
 
-func Placeholder(g *Graph, name string, dt DataType) (Output, error) {
+func _Placeholder(g *Graph, name string, dt DataType) (Output, error) {
 	op, err := g.AddOperation(OpSpec{
 		Type: "Placeholder",
 		Name: name,
@@ -27,7 +27,7 @@ func Placeholder(g *Graph, name string, dt DataType) (Output, error) {
 	return op.Output(0), err
 }
 
-func Const(g *Graph, name string, value interface{}) (Output, error) {
+func _Const(g *Graph, name string, value interface{}) (Output, error) {
 	t, ok := value.(*Tensor)
 	if !ok {
 		var err error
@@ -46,7 +46,7 @@ func Const(g *Graph, name string, value interface{}) (Output, error) {
 	return op.Output(0), err
 }
 
-func Neg(g *Graph, name string, port Output) (Output, error) {
+func _Neg(g *Graph, name string, port Output) (Output, error) {
 	op, err := g.AddOperation(OpSpec{
 		Type:  "Neg",
 		Name:  name,
@@ -55,7 +55,7 @@ func Neg(g *Graph, name string, port Output) (Output, error) {
 	return op.Output(0), err
 }
 
-func Add(g *Graph, name string, x, y Output) (Output, error) {
+func _Add(g *Graph, name string, x, y Output) (Output, error) {
 	op, err := g.AddOperation(OpSpec{
 		Type:  "Add",
 		Name:  name,

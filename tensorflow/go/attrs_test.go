@@ -22,10 +22,10 @@ import (
 	"testing"
 )
 
-func getTestCases(g *Graph, t* testing.T) (cases []OpSpec) {
+func getTestCases(g *Graph, t *testing.T) (cases []OpSpec) {
 	i := 0
 	makeConst := func(v interface{}) Output {
-		op, err := Const(g, fmt.Sprintf("const/%d/%+v", i, v), v)
+		op, err := _Const(g, fmt.Sprintf("const/%d/%+v", i, v), v)
 		i++
 		if err != nil {
 			t.Fatal(err)
