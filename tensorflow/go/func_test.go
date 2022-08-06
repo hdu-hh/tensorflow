@@ -26,8 +26,8 @@ import (
 // returns a test Func that returns the negative value of the input int8 value
 func getNegFunc(t *testing.T, funcName string) *Func {
 	g1 := NewGraph()
-	x1, _ := Placeholder(g1, "x", Int8)
-	y1, _ := Neg(g1, "neg", x1)
+	x1, _ := _Placeholder(g1, "x", Int8)
+	y1, _ := _Neg(g1, "neg", x1)
 	fn, err := g1.AsFunc(funcName, []Output{x1}, []Output{y1}, []string{"y1"}, "TestFunc1")
 	if err != nil {
 		t.Fatal(err)
@@ -61,7 +61,7 @@ func TestPlainFunc(t *testing.T) {
 
 	// add Func operation to other graph
 	x2Val := int8(+7)
-	x2, _ := Const(g2, "x2", x2Val)
+	x2, _ := _Const(g2, "x2", x2Val)
 	funcOp, err := g2.addFunc(fn, "fn_1", x2)
 	if err != nil {
 		t.Fatal(err)
