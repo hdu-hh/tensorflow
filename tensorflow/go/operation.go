@@ -20,7 +20,10 @@ package tensorflow
 // #include "tensorflow/c/c_api.h"
 import "C"
 
-import "unsafe"
+import (
+	"fmt"
+	"unsafe"
+)
 
 // Operation that has been added to the graph.
 type Operation struct {
@@ -225,3 +228,39 @@ type Input interface {
 type OutputList []Output
 
 func (l OutputList) canBeAnInput() {}
+
+// ControlInputs returns the control inputs of op.
+func (op *Operation) ControlInputs() []*Operation {
+	num := C.TF_OperationNumControlInputs(op.c)
+	if num == 0 {
+		return nil
+	}
+	ops := make([]*C.TF_Operation, num)
+	got := C.TF_OperationGetControlInputs(op.c, (**C.TF_Operation)(unsafe.Pointer(&ops[0])), num)
+	if got != num {
+		panic(fmt.Errorf("wrong number of control inputs: got %d, want %d", got, num))
+	}
+	out := make([]*Operation, got)
+	for i, c := range ops {
+		out[i] = &Operation{c, op.g}
+	}
+	return out
+}
+
+// ControlOutputs returns the operations that have op as a control input.
+func (op *Operation) ControlOutputs() []*Operation {
+	num := C.TF_OperationNumControlOutputs(op.c)
+	if num == 0 {
+		return nil
+	}
+	ops := make([]*C.TF_Operation, num)
+	got := C.TF_OperationGetControlOutputs(op.c, (**C.TF_Operation)(unsafe.Pointer(&ops[0])), num)
+	if got != num {
+		panic(fmt.Errorf("wrong number of control outputs: got %d, want %d", got, num))
+	}
+	out := make([]*Operation, got)
+	for i, c := range ops {
+		out[i] = &Operation{c, op.g}
+	}
+	return out
+}
