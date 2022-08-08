@@ -65,6 +65,7 @@ const (
 	Uint16     DataType = C.TF_UINT16
 	Complex128 DataType = C.TF_COMPLEX128
 	Half       DataType = C.TF_HALF
+	Resource   DataType = C.TF_RESOURCE
 	Variant    DataType = C.TF_VARIANT
 )
 
@@ -276,6 +277,8 @@ func decodeTensor(raw []byte, shape []int64, dt DataType) reflect.Value {
 		}
 		slice = reflect.ValueOf(strs)
 		typ = slice.Type()
+	case Resource:
+		bug("decoding Resource tensor is only supported within the graph for now.")
 	case Variant:
 		bug("decoding Variant tensor is only supported within the graph for now.")
 	default:
