@@ -21,9 +21,9 @@
 package op
 
 import (
+	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 	"math/rand"
 	"strconv"
-	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
 // optionalAttr is an intentionally un-exported type to hide
@@ -34956,11 +34956,11 @@ func RaggedTensorToSparse(scope *Scope, rt_nested_splits []tf.Output, rt_dense_v
 // compatible with this broadcast operation, and must have fewer dimensions than
 // the value tensor.
 //
-//	row_partition_types: The types of the row partition tensors. At present, these can be:
-//   - "ROW_SPLITS": the row_splits tensor from the ragged tensor.
-//   - "VALUE_ROWIDS": the value_rowids tensor from the ragged tensor.
-//   - "FIRST_DIM_SIZE": if value_rowids is used for the first dimension, then it
-//     is preceeded by "FIRST_DIM_SIZE".
+//		row_partition_types: The types of the row partition tensors. At present, these can be:
+//	  - "ROW_SPLITS": the row_splits tensor from the ragged tensor.
+//	  - "VALUE_ROWIDS": the value_rowids tensor from the ragged tensor.
+//	  - "FIRST_DIM_SIZE": if value_rowids is used for the first dimension, then it
+//	    is preceeded by "FIRST_DIM_SIZE".
 //
 // The tensors are in the order of the dimensions.
 //
@@ -44464,32 +44464,32 @@ func SpaceToBatch(scope *Scope, input tf.Output, paddings tf.Output, block_size 
 //
 // 2. Reshape `padded` to `reshaped_padded` of shape:
 //
-//	[batch] +
-//	[padded_shape[1] / block_shape[0],
-//	  block_shape[0],
-//	 ...,
-//	 padded_shape[M] / block_shape[M-1],
-//	 block_shape[M-1]] +
-//	remaining_shape
+//		[batch] +
+//		[padded_shape[1] / block_shape[0],
+//		  block_shape[0],
+//		 ...,
+//		 padded_shape[M] / block_shape[M-1],
+//		 block_shape[M-1]] +
+//		remaining_shape
 //
-//  3. Permute dimensions of `reshaped_padded` to produce
-//     `permuted_reshaped_padded` of shape:
+//	 3. Permute dimensions of `reshaped_padded` to produce
+//	    `permuted_reshaped_padded` of shape:
 //
-//     block_shape +
-//     [batch] +
-//     [padded_shape[1] / block_shape[0],
-//     ...,
-//     padded_shape[M] / block_shape[M-1]] +
-//     remaining_shape
+//	    block_shape +
+//	    [batch] +
+//	    [padded_shape[1] / block_shape[0],
+//	    ...,
+//	    padded_shape[M] / block_shape[M-1]] +
+//	    remaining_shape
 //
-//  4. Reshape `permuted_reshaped_padded` to flatten `block_shape` into the batch
-//     dimension, producing an output tensor of shape:
+//	 4. Reshape `permuted_reshaped_padded` to flatten `block_shape` into the batch
+//	    dimension, producing an output tensor of shape:
 //
-//     [batch * prod(block_shape)] +
-//     [padded_shape[1] / block_shape[0],
-//     ...,
-//     padded_shape[M] / block_shape[M-1]] +
-//     remaining_shape
+//	    [batch * prod(block_shape)] +
+//	    [padded_shape[1] / block_shape[0],
+//	    ...,
+//	    padded_shape[M] / block_shape[M-1]] +
+//	    remaining_shape
 //
 // Some examples:
 //

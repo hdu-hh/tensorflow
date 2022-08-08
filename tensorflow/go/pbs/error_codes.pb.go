@@ -24,11 +24,11 @@ const (
 //
 // Warnings:
 //
-// -   Do not change any numeric assignments.
-// -   Changes to this list should only be made if there is a compelling
+//   - Do not change any numeric assignments.
+//   - Changes to this list should only be made if there is a compelling
 //     need that can't be satisfied in another way.  Such changes
 //     must be approved by at least two OWNERS.
-// -   These error codes must match gRPC and protobuf error codes (except for
+//   - These error codes must match gRPC and protobuf error codes (except for
 //     DO_NOT_USE_RESERVED_FOR_FUTURE_EXPANSION_USE_DEFAULT_IN_SWITCH_INSTEAD_).
 //
 // Sometimes multiple error codes may apply.  Services should return

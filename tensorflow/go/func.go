@@ -32,9 +32,9 @@ import (
 // Func represents a tensorflow function.
 //
 // It can be created from a
-//  * graph with its [Graph.AsFunc] method
-//  * go function with the [op.BuildFunc] function
-//  * [pbs.FunctionDef] protobuf with [ImportFunc]
+//   - graph with its [Graph.AsFunc] method
+//   - go function with the [op.BuildFunc] function
+//   - [pbs.FunctionDef] protobuf with [ImportFunc]
 type Func struct {
 	c *C.TF_Function
 }
