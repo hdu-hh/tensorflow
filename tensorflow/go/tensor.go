@@ -65,6 +65,7 @@ const (
 	Uint16     DataType = C.TF_UINT16
 	Complex128 DataType = C.TF_COMPLEX128
 	Half       DataType = C.TF_HALF
+	Variant    DataType = C.TF_VARIANT
 )
 
 // Tensor holds a multi-dimensional array of elements of a single data type.
@@ -267,14 +268,17 @@ func decodeTensor(raw []byte, shape []int64, dt DataType) reflect.Value {
 		slice reflect.Value
 		typ   reflect.Type
 	)
-	if dt == String {
+	switch dt {
+	case String:
 		strs, err := decodeOneDimString(raw, n)
 		if err != nil {
 			panic(bug("unable to decode string with shape %v: %v", shape, err))
 		}
 		slice = reflect.ValueOf(strs)
 		typ = slice.Type()
-	} else {
+	case Variant:
+		bug("decoding Variant tensor is only supported within the graph for now.")
+	default:
 		typ = typeForDataType(dt)
 		l := n * int(typ.Size())
 		typ = reflect.SliceOf(typ)

@@ -20,6 +20,7 @@ package op
 
 import (
 	"testing"
+	"time"
 
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
@@ -118,5 +119,74 @@ func TestDataset(t *testing.T) {
 	}
 	if _, err := sess.Run(nil, next, nil); err == nil {
 		t.Errorf("Expected sess.Run() to fail since the iterator should have reached the end of the dataset")
+	}
+}
+
+// use Optional's hasValue and getValue to drain a dataset
+func TestDrainDataset(t *testing.T) {
+	// define dataset contents
+	var (
+		types     = []tf.DataType{tf.Int64}
+		shapes    = []tf.Shape{tf.ScalarShape()}
+		loopLimit = 1000
+	)
+
+	var (
+		s = NewScope()
+		// prepare sum
+		sumVar  = Variable(s, tf.ScalarShape(), tf.Int64)
+		sumInit = Const(s, int64(0))
+		wrSum0  = Assign(s, sumVar, sumInit)
+		// simple RangeDataset for this test
+		cOne    = Const(s, int64(1))
+		cLimit  = Const(s, int64(loopLimit))
+		dataset = RangeDataset(s, cOne, cLimit, cOne, types, shapes)
+		// prepare iteration
+		dsIter  = Iterator(s, "", "", types, shapes)
+		mkIter  = MakeIterator(s, dataset, dsIter)
+		nextOpt = IteratorGetNextAsOptional(s, dsIter, types, shapes)
+		optVar  = Variable(s, tf.ScalarShape(), tf.Variant)
+		wrOpt0  = Assign(s, optVar, nextOpt)
+		hasVal  = OptionalHasValue(s, optVar)
+		optVal  = OptionalGetValue(s, optVar, types, shapes)[0]
+		addSum  = Add(s, sumVar, optVal)
+		wrSumN  = Assign(s, sumVar, addSum)
+		wrOptN  = Assign(s.WithControlDependencies(wrSumN.Op), optVar, nextOpt)
+	)
+	graph, err := s.Finalize()
+	if err != nil {
+		t.Fatal(err)
+	}
+	sess, err := tf.NewSession(graph, nil)
+	if err != nil {
+		t.Fatal(err)
+	}
+	// connect the iterator to the dataset
+	// and initialize the sum
+	if _, err := sess.Run(nil, nil, []*tf.Operation{mkIter}); err != nil {
+		t.Fatal(err)
+	}
+	// initialize the sum and the optional variable
+	if _, err = sess.Run(nil, nil, []*tf.Operation{wrSum0.Op, wrOpt0.Op}); err != nil {
+		t.Fatal(err)
+	}
+	// run the feed-fetch loop
+	loopCount := 1
+	startTime := time.Now()
+	for ; loopCount <= 10*loopLimit; loopCount++ {
+		fetched, _ := sess.Run(nil, []tf.Output{hasVal}, nil)
+		if hasNext := fetched[0].Value().(bool); !hasNext {
+			break
+		}
+		_, _ = sess.Run(nil, nil, []*tf.Operation{wrSumN.Op, wrOptN.Op})
+	}
+	dt := float64(time.Since(startTime).Nanoseconds())
+	t.Logf("%d loops took %.1fms -> %.1fus/loop", loopLimit, dt*1e-6, dt*1e-3/float64(loopLimit))
+	if loopCount != loopLimit {
+		t.Errorf("looped %d times, wanted %d loops", loopCount, loopLimit)
+	}
+	fetched, _ := sess.Run(nil, []tf.Output{sumVar}, nil)
+	if got, want := fetched[0].Value().(int64), int64((loopLimit-1)*loopLimit/2); want != got {
+		t.Errorf("sum of while loop wrong: got %d, want %d", got, want)
 	}
 }
