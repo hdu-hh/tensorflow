@@ -214,10 +214,6 @@ func (pr *PartialRun) Run(feeds map[Output]*Tensor, fetches []Output, targets []
 // See documentation for the PartialRun type.
 func (s *Session) NewPartialRun(feeds, fetches []Output, targets []*Operation) (*PartialRun, error) {
 	var (
-		cfeeds   = make([]C.TF_Output, len(feeds))
-		cfetches = make([]C.TF_Output, len(fetches))
-		ctargets = make([]*C.TF_Operation, len(targets))
-
 		pcfeeds   *C.TF_Output
 		pcfetches *C.TF_Output
 		pctargets **C.TF_Operation
@@ -225,18 +221,21 @@ func (s *Session) NewPartialRun(feeds, fetches []Output, targets []*Operation) (
 		status = newStatus()
 	)
 	if len(feeds) > 0 {
+		cfeeds := make([]C.TF_Output, len(feeds))
 		pcfeeds = &cfeeds[0]
 		for i, o := range feeds {
 			cfeeds[i] = o.c()
 		}
 	}
 	if len(fetches) > 0 {
+		cfetches := make([]C.TF_Output, len(fetches))
 		pcfetches = &cfetches[0]
 		for i, o := range fetches {
 			cfetches[i] = o.c()
 		}
 	}
 	if len(targets) > 0 {
+		ctargets := make([]*C.TF_Operation, len(targets))
 		pctargets = &ctargets[0]
 		for i, o := range targets {
 			ctargets[i] = o.c
@@ -390,31 +389,37 @@ func (f *feedsort) Len() int {
 }
 
 func newCRunArgs(feeds map[Output]*Tensor, fetches []Output, targets []*Operation) *cRunArgs {
-	c := &cRunArgs{
-		fetches:      make([]C.TF_Output, len(fetches)),
-		fetchTensors: make([]*C.TF_Tensor, len(fetches)),
-		targets:      make([]*C.TF_Operation, len(targets)),
+	c := &cRunArgs{}
+	if l := len(feeds); l > 0 {
+		c.feeds = make([]C.TF_Output, 0, l)
+		c.feedTensors = make([]*C.TF_Tensor, 0, l)
+		// Go map iteration order is random. So our list of input names will be
+		// random for each Run. This interacts badly with the TF core code which
+		// builds a executor cache key from these names in the order we provide
+		// them. We'll eventually enumerate every possible order and store it in the
+		// executor cache. With n inputs that's n! entries. That gets very big very
+		// quickly.
+		for o, t := range feeds {
+			c.feeds = append(c.feeds, o.c())
+			c.feedTensors = append(c.feedTensors, t.c)
+		}
+		if len(c.feeds) > 1 {
+			fs := feedsort{feeds: c.feeds, feedTensors: c.feedTensors}
+			sort.Sort(&fs)
+		}
 	}
-	// Go map iteration order is random. So our list of input names will be
-	// random for each Run. This interacts badly with the TF core code which
-	// builds a executor cache key from these names in the order we provide
-	// them. We'll eventually enumerate every possible order and store it in the
-	// executor cache. With n inputs that's n! entries. That gets very big very
-	// quickly.
-	for o, t := range feeds {
-		c.feeds = append(c.feeds, o.c())
-		c.feedTensors = append(c.feedTensors, t.c)
+	if l := len(fetches); l > 0 {
+		c.fetches = make([]C.TF_Output, l)
+		c.fetchTensors = make([]*C.TF_Tensor, l)
+		for i, o := range fetches {
+			c.fetches[i] = o.c()
+		}
 	}
-	if len(c.feeds) > 1 {
-		fs := feedsort{feeds: c.feeds, feedTensors: c.feedTensors}
-		sort.Sort(&fs)
-	}
-
-	for i, o := range fetches {
-		c.fetches[i] = o.c()
-	}
-	for i, t := range targets {
-		c.targets[i] = t.c
+	if len(targets) > 0 {
+		c.targets = make([]*C.TF_Operation, len(targets))
+		for i, t := range targets {
+			c.targets[i] = t.c
+		}
 	}
 	return c
 }
