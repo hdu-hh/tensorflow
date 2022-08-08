@@ -32,52 +32,53 @@ import "C"
 // implement or rely upon this particular loss method. The output tensor names
 // differ, demonstrating how different outputs can exist for the same method.
 //
-// signature_def {
-//   key: "loss_A"
-//   value {
-//     inputs {
-//       key: "input"
-//       value {
-//         name: "input:0"
-//         dtype: DT_STRING
-//         tensor_shape: ...
-//       }
-//     }
-//     outputs {
-//       key: "loss_output"
-//       value {
-//         name: "loss_output_A:0"
-//         dtype: DT_FLOAT
-//         tensor_shape: ...
-//       }
-//     }
-//   }
-//   ...
-//   method_name: "some/package/compute_loss"
-// }
-// signature_def {
-//   key: "loss_B"
-//   value {
-//     inputs {
-//       key: "input"
-//       value {
-//         name: "input:0"
-//         dtype: DT_STRING
-//         tensor_shape: ...
-//       }
-//     }
-//     outputs {
-//       key: "loss_output"
-//       value {
-//         name: "loss_output_B:0"
-//         dtype: DT_FLOAT
-//         tensor_shape: ...
-//       }
-//     }
-//   }
-//   ...
-//   method_name: "some/package/compute_loss"
-// }
+//	signature_def {
+//	  key: "loss_A"
+//	  value {
+//	    inputs {
+//	      key: "input"
+//	      value {
+//	        name: "input:0"
+//	        dtype: DT_STRING
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    outputs {
+//	      key: "loss_output"
+//	      value {
+//	        name: "loss_output_A:0"
+//	        dtype: DT_FLOAT
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	  }
+//	  ...
+//	  method_name: "some/package/compute_loss"
+//	}
+//
+//	signature_def {
+//	  key: "loss_B"
+//	  value {
+//	    inputs {
+//	      key: "input"
+//	      value {
+//	        name: "input:0"
+//	        dtype: DT_STRING
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    outputs {
+//	      key: "loss_output"
+//	      value {
+//	        name: "loss_output_B:0"
+//	        dtype: DT_FLOAT
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	  }
+//	  ...
+//	  method_name: "some/package/compute_loss"
+//	}
 type Signature struct {
 	Inputs, Outputs map[string]TensorInfo
 	MethodName      string

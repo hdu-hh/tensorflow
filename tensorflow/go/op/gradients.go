@@ -25,11 +25,12 @@ import (
 // Gradients adds gradients computation ops to the graph according to scope.
 //
 // Arguments:
-//  y: output of the function to derive
-//  x: inputs of the function for which partial derivatives are computed
-//  dx: if not null, the partial derivatives of some loss function L w.r.t. y
 //
-//  return the partial derivatives
+//	y: output of the function to derive
+//	x: inputs of the function for which partial derivatives are computed
+//	dx: if not null, the partial derivatives of some loss function L w.r.t. y
+//
+//	return the partial derivatives
 func Gradients(scope *Scope, y []tf.Output, x []tf.Output, dx ...tf.Output) (output []tf.Output) {
 	if len(scope.controlDependencies) > 0 {
 		scope.UpdateErr("Gradients", fmt.Errorf("Gradients does not currently support control dependencies (via Scope.WithControlDependencies)."))

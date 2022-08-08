@@ -29,10 +29,9 @@ const (
 // Each consumer has "consumer" and "min_producer" versions (specified
 // elsewhere).  A consumer is allowed to consume this data if
 //
-//   producer >= min_producer
-//   consumer >= min_consumer
-//   consumer not in bad_consumers
-//
+//	producer >= min_producer
+//	consumer >= min_consumer
+//	consumer not in bad_consumers
 type VersionDef struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache

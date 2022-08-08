@@ -27,12 +27,13 @@ const (
 // objects necessary for running computation in a graph when crossing the
 // process boundary. It can be used for long term storage of graphs,
 // cross-language execution of graphs, etc.
-//   MetaInfoDef
-//   GraphDef
-//   SaverDef
-//   CollectionDef
-//   TensorInfo
-//   SignatureDef
+//
+//	MetaInfoDef
+//	GraphDef
+//	SaverDef
+//	CollectionDef
+//	TensorInfo
+//	SignatureDef
 type MetaGraphDef struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -138,66 +139,67 @@ func (x *MetaGraphDef) GetObjectGraphDef() *SavedObjectGraph {
 
 // CollectionDef should cover most collections.
 // To add a user-defined collection, do one of the following:
-// 1. For simple data types, such as string, int, float:
-//      tf.add_to_collection("your_collection_name", your_simple_value)
-//    strings will be stored as bytes_list.
+//  1. For simple data types, such as string, int, float:
+//     tf.add_to_collection("your_collection_name", your_simple_value)
+//     strings will be stored as bytes_list.
 //
 // 2. For Protobuf types, there are three ways to add them:
-//    1) tf.add_to_collection("your_collection_name",
-//         your_proto.SerializeToString())
 //
-//       collection_def {
-//         key: "user_defined_bytes_collection"
-//         value {
-//           bytes_list {
-//             value: "queue_name: \"test_queue\"\n"
-//           }
-//         }
-//       }
+//  1. tf.add_to_collection("your_collection_name",
+//     your_proto.SerializeToString())
 //
-//  or
+//     collection_def {
+//     key: "user_defined_bytes_collection"
+//     value {
+//     bytes_list {
+//     value: "queue_name: \"test_queue\"\n"
+//     }
+//     }
+//     }
 //
-//    2) tf.add_to_collection("your_collection_name", str(your_proto))
+//     or
 //
-//       collection_def {
-//         key: "user_defined_string_collection"
-//         value {
-//          bytes_list {
-//             value: "\n\ntest_queue"
-//           }
-//         }
-//       }
+//  2. tf.add_to_collection("your_collection_name", str(your_proto))
 //
-//  or
+//     collection_def {
+//     key: "user_defined_string_collection"
+//     value {
+//     bytes_list {
+//     value: "\n\ntest_queue"
+//     }
+//     }
+//     }
 //
-//    3) any_buf = any_pb2.Any()
-//       tf.add_to_collection("your_collection_name",
-//         any_buf.Pack(your_proto))
+//     or
 //
-//       collection_def {
-//         key: "user_defined_any_collection"
-//         value {
-//           any_list {
-//             value {
-//               type_url: "type.googleapis.com/tensorflow.QueueRunnerDef"
-//               value: "\n\ntest_queue"
-//             }
-//           }
-//         }
-//       }
+//  3. any_buf = any_pb2.Any()
+//     tf.add_to_collection("your_collection_name",
+//     any_buf.Pack(your_proto))
 //
-// 3. For Python objects, implement to_proto() and from_proto(), and register
-//    them in the following manner:
-//    ops.register_proto_function("your_collection_name",
-//                                proto_type,
-//                                to_proto=YourPythonObject.to_proto,
-//                                from_proto=YourPythonObject.from_proto)
-//    These functions will be invoked to serialize and de-serialize the
-//    collection. For example,
-//    ops.register_proto_function(ops.GraphKeys.GLOBAL_VARIABLES,
-//                                proto_type=variable_pb2.VariableDef,
-//                                to_proto=Variable.to_proto,
-//                                from_proto=Variable.from_proto)
+//     collection_def {
+//     key: "user_defined_any_collection"
+//     value {
+//     any_list {
+//     value {
+//     type_url: "type.googleapis.com/tensorflow.QueueRunnerDef"
+//     value: "\n\ntest_queue"
+//     }
+//     }
+//     }
+//     }
+//
+//  3. For Python objects, implement to_proto() and from_proto(), and register
+//     them in the following manner:
+//     ops.register_proto_function("your_collection_name",
+//     proto_type,
+//     to_proto=YourPythonObject.to_proto,
+//     from_proto=YourPythonObject.from_proto)
+//     These functions will be invoked to serialize and de-serialize the
+//     collection. For example,
+//     ops.register_proto_function(ops.GraphKeys.GLOBAL_VARIABLES,
+//     proto_type=variable_pb2.VariableDef,
+//     to_proto=Variable.to_proto,
+//     from_proto=Variable.from_proto)
 type CollectionDef struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -451,52 +453,53 @@ func (*TensorInfo_CompositeTensor_) isTensorInfo_Encoding() {}
 // implement or rely upon this particular loss method. The output tensor names
 // differ, demonstrating how different outputs can exist for the same method.
 //
-// signature_def {
-//   key: "loss_A"
-//   value {
-//     inputs {
-//       key: "input"
-//       value {
-//         name: "input:0"
-//         dtype: DT_STRING
-//         tensor_shape: ...
-//       }
-//     }
-//     outputs {
-//       key: "loss_output"
-//       value {
-//         name: "loss_output_A:0"
-//         dtype: DT_FLOAT
-//         tensor_shape: ...
-//       }
-//     }
-//     method_name: "some/package/compute_loss"
-//   }
-//   ...
-// }
-// signature_def {
-//   key: "loss_B"
-//   value {
-//     inputs {
-//       key: "input"
-//       value {
-//         name: "input:0"
-//         dtype: DT_STRING
-//         tensor_shape: ...
-//       }
-//     }
-//     outputs {
-//       key: "loss_output"
-//       value {
-//         name: "loss_output_B:0"
-//         dtype: DT_FLOAT
-//         tensor_shape: ...
-//       }
-//     }
-//     method_name: "some/package/compute_loss"
-//   }
-//   ...
-// }
+//	signature_def {
+//	  key: "loss_A"
+//	  value {
+//	    inputs {
+//	      key: "input"
+//	      value {
+//	        name: "input:0"
+//	        dtype: DT_STRING
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    outputs {
+//	      key: "loss_output"
+//	      value {
+//	        name: "loss_output_A:0"
+//	        dtype: DT_FLOAT
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    method_name: "some/package/compute_loss"
+//	  }
+//	  ...
+//	}
+//
+//	signature_def {
+//	  key: "loss_B"
+//	  value {
+//	    inputs {
+//	      key: "input"
+//	      value {
+//	        name: "input:0"
+//	        dtype: DT_STRING
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    outputs {
+//	      key: "loss_output"
+//	      value {
+//	        name: "loss_output_B:0"
+//	        dtype: DT_FLOAT
+//	        tensor_shape: ...
+//	      }
+//	    }
+//	    method_name: "some/package/compute_loss"
+//	  }
+//	  ...
+//	}
 type SignatureDef struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -758,15 +761,16 @@ func (x *MetaGraphDef_MetaInfoDef) GetFunctionAliases() map[string]string {
 }
 
 // NodeList is used for collecting nodes in graph. For example
-// collection_def {
-//   key: "summaries"
-//   value {
-//     node_list {
-//       value: "input_producer/ScalarSummary:0"
-//       value: "shuffle_batch/ScalarSummary:0"
-//       value: "ImageSummary:0"
-//     }
-//   }
+//
+//	collection_def {
+//	  key: "summaries"
+//	  value {
+//	    node_list {
+//	      value: "input_producer/ScalarSummary:0"
+//	      value: "shuffle_batch/ScalarSummary:0"
+//	      value: "ImageSummary:0"
+//	    }
+//	  }
 type CollectionDef_NodeList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -816,17 +820,18 @@ func (x *CollectionDef_NodeList) GetValue() []string {
 
 // BytesList is used for collecting strings and serialized protobufs. For
 // example:
-// collection_def {
-//   key: "trainable_variables"
-//   value {
-//     bytes_list {
-//       value: "\n\017conv1/weights:0\022\024conv1/weights/Assign
-//              \032\024conv1/weights/read:0"
-//       value: "\n\016conv1/biases:0\022\023conv1/biases/Assign\032
-//              \023conv1/biases/read:0"
-//     }
-//   }
-// }
+//
+//	collection_def {
+//	  key: "trainable_variables"
+//	  value {
+//	    bytes_list {
+//	      value: "\n\017conv1/weights:0\022\024conv1/weights/Assign
+//	             \032\024conv1/weights/read:0"
+//	      value: "\n\016conv1/biases:0\022\023conv1/biases/Assign\032
+//	             \023conv1/biases/read:0"
+//	    }
+//	  }
+//	}
 type CollectionDef_BytesList struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
