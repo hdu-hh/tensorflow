@@ -496,6 +496,17 @@ func setAttr(cdesc *C.TF_OperationDescription, status *status, name string, valu
 	return nil
 }
 
+// UpdateEdge updates a single graph edge so an op gets another input.
+// For mass updates the ImportWithOptions() method with GraphImportOptions
+// may be faster.
+func (g *Graph) UpdateEdge(newSrc Output, dstOp *Operation, idx int) {
+	status := newStatus()
+	C.TF_UpdateEdge(g.c, newSrc.c(), C.TF_Input{oper: dstOp.c, index: C.int(idx)}, status.c)
+	if err := status.Err(); err != nil {
+		panic(err)
+	}
+}
+
 type LibraryHandler struct {
 	cptr *C.TF_Library
 }
