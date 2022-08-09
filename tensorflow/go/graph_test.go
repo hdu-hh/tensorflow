@@ -405,3 +405,18 @@ func TestGraphValidateGradientsNames(t *testing.T) {
 		t.Error("AddGradients should have failed if gradients name is already existing")
 	}
 }
+
+func TestUpdateEdge(t *testing.T) {
+	var (
+		g    = NewGraph()
+		cOne = _Const(g, "c1", int32(+1))
+		cTwo = _Const(g, "c2", int32(-2))
+		neg  = _Neg(g, "neg", cOne)
+	)
+	g.UpdateEdge(cTwo, neg.Op, 0)
+	sess, _ := NewSession(g, nil)
+	fetch, _ := sess.Run(nil, []Output{neg}, nil)
+	if want, got := int32(+2), fetch[0].Value().(int32); want != got {
+		t.Errorf("got %d, want %d", got, want)
+	}
+}
