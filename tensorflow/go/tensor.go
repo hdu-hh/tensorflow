@@ -85,7 +85,7 @@ func NewTensor(value interface{}) (*Tensor, error) {
 		return nil, err
 	}
 	nflattened := numElements(shape)
-	nbytes := TypeOf(dataType, nil).Size() * uintptr(nflattened)
+	nbytes := typeOf(dataType, nil).Size() * uintptr(nflattened)
 	if dataType == String {
 		nbytes = uintptr(nflattened) * C.sizeof_TF_TString
 	}
@@ -184,7 +184,7 @@ func ReadTensor(dataType DataType, shape []int64, r io.Reader) (*Tensor, error) 
 		shapePtr = (*C.int64_t)(unsafe.Pointer(&shape[0]))
 	}
 
-	nbytes := TypeOf(dataType, nil).Size() * uintptr(numElements(shape))
+	nbytes := typeOf(dataType, nil).Size() * uintptr(numElements(shape))
 	t := &Tensor{
 		c:     C.TF_AllocateTensor(C.TF_DataType(dataType), shapePtr, C.int(len(shape)), C.size_t(nbytes)),
 		shape: shape,
@@ -456,8 +456,8 @@ func typeForDataType(dt DataType) reflect.Type {
 	panic(bug("DataType %v is not supported (see https://www.tensorflow.org/code/tensorflow/core/framework/types.proto)", dt))
 }
 
-// TypeOf converts from a DataType and Shape to the equivalent Go type.
-func TypeOf(dt DataType, shape []int64) reflect.Type {
+// typeOf converts from a DataType and Shape to the equivalent Go type.
+func typeOf(dt DataType, shape []int64) reflect.Type {
 	ret := typeForDataType(dt)
 	for range shape {
 		ret = reflect.SliceOf(ret)
