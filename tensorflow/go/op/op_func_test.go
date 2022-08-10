@@ -17,15 +17,32 @@ limitations under the License.
 package op
 
 import (
+	"fmt"
 	"math"
 	"math/rand"
+	"strings"
 	"testing"
 	"time"
 
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
-func TestFuncCall(t *testing.T) {
+func ExampleBuildFunc() {
+	mkFn := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
+		y1 := Add(s, x[0], x[1])
+		y2 := Pow(s, x[0], x[1])
+		return []tf.Output{y1, y2}, nil, "food for BuildFunc()"
+	}
+	fn := BuildFunc("func1", mkFn, tf.Float, tf.Float)
+	s := fn.Signature()
+	str := fmt.Sprintf("inputs: %q\noutputs: %q", s.InputArg, s.OutputArg)
+	fmt.Println(strings.ReplaceAll(str, "  ", " ")) // anti-whitespace-fuzzing: github.com/golang/protobuf/issues/1121
+	// Output:
+	// inputs: ["name:\"placeholder_1\" type:DT_FLOAT" "name:\"placeholder_2\" type:DT_FLOAT"]
+	// outputs: ["name:\"add_1\" type:DT_FLOAT" "name:\"pow_1\" type:DT_FLOAT"]
+}
+
+func ExampleFunc() {
 	mkFn1 := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
 		y1 := Add(s, x[0], x[1])
 		y2 := Pow(s, x[0], x[1])
@@ -42,12 +59,8 @@ func TestFuncCall(t *testing.T) {
 		sess, _ = tf.NewSession(g, nil)
 		ft, _   = sess.Run(nil, y, nil)
 	)
-	if want, got := float32(6.0), ft[0].Value().(float32); got != want {
-		t.Errorf("bad addition result: got %f, want %f", got, want)
-	}
-	if want, got := int32(27), ft[1].Value().(int32); got != want {
-		t.Errorf("bad power result: got %d, want %d", got, want)
-	}
+	fmt.Println(ft[0].Value(), ft[1].Value())
+	// Output: 6 27
 }
 
 func TestForOperation(t *testing.T) {
@@ -158,7 +171,7 @@ func TestWhileToDrainDataset(t *testing.T) {
 	)
 
 	// x[0] is the iterator
-	// x[1] is the optional value from the iterator
+	// x[1] is the optional from the iterator
 	mkCondFn := func(s *Scope, x ...tf.Output) (outs []tf.Output, outNames []string, desc string) {
 		y := OptionalHasValue(s, x[1])
 		return []tf.Output{y}, nil, "return if the optional has data"
