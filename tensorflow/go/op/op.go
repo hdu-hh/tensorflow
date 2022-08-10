@@ -52,10 +52,10 @@ func Const(scope *Scope, value interface{}) (output tf.Output) {
 
 // Func adds the tensorflow function to the graph
 //
-// The easiest way to get a [tf.Func] is to
-//  * use [BuildFunc] or [BuildFuncPair] when building function graphs from scratch
-//  * use the [tf.Graph.AsFunc] method when converting an existing graph
-//  * use the [tf.ImportFunc] function when a FunctionDef protobuf is available
+// Get a [tf.Func] with
+//  * [BuildFunc] or [BuildFuncPair] when building function graphs from scratch
+//  * [tf.Graph.AsFunc] when converting an existing graph
+//  * [tf.ImportFunc] when a FunctionDef protobuf is available
 func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
 	fnOp := scope.AddOperation(tf.OpSpec{
 		Type:  fn.Name(),
@@ -72,7 +72,7 @@ func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
 // Please see [BuildFunc] for an example.
 type GoFunc func(s *Scope, inputs ...tf.Output) (outputs []tf.Output, outNames []string, desc string)
 
-// BuildFunc returns a `tf.Func`` matching to a go function.
+// BuildFunc returns a `tf.Func` matching to a go function.
 // The provided go function must have the GoFunc signature.
 // e.g.
 //	 goFunc := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
@@ -107,8 +107,8 @@ func BuildFunc(name string, goFunc GoFunc, dtypes ...tf.DataType) *tf.Func {
 	return tfFunc
 }
 
-// BuildFuncPair returns two tf.Pair for functions sharing the signature.
-// This simplifies handling op.While that requires such a pair.
+// BuildFuncPair returns a tf.Func pair for functions sharing their signature.
+// Operations like op.While require such pairs and benefit from this.
 func BuildFuncPair(name1, name2 string, goFn1, goFn2 GoFunc, dtypes ...tf.DataType) (*tf.Func, *tf.Func) {
 	tfFn1 := BuildFunc(name1, goFn1, dtypes...)
 	tfFn2 := BuildFunc(name2, goFn2, dtypes...)
