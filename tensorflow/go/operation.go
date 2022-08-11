@@ -95,9 +95,9 @@ func (op *Operation) NumInputs() int {
 }
 
 // Output represents one of the outputs of an operation in the graph. Has a
-// DataType (and eventually a Shape).  May be passed as an input argument to a
-// function for adding operations to a graph, or to a Session's Run() method to
-// fetch that output as a tensor.
+// DataType (and eventually a [Shape]).  May be passed as an input argument to
+// a function for adding operations to a graph, or to a Session's Run() method
+// to fetch that output as a tensor.
 type Output struct {
 	// Op is the Operation that produces this Output.
 	Op *Operation
@@ -106,12 +106,14 @@ type Output struct {
 	Index int
 }
 
-// DataType returns the type of elements in the tensor produced by p.
+// DataType returns the type of elements in the tensor produced by
+// the output.
 func (p Output) DataType() DataType {
 	return DataType(C.TF_OperationOutputType(p.c()))
 }
 
-// Shape returns the (possibly incomplete) shape of the tensor produced p.
+// Shape returns the (possibly incomplete) shape of the tensor produced
+// by the output.
 func (p Output) Shape() Shape {
 	status := newStatus()
 	port := p.c()
@@ -217,8 +219,8 @@ func (p Consumer) Producer() Output {
 // a Graph.
 //
 // Operations can have multiple inputs, each of which could be either a tensor
-// produced by another operation (an Output object), or a list of tensors
-// produced by other operations (an OutputList). Thus, this interface is
+// produced by another operation (an [Output] object), or a list of tensors
+// produced by other operations (an [OutputList]). Thus, this interface is
 // implemented by both Output and OutputList.
 //
 // See OpSpec.Input for more information.
@@ -233,7 +235,7 @@ type OutputList []Output
 
 func (l OutputList) canBeAnInput() {}
 
-// ControlInputs returns the control inputs of op.
+// ControlInputs returns the control inputs of an operation.
 func (op *Operation) ControlInputs() []*Operation {
 	num := C.TF_OperationNumControlInputs(op.c)
 	if num == 0 {

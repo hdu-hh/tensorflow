@@ -32,7 +32,7 @@ import (
 	"github.com/hdu-hh/tensorflow/tensorflow/go/op"
 )
 
-func Example() {
+func ExampleInception5h() {
 	// An example for using the TensorFlow Go API for image recognition
 	// using a pre-trained inception model (http://arxiv.org/abs/1512.00567).
 	//
