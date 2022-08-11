@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -222,10 +221,10 @@ type GraphTransferConstNodeInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name   string                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	NodeId int32                   `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
-	Shape  []int64                 `protobuf:"varint,3,rep,packed,name=shape,proto3" json:"shape,omitempty"`
-	Data   []byte                  `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
+	Name   string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	NodeId int32    `protobuf:"varint,2,opt,name=node_id,json=nodeId,proto3" json:"node_id,omitempty"`
+	Shape  []int64  `protobuf:"varint,3,rep,packed,name=shape,proto3" json:"shape,omitempty"`
+	Data   []byte   `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
 	Dtype  DataType `protobuf:"varint,5,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 }
 
@@ -411,8 +410,8 @@ type GraphTransferGraphInputNodeInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name  string                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Shape []int64                 `protobuf:"varint,2,rep,packed,name=shape,proto3" json:"shape,omitempty"`
+	Name  string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Shape []int64  `protobuf:"varint,2,rep,packed,name=shape,proto3" json:"shape,omitempty"`
 	Dtype DataType `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 }
 
@@ -474,8 +473,8 @@ type GraphTransferGraphOutputNodeInfo struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name  string                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Shape []int64                 `protobuf:"varint,2,rep,packed,name=shape,proto3" json:"shape,omitempty"`
+	Name  string   `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Shape []int64  `protobuf:"varint,2,rep,packed,name=shape,proto3" json:"shape,omitempty"`
 	Dtype DataType `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 }
 
@@ -776,7 +775,7 @@ var file_tensorflow_core_framework_graph_transfer_info_proto_goTypes = []interfa
 	(*GraphTransferGraphInputNodeInfo)(nil),  // 6: tensorflow.GraphTransferGraphInputNodeInfo
 	(*GraphTransferGraphOutputNodeInfo)(nil), // 7: tensorflow.GraphTransferGraphOutputNodeInfo
 	(*GraphTransferInfo)(nil),                // 8: tensorflow.GraphTransferInfo
-	(DataType)(0),             // 9: tensorflow.DataType
+	(DataType)(0),                            // 9: tensorflow.DataType
 }
 var file_tensorflow_core_framework_graph_transfer_info_proto_depIdxs = []int32{
 	9,  // 0: tensorflow.GraphTransferConstNodeInfo.dtype:type_name -> tensorflow.DataType

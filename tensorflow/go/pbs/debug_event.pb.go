@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1312,19 +1311,19 @@ func file_tensorflow_core_protobuf_debug_event_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_protobuf_debug_event_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tensorflow_core_protobuf_debug_event_proto_msgTypes = make([]protoimpl.MessageInfo, 10)
 var file_tensorflow_core_protobuf_debug_event_proto_goTypes = []interface{}{
-	(TensorDebugMode)(0),                // 0: tensorflow.TensorDebugMode
-	(*DebugEvent)(nil),                  // 1: tensorflow.DebugEvent
-	(*DebugMetadata)(nil),               // 2: tensorflow.DebugMetadata
-	(*SourceFile)(nil),                  // 3: tensorflow.SourceFile
-	(*StackFrameWithId)(nil),            // 4: tensorflow.StackFrameWithId
-	(*CodeLocation)(nil),                // 5: tensorflow.CodeLocation
-	(*GraphOpCreation)(nil),             // 6: tensorflow.GraphOpCreation
-	(*DebuggedGraph)(nil),               // 7: tensorflow.DebuggedGraph
-	(*DebuggedDevice)(nil),              // 8: tensorflow.DebuggedDevice
-	(*Execution)(nil),                   // 9: tensorflow.Execution
-	(*GraphExecutionTrace)(nil),         // 10: tensorflow.GraphExecutionTrace
-	(*GraphDebugInfo_FileLineCol)(nil),  // 11: tensorflow.GraphDebugInfo.FileLineCol
-	(*TensorProto)(nil), // 12: tensorflow.TensorProto
+	(TensorDebugMode)(0),               // 0: tensorflow.TensorDebugMode
+	(*DebugEvent)(nil),                 // 1: tensorflow.DebugEvent
+	(*DebugMetadata)(nil),              // 2: tensorflow.DebugMetadata
+	(*SourceFile)(nil),                 // 3: tensorflow.SourceFile
+	(*StackFrameWithId)(nil),           // 4: tensorflow.StackFrameWithId
+	(*CodeLocation)(nil),               // 5: tensorflow.CodeLocation
+	(*GraphOpCreation)(nil),            // 6: tensorflow.GraphOpCreation
+	(*DebuggedGraph)(nil),              // 7: tensorflow.DebuggedGraph
+	(*DebuggedDevice)(nil),             // 8: tensorflow.DebuggedDevice
+	(*Execution)(nil),                  // 9: tensorflow.Execution
+	(*GraphExecutionTrace)(nil),        // 10: tensorflow.GraphExecutionTrace
+	(*GraphDebugInfo_FileLineCol)(nil), // 11: tensorflow.GraphDebugInfo.FileLineCol
+	(*TensorProto)(nil),                // 12: tensorflow.TensorProto
 }
 var file_tensorflow_core_protobuf_debug_event_proto_depIdxs = []int32{
 	2,  // 0: tensorflow.DebugEvent.debug_metadata:type_name -> tensorflow.DebugMetadata

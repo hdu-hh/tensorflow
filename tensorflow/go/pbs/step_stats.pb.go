@@ -7,8 +7,6 @@
 package pbs
 
 import (
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -178,7 +176,7 @@ type NodeOutput struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Slot              int32                                          `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
+	Slot              int32              `protobuf:"varint,1,opt,name=slot,proto3" json:"slot,omitempty"`
 	TensorDescription *TensorDescription `protobuf:"bytes,3,opt,name=tensor_description,json=tensorDescription,proto3" json:"tensor_description,omitempty"`
 }
 
@@ -332,23 +330,23 @@ type NodeExecStats struct {
 	// the full string name.  Either all processes should agree on a
 	// global id (cost_id?) for each node, or we should use a hash of
 	// the name.
-	NodeName         string                                                   `protobuf:"bytes,1,opt,name=node_name,json=nodeName,proto3" json:"node_name,omitempty"`
-	AllStartMicros   int64                                                    `protobuf:"varint,2,opt,name=all_start_micros,json=allStartMicros,proto3" json:"all_start_micros,omitempty"`
-	OpStartRelMicros int64                                                    `protobuf:"varint,3,opt,name=op_start_rel_micros,json=opStartRelMicros,proto3" json:"op_start_rel_micros,omitempty"`
-	OpEndRelMicros   int64                                                    `protobuf:"varint,4,opt,name=op_end_rel_micros,json=opEndRelMicros,proto3" json:"op_end_rel_micros,omitempty"`
-	AllEndRelMicros  int64                                                    `protobuf:"varint,5,opt,name=all_end_rel_micros,json=allEndRelMicros,proto3" json:"all_end_rel_micros,omitempty"`
-	Memory           []*AllocatorMemoryUsed                                   `protobuf:"bytes,6,rep,name=memory,proto3" json:"memory,omitempty"`
-	Output           []*NodeOutput                                            `protobuf:"bytes,7,rep,name=output,proto3" json:"output,omitempty"`
-	TimelineLabel    string                                                   `protobuf:"bytes,8,opt,name=timeline_label,json=timelineLabel,proto3" json:"timeline_label,omitempty"`
-	ScheduledMicros  int64                                                    `protobuf:"varint,9,opt,name=scheduled_micros,json=scheduledMicros,proto3" json:"scheduled_micros,omitempty"`
-	ThreadId         uint32                                                   `protobuf:"varint,10,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
+	NodeName         string                   `protobuf:"bytes,1,opt,name=node_name,json=nodeName,proto3" json:"node_name,omitempty"`
+	AllStartMicros   int64                    `protobuf:"varint,2,opt,name=all_start_micros,json=allStartMicros,proto3" json:"all_start_micros,omitempty"`
+	OpStartRelMicros int64                    `protobuf:"varint,3,opt,name=op_start_rel_micros,json=opStartRelMicros,proto3" json:"op_start_rel_micros,omitempty"`
+	OpEndRelMicros   int64                    `protobuf:"varint,4,opt,name=op_end_rel_micros,json=opEndRelMicros,proto3" json:"op_end_rel_micros,omitempty"`
+	AllEndRelMicros  int64                    `protobuf:"varint,5,opt,name=all_end_rel_micros,json=allEndRelMicros,proto3" json:"all_end_rel_micros,omitempty"`
+	Memory           []*AllocatorMemoryUsed   `protobuf:"bytes,6,rep,name=memory,proto3" json:"memory,omitempty"`
+	Output           []*NodeOutput            `protobuf:"bytes,7,rep,name=output,proto3" json:"output,omitempty"`
+	TimelineLabel    string                   `protobuf:"bytes,8,opt,name=timeline_label,json=timelineLabel,proto3" json:"timeline_label,omitempty"`
+	ScheduledMicros  int64                    `protobuf:"varint,9,opt,name=scheduled_micros,json=scheduledMicros,proto3" json:"scheduled_micros,omitempty"`
+	ThreadId         uint32                   `protobuf:"varint,10,opt,name=thread_id,json=threadId,proto3" json:"thread_id,omitempty"`
 	ReferencedTensor []*AllocationDescription `protobuf:"bytes,11,rep,name=referenced_tensor,json=referencedTensor,proto3" json:"referenced_tensor,omitempty"`
-	MemoryStats      *MemoryStats                                             `protobuf:"bytes,12,opt,name=memory_stats,json=memoryStats,proto3" json:"memory_stats,omitempty"`
-	AllStartNanos    int64                                                    `protobuf:"varint,13,opt,name=all_start_nanos,json=allStartNanos,proto3" json:"all_start_nanos,omitempty"`
-	OpStartRelNanos  int64                                                    `protobuf:"varint,14,opt,name=op_start_rel_nanos,json=opStartRelNanos,proto3" json:"op_start_rel_nanos,omitempty"`
-	OpEndRelNanos    int64                                                    `protobuf:"varint,15,opt,name=op_end_rel_nanos,json=opEndRelNanos,proto3" json:"op_end_rel_nanos,omitempty"`
-	AllEndRelNanos   int64                                                    `protobuf:"varint,16,opt,name=all_end_rel_nanos,json=allEndRelNanos,proto3" json:"all_end_rel_nanos,omitempty"`
-	ScheduledNanos   int64                                                    `protobuf:"varint,17,opt,name=scheduled_nanos,json=scheduledNanos,proto3" json:"scheduled_nanos,omitempty"`
+	MemoryStats      *MemoryStats             `protobuf:"bytes,12,opt,name=memory_stats,json=memoryStats,proto3" json:"memory_stats,omitempty"`
+	AllStartNanos    int64                    `protobuf:"varint,13,opt,name=all_start_nanos,json=allStartNanos,proto3" json:"all_start_nanos,omitempty"`
+	OpStartRelNanos  int64                    `protobuf:"varint,14,opt,name=op_start_rel_nanos,json=opStartRelNanos,proto3" json:"op_start_rel_nanos,omitempty"`
+	OpEndRelNanos    int64                    `protobuf:"varint,15,opt,name=op_end_rel_nanos,json=opEndRelNanos,proto3" json:"op_end_rel_nanos,omitempty"`
+	AllEndRelNanos   int64                    `protobuf:"varint,16,opt,name=all_end_rel_nanos,json=allEndRelNanos,proto3" json:"all_end_rel_nanos,omitempty"`
+	ScheduledNanos   int64                    `protobuf:"varint,17,opt,name=scheduled_nanos,json=scheduledNanos,proto3" json:"scheduled_nanos,omitempty"`
 }
 
 func (x *NodeExecStats) Reset() {
@@ -775,15 +773,15 @@ func file_tensorflow_core_framework_step_stats_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_step_stats_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_tensorflow_core_framework_step_stats_proto_goTypes = []interface{}{
-	(*AllocationRecord)(nil),    // 0: tensorflow.AllocationRecord
-	(*AllocatorMemoryUsed)(nil), // 1: tensorflow.AllocatorMemoryUsed
-	(*NodeOutput)(nil),          // 2: tensorflow.NodeOutput
-	(*MemoryStats)(nil),         // 3: tensorflow.MemoryStats
-	(*NodeExecStats)(nil),       // 4: tensorflow.NodeExecStats
-	(*DeviceStepStats)(nil),     // 5: tensorflow.DeviceStepStats
-	(*StepStats)(nil),           // 6: tensorflow.StepStats
-	nil,                         // 7: tensorflow.DeviceStepStats.ThreadNamesEntry
-	(*TensorDescription)(nil),         // 8: tensorflow.TensorDescription
+	(*AllocationRecord)(nil),      // 0: tensorflow.AllocationRecord
+	(*AllocatorMemoryUsed)(nil),   // 1: tensorflow.AllocatorMemoryUsed
+	(*NodeOutput)(nil),            // 2: tensorflow.NodeOutput
+	(*MemoryStats)(nil),           // 3: tensorflow.MemoryStats
+	(*NodeExecStats)(nil),         // 4: tensorflow.NodeExecStats
+	(*DeviceStepStats)(nil),       // 5: tensorflow.DeviceStepStats
+	(*StepStats)(nil),             // 6: tensorflow.StepStats
+	nil,                           // 7: tensorflow.DeviceStepStats.ThreadNamesEntry
+	(*TensorDescription)(nil),     // 8: tensorflow.TensorDescription
 	(*AllocationDescription)(nil), // 9: tensorflow.AllocationDescription
 }
 var file_tensorflow_core_framework_step_stats_proto_depIdxs = []int32{

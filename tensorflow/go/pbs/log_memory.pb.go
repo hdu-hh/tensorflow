@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -548,13 +547,13 @@ func file_tensorflow_core_framework_log_memory_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_log_memory_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_tensorflow_core_framework_log_memory_proto_goTypes = []interface{}{
-	(*MemoryLogStep)(nil),                                 // 0: tensorflow.MemoryLogStep
-	(*MemoryLogTensorAllocation)(nil),                     // 1: tensorflow.MemoryLogTensorAllocation
-	(*MemoryLogTensorDeallocation)(nil),                   // 2: tensorflow.MemoryLogTensorDeallocation
-	(*MemoryLogTensorOutput)(nil),                         // 3: tensorflow.MemoryLogTensorOutput
-	(*MemoryLogRawAllocation)(nil),                        // 4: tensorflow.MemoryLogRawAllocation
-	(*MemoryLogRawDeallocation)(nil),                      // 5: tensorflow.MemoryLogRawDeallocation
-	(*TensorDescription)(nil), // 6: tensorflow.TensorDescription
+	(*MemoryLogStep)(nil),               // 0: tensorflow.MemoryLogStep
+	(*MemoryLogTensorAllocation)(nil),   // 1: tensorflow.MemoryLogTensorAllocation
+	(*MemoryLogTensorDeallocation)(nil), // 2: tensorflow.MemoryLogTensorDeallocation
+	(*MemoryLogTensorOutput)(nil),       // 3: tensorflow.MemoryLogTensorOutput
+	(*MemoryLogRawAllocation)(nil),      // 4: tensorflow.MemoryLogRawAllocation
+	(*MemoryLogRawDeallocation)(nil),    // 5: tensorflow.MemoryLogRawDeallocation
+	(*TensorDescription)(nil),           // 6: tensorflow.TensorDescription
 }
 var file_tensorflow_core_framework_log_memory_proto_depIdxs = []int32{
 	6, // 0: tensorflow.MemoryLogTensorAllocation.tensor:type_name -> tensorflow.TensorDescription
