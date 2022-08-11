@@ -53,7 +53,7 @@ type Graph struct {
 	c *C.TF_Graph
 }
 
-// The GraphImportOptions struct holds parameters for the ImportWithOptions function.
+// The GraphImportOptions struct holds parameters for the [ImportWithOptions] function.
 type GraphImportOptions struct {
 	// Node prefix
 	Prefix string
@@ -136,8 +136,8 @@ func getBufferAsSlice(buf *C.TF_Buffer) ([]byte, error) {
 	return slice, nil
 }
 
-// ImportWithOptions imports the nodes and edges from a serialized representation of
-// another Graph into g.
+// ImportWithOptions imports the nodes and edges from a serialized
+// representation of a [pbs.GraphDef] protocol buffer into the graph.
 //
 // Multiple options can be specified for the newly imported nodes.
 func (g *Graph) ImportWithOptions(def []byte, options GraphImportOptions) error {
@@ -179,8 +179,8 @@ func (g *Graph) ImportWithOptions(def []byte, options GraphImportOptions) error 
 	return nil
 }
 
-// Import imports the nodes and edges from a serialized representation of
-// another Graph into g.
+// Import imports the nodes and edges from a serialized representation
+// of a [pbs.GraphDef] protocol buffer into the graph.
 //
 // Names of imported nodes will be prefixed with prefix.
 func (g *Graph) Import(def []byte, prefix string) error {
@@ -216,8 +216,8 @@ func (g *Graph) Operations() []Operation {
 // AddGradients adds operations to compute the partial derivatives of the sum of tensors in y
 // with respect to tensors in x, i.e., d(y[0] + y[1] + ...) / d x[0], d(y[0] + y[1] + ... ) / d x[1] etc.
 //
-// prefix, if non-empty, is the name prefix used for all operations added to the graph to compute
-// these gradients.
+//   prefix, if non-empty, is the name prefix used for all operations
+//   added to the graph to compute these gradients.
 func (g *Graph) AddGradients(prefix string, y []Output, x []Output, dx []Output) ([]Output, error) {
 	var (
 		cprefix *C.char
@@ -275,8 +275,8 @@ func (g *Graph) AddGradients(prefix string, y []Output, x []Output, dx []Output)
 	return dy, nil
 }
 
-// OpSpec is the specification of an Operation to be added to a Graph
-// (using Graph.AddOperation).
+// OpSpec is the specification of an Operation to be added to a [Graph]
+// (using [Graph.AddOperation]).
 type OpSpec struct {
 	// Type of the operation (e.g., "Add", "MatMul").
 	Type string
@@ -315,7 +315,7 @@ type OpSpec struct {
 	// Other possible fields: ColocateWith.
 }
 
-// AddOperation adds an operation to g.
+// AddOperation adds an operation to the graph.
 func (g *Graph) AddOperation(args OpSpec) (*Operation, error) {
 	if args.Name == "" {
 		args.Name = args.Type
@@ -510,8 +510,7 @@ func setAttr(cdesc *C.TF_OperationDescription, status *status, name string, valu
 }
 
 // UpdateEdge updates a single graph edge so an op gets another input.
-// For mass updates the ImportWithOptions() method with GraphImportOptions
-// may be faster.
+// For mass updates the [Graph.ImportWithOptions]() method may be faster.
 func (g *Graph) UpdateEdge(newSrc Output, dstOp *Operation, idx int) {
 	status := newStatus()
 	C.TF_UpdateEdge(g.c, newSrc.c(), C.TF_Input{oper: dstOp.c, index: C.int(idx)}, status.c)
@@ -524,7 +523,8 @@ type LibraryHandler struct {
 	cptr *C.TF_Library
 }
 
-// Load library content into current context, useful to load ops implementation into non-monolithic TF build. Returns LibraryHandler or nil and error
+// Load library content into current context, useful to load ops implementation
+// into non-monolithic TF build. Returns LibraryHandler or nil and error.
 func LoadLibrary(path string) (*LibraryHandler, error) {
 	status := newStatus()
 

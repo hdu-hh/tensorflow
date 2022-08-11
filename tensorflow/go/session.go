@@ -66,13 +66,14 @@ func NewSession(graph *Graph, options *SessionOptions) (*Session, error) {
 	return s, nil
 }
 
-// Device structure contains information about a device associated with a session, as returned by ListDevices()
+// Device structure contains information about a device associated
+// with a session, as returned by [ListDevices].
 type Device struct {
 	Name, Type       string
 	MemoryLimitBytes int64
 }
 
-// String describes d and implements fmt.Stringer.
+// String describes d and implements [fmt.Stringer].
 func (d Device) String() string {
 	memStr := "no memory limit"
 	if d.MemoryLimitBytes >= 0 {
@@ -163,7 +164,7 @@ func (s *Session) Run(feeds map[Output]*Tensor, fetches []Output, targets []*Ope
 // PartialRun allows the caller to pause the evaluation of a graph, run
 // arbitrary code that depends on the intermediate computation of the graph,
 // and then resume graph execution. The results of the arbitrary code can be
-// fed into the graph when resuming execution.  In contrast, Session.Run
+// fed into the graph when resuming execution.  In contrast, [Session.Run]
 // executes the graph to compute the requested fetches using the provided feeds
 // and discards all intermediate state (e.g., value of intermediate tensors)
 // when it returns.
@@ -313,7 +314,7 @@ type SessionOptions struct {
 	Target string
 
 	// Config is a binary-serialized representation of the
-	// tensorflow.ConfigProto protocol message
+	// [pbs.ConfigProto] protocol message
 	// (https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto).
 	Config []byte
 }
@@ -349,8 +350,8 @@ func (o *SessionOptions) c() (ret *C.TF_SessionOptions, done func(), err error) 
 	}, nil
 }
 
-// cRunArgs translates the arguments to Session.Run and PartialRun.Run into
-// values suitable for C library calls.
+// cRunArgs translates the arguments to [Session.Run] and [PartialRun.Run]
+// into values suitable for C library calls.
 type cRunArgs struct {
 	feeds        []C.TF_Output
 	feedTensors  []*C.TF_Tensor
