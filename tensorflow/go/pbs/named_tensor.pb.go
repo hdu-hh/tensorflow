@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -124,8 +123,8 @@ func file_tensorflow_core_protobuf_named_tensor_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_named_tensor_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_tensorflow_core_protobuf_named_tensor_proto_goTypes = []interface{}{
-	(*NamedTensorProto)(nil),            // 0: tensorflow.NamedTensorProto
-	(*TensorProto)(nil), // 1: tensorflow.TensorProto
+	(*NamedTensorProto)(nil), // 0: tensorflow.NamedTensorProto
+	(*TensorProto)(nil),      // 1: tensorflow.TensorProto
 }
 var file_tensorflow_core_protobuf_named_tensor_proto_depIdxs = []int32{
 	1, // 0: tensorflow.NamedTensorProto.tensor:type_name -> tensorflow.TensorProto

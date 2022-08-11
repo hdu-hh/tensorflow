@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -966,19 +965,19 @@ func file_tensorflow_core_util_event_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_util_event_proto_enumTypes = make([]protoimpl.EnumInfo, 4)
 var file_tensorflow_core_util_event_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_tensorflow_core_util_event_proto_goTypes = []interface{}{
-	(WorkerHealth)(0),                // 0: tensorflow.WorkerHealth
-	(WorkerShutdownMode)(0),          // 1: tensorflow.WorkerShutdownMode
-	(LogMessage_Level)(0),            // 2: tensorflow.LogMessage.Level
-	(SessionLog_SessionStatus)(0),    // 3: tensorflow.SessionLog.SessionStatus
-	(*Event)(nil),                    // 4: tensorflow.Event
-	(*LogMessage)(nil),               // 5: tensorflow.LogMessage
-	(*SessionLog)(nil),               // 6: tensorflow.SessionLog
-	(*TaggedRunMetadata)(nil),        // 7: tensorflow.TaggedRunMetadata
-	(*WatchdogConfig)(nil),           // 8: tensorflow.WatchdogConfig
-	(*RequestedExitCode)(nil),        // 9: tensorflow.RequestedExitCode
-	(*WorkerHeartbeatRequest)(nil),   // 10: tensorflow.WorkerHeartbeatRequest
-	(*WorkerHeartbeatResponse)(nil),  // 11: tensorflow.WorkerHeartbeatResponse
-	(*Summary)(nil), // 12: tensorflow.Summary
+	(WorkerHealth)(0),               // 0: tensorflow.WorkerHealth
+	(WorkerShutdownMode)(0),         // 1: tensorflow.WorkerShutdownMode
+	(LogMessage_Level)(0),           // 2: tensorflow.LogMessage.Level
+	(SessionLog_SessionStatus)(0),   // 3: tensorflow.SessionLog.SessionStatus
+	(*Event)(nil),                   // 4: tensorflow.Event
+	(*LogMessage)(nil),              // 5: tensorflow.LogMessage
+	(*SessionLog)(nil),              // 6: tensorflow.SessionLog
+	(*TaggedRunMetadata)(nil),       // 7: tensorflow.TaggedRunMetadata
+	(*WatchdogConfig)(nil),          // 8: tensorflow.WatchdogConfig
+	(*RequestedExitCode)(nil),       // 9: tensorflow.RequestedExitCode
+	(*WorkerHeartbeatRequest)(nil),  // 10: tensorflow.WorkerHeartbeatRequest
+	(*WorkerHeartbeatResponse)(nil), // 11: tensorflow.WorkerHeartbeatResponse
+	(*Summary)(nil),                 // 12: tensorflow.Summary
 }
 var file_tensorflow_core_util_event_proto_depIdxs = []int32{
 	12, // 0: tensorflow.Event.summary:type_name -> tensorflow.Summary

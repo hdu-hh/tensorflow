@@ -10,7 +10,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -39,14 +38,14 @@ type ConvolutionProto struct {
 	// result = conv_scale * conv(...) + side_value_scale * side_value.
 	// side_value is an arbitrary buffer if activation is not none. Otherwise, it
 	// has to be the result buffer (using its old values).
-	ConvScale        float64                        `protobuf:"fixed64,6,opt,name=conv_scale,json=convScale,proto3" json:"conv_scale,omitempty"`
-	SideValueScale   float64                        `protobuf:"fixed64,7,opt,name=side_value_scale,json=sideValueScale,proto3" json:"side_value_scale,omitempty"`
+	ConvScale        float64        `protobuf:"fixed64,6,opt,name=conv_scale,json=convScale,proto3" json:"conv_scale,omitempty"`
+	SideValueScale   float64        `protobuf:"fixed64,7,opt,name=side_value_scale,json=sideValueScale,proto3" json:"side_value_scale,omitempty"`
 	Activation       ActivationMode `protobuf:"varint,8,opt,name=activation,proto3,enum=dnn.ActivationMode" json:"activation,omitempty"`
-	InputAddress     int64                          `protobuf:"varint,9,opt,name=input_address,json=inputAddress,proto3" json:"input_address,omitempty"`
-	FilterAddress    int64                          `protobuf:"varint,10,opt,name=filter_address,json=filterAddress,proto3" json:"filter_address,omitempty"`
-	OutputAddress    int64                          `protobuf:"varint,11,opt,name=output_address,json=outputAddress,proto3" json:"output_address,omitempty"`
-	BiasAddress      int64                          `protobuf:"varint,12,opt,name=bias_address,json=biasAddress,proto3" json:"bias_address,omitempty"`
-	SideInputAddress int64                          `protobuf:"varint,13,opt,name=side_input_address,json=sideInputAddress,proto3" json:"side_input_address,omitempty"`
+	InputAddress     int64          `protobuf:"varint,9,opt,name=input_address,json=inputAddress,proto3" json:"input_address,omitempty"`
+	FilterAddress    int64          `protobuf:"varint,10,opt,name=filter_address,json=filterAddress,proto3" json:"filter_address,omitempty"`
+	OutputAddress    int64          `protobuf:"varint,11,opt,name=output_address,json=outputAddress,proto3" json:"output_address,omitempty"`
+	BiasAddress      int64          `protobuf:"varint,12,opt,name=bias_address,json=biasAddress,proto3" json:"bias_address,omitempty"`
+	SideInputAddress int64          `protobuf:"varint,13,opt,name=side_input_address,json=sideInputAddress,proto3" json:"side_input_address,omitempty"`
 }
 
 func (x *ConvolutionProto) Reset() {
@@ -248,7 +247,7 @@ func file_tensorflow_core_protobuf_conv_autotuning_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_conv_autotuning_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_tensorflow_core_protobuf_conv_autotuning_proto_goTypes = []interface{}{
-	(*ConvolutionProto)(nil),                           // 0: tensorflow.ConvolutionProto
+	(*ConvolutionProto)(nil),           // 0: tensorflow.ConvolutionProto
 	(ConvolutionKind)(0),               // 1: dnn.ConvolutionKind
 	(*TensorDescriptorProto)(nil),      // 2: dnn.TensorDescriptorProto
 	(*ConvolutionDescriptorProto)(nil), // 3: dnn.ConvolutionDescriptorProto

@@ -7,9 +7,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -698,9 +695,9 @@ type TensorSpecProto struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name  string                                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name  string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Shape *TensorShapeProto `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
-	Dtype DataType                 `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Dtype DataType          `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 }
 
 func (x *TensorSpecProto) Reset() {
@@ -762,11 +759,11 @@ type BoundedTensorSpecProto struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name    string                                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name    string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	Shape   *TensorShapeProto `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
-	Dtype   DataType                 `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
-	Minimum *TensorProto            `protobuf:"bytes,4,opt,name=minimum,proto3" json:"minimum,omitempty"`
-	Maximum *TensorProto            `protobuf:"bytes,5,opt,name=maximum,proto3" json:"maximum,omitempty"`
+	Dtype   DataType          `protobuf:"varint,3,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Minimum *TensorProto      `protobuf:"bytes,4,opt,name=minimum,proto3" json:"minimum,omitempty"`
+	Maximum *TensorProto      `protobuf:"bytes,5,opt,name=maximum,proto3" json:"maximum,omitempty"`
 }
 
 func (x *BoundedTensorSpecProto) Reset() {
@@ -1111,9 +1108,9 @@ var file_tensorflow_core_protobuf_struct_proto_goTypes = []interface{}{
 	(*BoundedTensorSpecProto)(nil),   // 9: tensorflow.BoundedTensorSpecProto
 	(*TypeSpecProto)(nil),            // 10: tensorflow.TypeSpecProto
 	nil,                              // 11: tensorflow.DictValue.FieldsEntry
-	(*TensorShapeProto)(nil), // 12: tensorflow.TensorShapeProto
-	(DataType)(0),                   // 13: tensorflow.DataType
-	(*TensorProto)(nil),            // 14: tensorflow.TensorProto
+	(*TensorShapeProto)(nil),         // 12: tensorflow.TensorShapeProto
+	(DataType)(0),                    // 13: tensorflow.DataType
+	(*TensorProto)(nil),              // 14: tensorflow.TensorProto
 }
 var file_tensorflow_core_protobuf_struct_proto_depIdxs = []int32{
 	2,  // 0: tensorflow.StructuredValue.none_value:type_name -> tensorflow.NoneValue

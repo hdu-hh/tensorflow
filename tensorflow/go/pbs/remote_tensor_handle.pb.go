@@ -7,8 +7,6 @@
 package pbs
 
 import (
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -27,7 +25,7 @@ type ResourceDtypeAndShape struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Dtype DataType                 `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Dtype DataType          `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 	Shape *TensorShapeProto `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
 }
 
@@ -236,10 +234,10 @@ func file_tensorflow_core_protobuf_remote_tensor_handle_proto_rawDescGZIP() []by
 
 var file_tensorflow_core_protobuf_remote_tensor_handle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_tensorflow_core_protobuf_remote_tensor_handle_proto_goTypes = []interface{}{
-	(*ResourceDtypeAndShape)(nil),                  // 0: tensorflow.eager.ResourceDtypeAndShape
-	(*RemoteTensorHandle)(nil),                     // 1: tensorflow.eager.RemoteTensorHandle
-	(DataType)(0),                   // 2: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 3: tensorflow.TensorShapeProto
+	(*ResourceDtypeAndShape)(nil), // 0: tensorflow.eager.ResourceDtypeAndShape
+	(*RemoteTensorHandle)(nil),    // 1: tensorflow.eager.RemoteTensorHandle
+	(DataType)(0),                 // 2: tensorflow.DataType
+	(*TensorShapeProto)(nil),      // 3: tensorflow.TensorShapeProto
 }
 var file_tensorflow_core_protobuf_remote_tensor_handle_proto_depIdxs = []int32{
 	2, // 0: tensorflow.eager.ResourceDtypeAndShape.dtype:type_name -> tensorflow.DataType

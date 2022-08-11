@@ -7,8 +7,6 @@
 package pbs
 
 import (
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -391,9 +389,9 @@ type CostGraphDef_Node_OutputInfo struct {
 	// If >= 0, the output is an alias of an input. Note that an alias input
 	// may itself be an alias. The algorithm will therefore need to follow
 	// those pointers.
-	AliasInputPort int64                                   `protobuf:"varint,2,opt,name=alias_input_port,json=aliasInputPort,proto3" json:"alias_input_port,omitempty"`
+	AliasInputPort int64             `protobuf:"varint,2,opt,name=alias_input_port,json=aliasInputPort,proto3" json:"alias_input_port,omitempty"`
 	Shape          *TensorShapeProto `protobuf:"bytes,3,opt,name=shape,proto3" json:"shape,omitempty"`
-	Dtype          DataType                 `protobuf:"varint,4,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Dtype          DataType          `protobuf:"varint,4,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 }
 
 func (x *CostGraphDef_Node_OutputInfo) Reset() {
@@ -566,13 +564,13 @@ func file_tensorflow_core_framework_cost_graph_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_cost_graph_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_tensorflow_core_framework_cost_graph_proto_goTypes = []interface{}{
-	(*CostGraphDef)(nil),                           // 0: tensorflow.CostGraphDef
-	(*CostGraphDef_Node)(nil),                      // 1: tensorflow.CostGraphDef.Node
-	(*CostGraphDef_AggregatedCost)(nil),            // 2: tensorflow.CostGraphDef.AggregatedCost
-	(*CostGraphDef_Node_InputInfo)(nil),            // 3: tensorflow.CostGraphDef.Node.InputInfo
-	(*CostGraphDef_Node_OutputInfo)(nil),           // 4: tensorflow.CostGraphDef.Node.OutputInfo
-	(*TensorShapeProto)(nil), // 5: tensorflow.TensorShapeProto
-	(DataType)(0),                   // 6: tensorflow.DataType
+	(*CostGraphDef)(nil),                 // 0: tensorflow.CostGraphDef
+	(*CostGraphDef_Node)(nil),            // 1: tensorflow.CostGraphDef.Node
+	(*CostGraphDef_AggregatedCost)(nil),  // 2: tensorflow.CostGraphDef.AggregatedCost
+	(*CostGraphDef_Node_InputInfo)(nil),  // 3: tensorflow.CostGraphDef.Node.InputInfo
+	(*CostGraphDef_Node_OutputInfo)(nil), // 4: tensorflow.CostGraphDef.Node.OutputInfo
+	(*TensorShapeProto)(nil),             // 5: tensorflow.TensorShapeProto
+	(DataType)(0),                        // 6: tensorflow.DataType
 }
 var file_tensorflow_core_framework_cost_graph_proto_depIdxs = []int32{
 	1, // 0: tensorflow.CostGraphDef.node:type_name -> tensorflow.CostGraphDef.Node
