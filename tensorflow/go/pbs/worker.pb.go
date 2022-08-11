@@ -24,12 +24,6 @@ package pbs
 import (
 	any "github.com/golang/protobuf/ptypes/any"
 
-
-
-
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -968,7 +962,7 @@ type RunGraphResponse struct {
 	// TODO(suharshs): Package these in a RunMetadata instead.
 	StepStats      *StepStats    `protobuf:"bytes,2,opt,name=step_stats,json=stepStats,proto3" json:"step_stats,omitempty"`
 	CostGraph      *CostGraphDef `protobuf:"bytes,3,opt,name=cost_graph,json=costGraph,proto3" json:"cost_graph,omitempty"`
-	PartitionGraph []*GraphDef        `protobuf:"bytes,4,rep,name=partition_graph,json=partitionGraph,proto3" json:"partition_graph,omitempty"`
+	PartitionGraph []*GraphDef   `protobuf:"bytes,4,rep,name=partition_graph,json=partitionGraph,proto3" json:"partition_graph,omitempty"`
 	// If store_errors_in_response_body is true in the request, then
 	// optionally the server may return an OK status for the RPC and
 	// fill the true status into the fields below, to allow for messages
@@ -1511,7 +1505,7 @@ type LabeledStepStats struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	StepId    int64                          `protobuf:"varint,1,opt,name=step_id,json=stepId,proto3" json:"step_id,omitempty"`
+	StepId    int64      `protobuf:"varint,1,opt,name=step_id,json=stepId,proto3" json:"step_id,omitempty"`
 	StepStats *StepStats `protobuf:"bytes,2,opt,name=step_stats,json=stepStats,proto3" json:"step_stats,omitempty"`
 }
 
@@ -2028,10 +2022,10 @@ type CompleteGroupRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupKey         int32                                        `protobuf:"varint,1,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
-	GroupSize        int32                                        `protobuf:"varint,2,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
-	DeviceType       string                                       `protobuf:"bytes,3,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
-	CollectiveType   int32                                        `protobuf:"varint,5,opt,name=collective_type,json=collectiveType,proto3" json:"collective_type,omitempty"`
+	GroupKey         int32             `protobuf:"varint,1,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
+	GroupSize        int32             `protobuf:"varint,2,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
+	DeviceType       string            `protobuf:"bytes,3,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	CollectiveType   int32             `protobuf:"varint,5,opt,name=collective_type,json=collectiveType,proto3" json:"collective_type,omitempty"`
 	DeviceAttributes *DeviceAttributes `protobuf:"bytes,6,opt,name=device_attributes,json=deviceAttributes,proto3" json:"device_attributes,omitempty"`
 }
 
@@ -2108,11 +2102,11 @@ type CompleteGroupResponse struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	GroupKey         int32                                          `protobuf:"varint,1,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
-	GroupSize        int32                                          `protobuf:"varint,2,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
-	DeviceType       string                                         `protobuf:"bytes,3,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
-	NumTasks         int32                                          `protobuf:"varint,4,opt,name=num_tasks,json=numTasks,proto3" json:"num_tasks,omitempty"` // number of distinct tasks hosting the devices
-	CommunicatorKey  []byte                                         `protobuf:"bytes,7,opt,name=communicator_key,json=communicatorKey,proto3" json:"communicator_key,omitempty"`
+	GroupKey         int32               `protobuf:"varint,1,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
+	GroupSize        int32               `protobuf:"varint,2,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
+	DeviceType       string              `protobuf:"bytes,3,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	NumTasks         int32               `protobuf:"varint,4,opt,name=num_tasks,json=numTasks,proto3" json:"num_tasks,omitempty"` // number of distinct tasks hosting the devices
+	CommunicatorKey  []byte              `protobuf:"bytes,7,opt,name=communicator_key,json=communicatorKey,proto3" json:"communicator_key,omitempty"`
 	DeviceAttributes []*DeviceAttributes `protobuf:"bytes,8,rep,name=device_attributes,json=deviceAttributes,proto3" json:"device_attributes,omitempty"`
 }
 
@@ -2199,17 +2193,17 @@ type CompleteInstanceRequest struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name         string                                  `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
-	Type         int32                                   `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
-	DataType     DataType                 `protobuf:"varint,3,opt,name=data_type,json=dataType,proto3,enum=tensorflow.DataType" json:"data_type,omitempty"`
+	Name         string            `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Type         int32             `protobuf:"varint,2,opt,name=type,proto3" json:"type,omitempty"`
+	DataType     DataType          `protobuf:"varint,3,opt,name=data_type,json=dataType,proto3,enum=tensorflow.DataType" json:"data_type,omitempty"`
 	Shape        *TensorShapeProto `protobuf:"bytes,4,opt,name=shape,proto3" json:"shape,omitempty"`
-	GroupKey     int32                                   `protobuf:"varint,5,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
-	GroupSize    int32                                   `protobuf:"varint,6,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
-	InstanceKey  int32                                   `protobuf:"varint,7,opt,name=instance_key,json=instanceKey,proto3" json:"instance_key,omitempty"`
-	DeviceType   string                                  `protobuf:"bytes,8,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
-	SubdivOffset []int32                                 `protobuf:"varint,9,rep,packed,name=subdiv_offset,json=subdivOffset,proto3" json:"subdiv_offset,omitempty"`
-	Device       string                                  `protobuf:"bytes,10,opt,name=device,proto3" json:"device,omitempty"`
-	IsSource     bool                                    `protobuf:"varint,11,opt,name=is_source,json=isSource,proto3" json:"is_source,omitempty"`
+	GroupKey     int32             `protobuf:"varint,5,opt,name=group_key,json=groupKey,proto3" json:"group_key,omitempty"`
+	GroupSize    int32             `protobuf:"varint,6,opt,name=group_size,json=groupSize,proto3" json:"group_size,omitempty"`
+	InstanceKey  int32             `protobuf:"varint,7,opt,name=instance_key,json=instanceKey,proto3" json:"instance_key,omitempty"`
+	DeviceType   string            `protobuf:"bytes,8,opt,name=device_type,json=deviceType,proto3" json:"device_type,omitempty"`
+	SubdivOffset []int32           `protobuf:"varint,9,rep,packed,name=subdiv_offset,json=subdivOffset,proto3" json:"subdiv_offset,omitempty"`
+	Device       string            `protobuf:"bytes,10,opt,name=device,proto3" json:"device,omitempty"`
+	IsSource     bool              `protobuf:"varint,11,opt,name=is_source,json=isSource,proto3" json:"is_source,omitempty"`
 }
 
 func (x *CompleteInstanceRequest) Reset() {
@@ -2963,57 +2957,57 @@ func file_tensorflow_core_protobuf_worker_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_worker_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_tensorflow_core_protobuf_worker_proto_goTypes = []interface{}{
-	(*GetStatusRequest)(nil),                            // 0: tensorflow.GetStatusRequest
-	(*GetStatusResponse)(nil),                           // 1: tensorflow.GetStatusResponse
-	(*CreateWorkerSessionRequest)(nil),                  // 2: tensorflow.CreateWorkerSessionRequest
-	(*CreateWorkerSessionResponse)(nil),                 // 3: tensorflow.CreateWorkerSessionResponse
-	(*DeleteWorkerSessionRequest)(nil),                  // 4: tensorflow.DeleteWorkerSessionRequest
-	(*DeleteWorkerSessionResponse)(nil),                 // 5: tensorflow.DeleteWorkerSessionResponse
-	(*RegisterGraphRequest)(nil),                        // 6: tensorflow.RegisterGraphRequest
-	(*RegisterGraphResponse)(nil),                       // 7: tensorflow.RegisterGraphResponse
-	(*DeregisterGraphRequest)(nil),                      // 8: tensorflow.DeregisterGraphRequest
-	(*DeregisterGraphResponse)(nil),                     // 9: tensorflow.DeregisterGraphResponse
-	(*CleanupAllRequest)(nil),                           // 10: tensorflow.CleanupAllRequest
-	(*CleanupAllResponse)(nil),                          // 11: tensorflow.CleanupAllResponse
-	(*ExecutorOpts)(nil),                                // 12: tensorflow.ExecutorOpts
-	(*RunGraphRequest)(nil),                             // 13: tensorflow.RunGraphRequest
-	(*RunGraphResponse)(nil),                            // 14: tensorflow.RunGraphResponse
-	(*CleanupGraphRequest)(nil),                         // 15: tensorflow.CleanupGraphRequest
-	(*CleanupGraphResponse)(nil),                        // 16: tensorflow.CleanupGraphResponse
-	(*RecvTensorRequest)(nil),                           // 17: tensorflow.RecvTensorRequest
-	(*RecvTensorResponse)(nil),                          // 18: tensorflow.RecvTensorResponse
-	(*MarkRecvFinishedRequest)(nil),                     // 19: tensorflow.MarkRecvFinishedRequest
-	(*MarkRecvFinishedResponse)(nil),                    // 20: tensorflow.MarkRecvFinishedResponse
-	(*LoggingRequest)(nil),                              // 21: tensorflow.LoggingRequest
-	(*LabeledStepStats)(nil),                            // 22: tensorflow.LabeledStepStats
-	(*LoggingResponse)(nil),                             // 23: tensorflow.LoggingResponse
-	(*TraceOpts)(nil),                                   // 24: tensorflow.TraceOpts
-	(*TracingRequest)(nil),                              // 25: tensorflow.TracingRequest
-	(*TracingResponse)(nil),                             // 26: tensorflow.TracingResponse
-	(*RecvBufRequest)(nil),                              // 27: tensorflow.RecvBufRequest
-	(*RecvBufResponse)(nil),                             // 28: tensorflow.RecvBufResponse
-	(*CompleteGroupRequest)(nil),                        // 29: tensorflow.CompleteGroupRequest
-	(*CompleteGroupResponse)(nil),                       // 30: tensorflow.CompleteGroupResponse
-	(*CompleteInstanceRequest)(nil),                     // 31: tensorflow.CompleteInstanceRequest
-	(*CompleteInstanceResponse)(nil),                    // 32: tensorflow.CompleteInstanceResponse
-	(*GetStepSequenceRequest)(nil),                      // 33: tensorflow.GetStepSequenceRequest
-	(*StepSequence)(nil),                                // 34: tensorflow.StepSequence
-	(*GetStepSequenceResponse)(nil),                     // 35: tensorflow.GetStepSequenceResponse
-	(*DeviceAttributes)(nil), // 36: tensorflow.DeviceAttributes
-	(*ServerDef)(nil),                                   // 37: tensorflow.ServerDef
-	(*GraphDef)(nil),                     // 38: tensorflow.GraphDef
-	(*GraphOptions)(nil),                                // 39: tensorflow.GraphOptions
-	(*DebugOptions)(nil),                                // 40: tensorflow.DebugOptions
-	(*ConfigProto)(nil),                                 // 41: tensorflow.ConfigProto
-	(*NamedTensorProto)(nil),                            // 42: tensorflow.NamedTensorProto
-	(*StepStats)(nil),               // 43: tensorflow.StepStats
-	(*CostGraphDef)(nil),            // 44: tensorflow.CostGraphDef
-	(Code)(0),                                           // 45: tensorflow.error.Code
-	(*DeviceLocality)(nil),   // 46: tensorflow.DeviceLocality
-	(*any.Any)(nil),                                     // 47: google.protobuf.Any
+	(*GetStatusRequest)(nil),            // 0: tensorflow.GetStatusRequest
+	(*GetStatusResponse)(nil),           // 1: tensorflow.GetStatusResponse
+	(*CreateWorkerSessionRequest)(nil),  // 2: tensorflow.CreateWorkerSessionRequest
+	(*CreateWorkerSessionResponse)(nil), // 3: tensorflow.CreateWorkerSessionResponse
+	(*DeleteWorkerSessionRequest)(nil),  // 4: tensorflow.DeleteWorkerSessionRequest
+	(*DeleteWorkerSessionResponse)(nil), // 5: tensorflow.DeleteWorkerSessionResponse
+	(*RegisterGraphRequest)(nil),        // 6: tensorflow.RegisterGraphRequest
+	(*RegisterGraphResponse)(nil),       // 7: tensorflow.RegisterGraphResponse
+	(*DeregisterGraphRequest)(nil),      // 8: tensorflow.DeregisterGraphRequest
+	(*DeregisterGraphResponse)(nil),     // 9: tensorflow.DeregisterGraphResponse
+	(*CleanupAllRequest)(nil),           // 10: tensorflow.CleanupAllRequest
+	(*CleanupAllResponse)(nil),          // 11: tensorflow.CleanupAllResponse
+	(*ExecutorOpts)(nil),                // 12: tensorflow.ExecutorOpts
+	(*RunGraphRequest)(nil),             // 13: tensorflow.RunGraphRequest
+	(*RunGraphResponse)(nil),            // 14: tensorflow.RunGraphResponse
+	(*CleanupGraphRequest)(nil),         // 15: tensorflow.CleanupGraphRequest
+	(*CleanupGraphResponse)(nil),        // 16: tensorflow.CleanupGraphResponse
+	(*RecvTensorRequest)(nil),           // 17: tensorflow.RecvTensorRequest
+	(*RecvTensorResponse)(nil),          // 18: tensorflow.RecvTensorResponse
+	(*MarkRecvFinishedRequest)(nil),     // 19: tensorflow.MarkRecvFinishedRequest
+	(*MarkRecvFinishedResponse)(nil),    // 20: tensorflow.MarkRecvFinishedResponse
+	(*LoggingRequest)(nil),              // 21: tensorflow.LoggingRequest
+	(*LabeledStepStats)(nil),            // 22: tensorflow.LabeledStepStats
+	(*LoggingResponse)(nil),             // 23: tensorflow.LoggingResponse
+	(*TraceOpts)(nil),                   // 24: tensorflow.TraceOpts
+	(*TracingRequest)(nil),              // 25: tensorflow.TracingRequest
+	(*TracingResponse)(nil),             // 26: tensorflow.TracingResponse
+	(*RecvBufRequest)(nil),              // 27: tensorflow.RecvBufRequest
+	(*RecvBufResponse)(nil),             // 28: tensorflow.RecvBufResponse
+	(*CompleteGroupRequest)(nil),        // 29: tensorflow.CompleteGroupRequest
+	(*CompleteGroupResponse)(nil),       // 30: tensorflow.CompleteGroupResponse
+	(*CompleteInstanceRequest)(nil),     // 31: tensorflow.CompleteInstanceRequest
+	(*CompleteInstanceResponse)(nil),    // 32: tensorflow.CompleteInstanceResponse
+	(*GetStepSequenceRequest)(nil),      // 33: tensorflow.GetStepSequenceRequest
+	(*StepSequence)(nil),                // 34: tensorflow.StepSequence
+	(*GetStepSequenceResponse)(nil),     // 35: tensorflow.GetStepSequenceResponse
+	(*DeviceAttributes)(nil),            // 36: tensorflow.DeviceAttributes
+	(*ServerDef)(nil),                   // 37: tensorflow.ServerDef
+	(*GraphDef)(nil),                    // 38: tensorflow.GraphDef
+	(*GraphOptions)(nil),                // 39: tensorflow.GraphOptions
+	(*DebugOptions)(nil),                // 40: tensorflow.DebugOptions
+	(*ConfigProto)(nil),                 // 41: tensorflow.ConfigProto
+	(*NamedTensorProto)(nil),            // 42: tensorflow.NamedTensorProto
+	(*StepStats)(nil),                   // 43: tensorflow.StepStats
+	(*CostGraphDef)(nil),                // 44: tensorflow.CostGraphDef
+	(Code)(0),                           // 45: tensorflow.error.Code
+	(*DeviceLocality)(nil),              // 46: tensorflow.DeviceLocality
+	(*any.Any)(nil),                     // 47: google.protobuf.Any
 	(*TensorProto)(nil),                 // 48: tensorflow.TensorProto
-	(DataType)(0),                        // 49: tensorflow.DataType
-	(*TensorShapeProto)(nil),      // 50: tensorflow.TensorShapeProto
+	(DataType)(0),                       // 49: tensorflow.DataType
+	(*TensorShapeProto)(nil),            // 50: tensorflow.TensorShapeProto
 }
 var file_tensorflow_core_protobuf_worker_proto_depIdxs = []int32{
 	36, // 0: tensorflow.GetStatusResponse.device_attributes:type_name -> tensorflow.DeviceAttributes

@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1319,16 +1318,16 @@ func file_tensorflow_core_framework_dataset_options_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_framework_dataset_options_proto_enumTypes = make([]protoimpl.EnumInfo, 3)
 var file_tensorflow_core_framework_dataset_options_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
 var file_tensorflow_core_framework_dataset_options_proto_goTypes = []interface{}{
-	(AutoShardPolicy)(0),                  // 0: tensorflow.data.AutoShardPolicy
-	(ExternalStatePolicy)(0),              // 1: tensorflow.data.ExternalStatePolicy
-	(CardinalityOptions_ComputeLevel)(0),  // 2: tensorflow.data.CardinalityOptions.ComputeLevel
-	(*AutotuneOptions)(nil),               // 3: tensorflow.data.AutotuneOptions
-	(*CardinalityOptions)(nil),            // 4: tensorflow.data.CardinalityOptions
-	(*DistributeOptions)(nil),             // 5: tensorflow.data.DistributeOptions
-	(*OptimizationOptions)(nil),           // 6: tensorflow.data.OptimizationOptions
-	(*ThreadingOptions)(nil),              // 7: tensorflow.data.ThreadingOptions
-	(*Options)(nil),                       // 8: tensorflow.data.Options
-	(AutotuneAlgorithm)(0), // 9: tensorflow.data.model.AutotuneAlgorithm
+	(AutoShardPolicy)(0),                 // 0: tensorflow.data.AutoShardPolicy
+	(ExternalStatePolicy)(0),             // 1: tensorflow.data.ExternalStatePolicy
+	(CardinalityOptions_ComputeLevel)(0), // 2: tensorflow.data.CardinalityOptions.ComputeLevel
+	(*AutotuneOptions)(nil),              // 3: tensorflow.data.AutotuneOptions
+	(*CardinalityOptions)(nil),           // 4: tensorflow.data.CardinalityOptions
+	(*DistributeOptions)(nil),            // 5: tensorflow.data.DistributeOptions
+	(*OptimizationOptions)(nil),          // 6: tensorflow.data.OptimizationOptions
+	(*ThreadingOptions)(nil),             // 7: tensorflow.data.ThreadingOptions
+	(*Options)(nil),                      // 8: tensorflow.data.Options
+	(AutotuneAlgorithm)(0),               // 9: tensorflow.data.model.AutotuneAlgorithm
 }
 var file_tensorflow_core_framework_dataset_options_proto_depIdxs = []int32{
 	9, // 0: tensorflow.data.AutotuneOptions.autotune_algorithm:type_name -> tensorflow.data.model.AutotuneAlgorithm

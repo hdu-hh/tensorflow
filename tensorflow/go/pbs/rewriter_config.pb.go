@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -790,7 +789,7 @@ type RewriterConfig_CustomGraphOptimizer struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Name         string                                    `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name         string                `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
 	ParameterMap map[string]*AttrValue `protobuf:"bytes,2,rep,name=parameter_map,json=parameterMap,proto3" json:"parameter_map,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 }
 
@@ -1127,9 +1126,9 @@ var file_tensorflow_core_protobuf_rewriter_config_proto_goTypes = []interface{}{
 	(*ScopedAllocatorOptions)(nil),              // 5: tensorflow.ScopedAllocatorOptions
 	(*RewriterConfig)(nil),                      // 6: tensorflow.RewriterConfig
 	(*RewriterConfig_CustomGraphOptimizer)(nil), // 7: tensorflow.RewriterConfig.CustomGraphOptimizer
-	nil,                                   // 8: tensorflow.RewriterConfig.CustomGraphOptimizer.ParameterMapEntry
-	(*VerifierConfig)(nil),                // 9: tensorflow.VerifierConfig
-	(*AttrValue)(nil), // 10: tensorflow.AttrValue
+	nil,                    // 8: tensorflow.RewriterConfig.CustomGraphOptimizer.ParameterMapEntry
+	(*VerifierConfig)(nil), // 9: tensorflow.VerifierConfig
+	(*AttrValue)(nil),      // 10: tensorflow.AttrValue
 }
 var file_tensorflow_core_protobuf_rewriter_config_proto_depIdxs = []int32{
 	1,  // 0: tensorflow.RewriterConfig.cpu_layout_conversion:type_name -> tensorflow.RewriterConfig.CpuLayout

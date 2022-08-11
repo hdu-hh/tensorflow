@@ -7,9 +7,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -354,13 +351,13 @@ func file_tensorflow_core_protobuf_snapshot_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_snapshot_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_tensorflow_core_protobuf_snapshot_proto_goTypes = []interface{}{
-	(*SnapshotRecord)(nil),                         // 0: tensorflow.data.experimental.SnapshotRecord
-	(*SnapshotMetadataRecord)(nil),                 // 1: tensorflow.data.experimental.SnapshotMetadataRecord
-	(*TensorMetadata)(nil),                         // 2: tensorflow.data.experimental.TensorMetadata
-	(*SnapshotTensorMetadata)(nil),                 // 3: tensorflow.data.experimental.SnapshotTensorMetadata
+	(*SnapshotRecord)(nil),         // 0: tensorflow.data.experimental.SnapshotRecord
+	(*SnapshotMetadataRecord)(nil), // 1: tensorflow.data.experimental.SnapshotMetadataRecord
+	(*TensorMetadata)(nil),         // 2: tensorflow.data.experimental.TensorMetadata
+	(*SnapshotTensorMetadata)(nil), // 3: tensorflow.data.experimental.SnapshotTensorMetadata
 	(*TensorProto)(nil),            // 4: tensorflow.TensorProto
-	(DataType)(0),                   // 5: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 6: tensorflow.TensorShapeProto
+	(DataType)(0),                  // 5: tensorflow.DataType
+	(*TensorShapeProto)(nil),       // 6: tensorflow.TensorShapeProto
 }
 var file_tensorflow_core_protobuf_snapshot_proto_depIdxs = []int32{
 	4, // 0: tensorflow.data.experimental.SnapshotRecord.tensor:type_name -> tensorflow.TensorProto

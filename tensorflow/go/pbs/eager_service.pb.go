@@ -7,12 +7,6 @@
 package pbs
 
 import (
-
-
-
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -44,9 +38,9 @@ type Operation struct {
 	// Control Operation IDs that will be respected when ops are re-ordered by
 	// async execution. If async execution (+ op re-ordering) is not enabled, this
 	// should have no effect.
-	ControlOpIds []int64                                   `protobuf:"varint,4,rep,packed,name=control_op_ids,json=controlOpIds,proto3" json:"control_op_ids,omitempty"`
+	ControlOpIds []int64               `protobuf:"varint,4,rep,packed,name=control_op_ids,json=controlOpIds,proto3" json:"control_op_ids,omitempty"`
 	Attrs        map[string]*AttrValue `protobuf:"bytes,5,rep,name=attrs,proto3" json:"attrs,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	Device       string                                    `protobuf:"bytes,6,opt,name=device,proto3" json:"device,omitempty"`
+	Device       string                `protobuf:"bytes,6,opt,name=device,proto3" json:"device,omitempty"`
 	// Indicates whether the op is a component of a multi-device function.
 	IsComponentFunction bool `protobuf:"varint,7,opt,name=is_component_function,json=isComponentFunction,proto3" json:"is_component_function,omitempty"`
 	// Set when is_component_function is true. It's initially generated
@@ -943,7 +937,7 @@ type RunComponentFunctionResponse struct {
 	unknownFields protoimpl.UnknownFields
 
 	Shape  []*TensorShapeProto `protobuf:"bytes,1,rep,name=shape,proto3" json:"shape,omitempty"`
-	Tensor []*TensorProto            `protobuf:"bytes,2,rep,name=tensor,proto3" json:"tensor,omitempty"`
+	Tensor []*TensorProto      `protobuf:"bytes,2,rep,name=tensor,proto3" json:"tensor,omitempty"`
 }
 
 func (x *RunComponentFunctionResponse) Reset() {
@@ -2030,41 +2024,41 @@ func file_tensorflow_core_protobuf_eager_service_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_eager_service_proto_msgTypes = make([]protoimpl.MessageInfo, 26)
 var file_tensorflow_core_protobuf_eager_service_proto_goTypes = []interface{}{
-	(*Operation)(nil),                                   // 0: tensorflow.eager.Operation
-	(*QueueItem)(nil),                                   // 1: tensorflow.eager.QueueItem
-	(*QueueResponse)(nil),                               // 2: tensorflow.eager.QueueResponse
-	(*CreateContextRequest)(nil),                        // 3: tensorflow.eager.CreateContextRequest
-	(*CreateContextResponse)(nil),                       // 4: tensorflow.eager.CreateContextResponse
-	(*UpdateContextRequest)(nil),                        // 5: tensorflow.eager.UpdateContextRequest
-	(*UpdateContextResponse)(nil),                       // 6: tensorflow.eager.UpdateContextResponse
-	(*EnqueueRequest)(nil),                              // 7: tensorflow.eager.EnqueueRequest
-	(*EnqueueResponse)(nil),                             // 8: tensorflow.eager.EnqueueResponse
-	(*WaitQueueDoneRequest)(nil),                        // 9: tensorflow.eager.WaitQueueDoneRequest
-	(*WaitQueueDoneResponse)(nil),                       // 10: tensorflow.eager.WaitQueueDoneResponse
-	(*RunComponentFunctionRequest)(nil),                 // 11: tensorflow.eager.RunComponentFunctionRequest
-	(*RunComponentFunctionResponse)(nil),                // 12: tensorflow.eager.RunComponentFunctionResponse
-	(*KeepAliveRequest)(nil),                            // 13: tensorflow.eager.KeepAliveRequest
-	(*KeepAliveResponse)(nil),                           // 14: tensorflow.eager.KeepAliveResponse
-	(*CloseContextRequest)(nil),                         // 15: tensorflow.eager.CloseContextRequest
-	(*CloseContextResponse)(nil),                        // 16: tensorflow.eager.CloseContextResponse
-	(*RegisterFunctionOp)(nil),                          // 17: tensorflow.eager.RegisterFunctionOp
-	(*CleanupFunctionOp)(nil),                           // 18: tensorflow.eager.CleanupFunctionOp
-	(*SyncRemoteExecutorForStream)(nil),                 // 19: tensorflow.eager.SyncRemoteExecutorForStream
-	(*SendTensorOp)(nil),                                // 20: tensorflow.eager.SendTensorOp
-	(*SendPackedHandleOp)(nil),                          // 21: tensorflow.eager.SendPackedHandleOp
-	(*Operation_Input)(nil),                             // 22: tensorflow.eager.Operation.Input
-	nil,                                                 // 23: tensorflow.eager.Operation.AttrsEntry
-	(*SendPackedHandleOp_LocalTensorHandle)(nil),        // 24: tensorflow.eager.SendPackedHandleOp.LocalTensorHandle
-	(*SendPackedHandleOp_Handle)(nil),                   // 25: tensorflow.eager.SendPackedHandleOp.Handle
-	(*RemoteTensorHandle)(nil),                          // 26: tensorflow.eager.RemoteTensorHandle
-	(*TensorShapeProto)(nil),      // 27: tensorflow.TensorShapeProto
-	(*TensorProto)(nil),                 // 28: tensorflow.TensorProto
-	(*ServerDef)(nil),                                   // 29: tensorflow.ServerDef
-	(*VersionDef)(nil),                // 30: tensorflow.VersionDef
-	(*DeviceAttributes)(nil), // 31: tensorflow.DeviceAttributes
-	(*FunctionDef)(nil),               // 32: tensorflow.FunctionDef
-	(*FunctionDefLibrary)(nil),        // 33: tensorflow.FunctionDefLibrary
-	(*AttrValue)(nil),               // 34: tensorflow.AttrValue
+	(*Operation)(nil),                            // 0: tensorflow.eager.Operation
+	(*QueueItem)(nil),                            // 1: tensorflow.eager.QueueItem
+	(*QueueResponse)(nil),                        // 2: tensorflow.eager.QueueResponse
+	(*CreateContextRequest)(nil),                 // 3: tensorflow.eager.CreateContextRequest
+	(*CreateContextResponse)(nil),                // 4: tensorflow.eager.CreateContextResponse
+	(*UpdateContextRequest)(nil),                 // 5: tensorflow.eager.UpdateContextRequest
+	(*UpdateContextResponse)(nil),                // 6: tensorflow.eager.UpdateContextResponse
+	(*EnqueueRequest)(nil),                       // 7: tensorflow.eager.EnqueueRequest
+	(*EnqueueResponse)(nil),                      // 8: tensorflow.eager.EnqueueResponse
+	(*WaitQueueDoneRequest)(nil),                 // 9: tensorflow.eager.WaitQueueDoneRequest
+	(*WaitQueueDoneResponse)(nil),                // 10: tensorflow.eager.WaitQueueDoneResponse
+	(*RunComponentFunctionRequest)(nil),          // 11: tensorflow.eager.RunComponentFunctionRequest
+	(*RunComponentFunctionResponse)(nil),         // 12: tensorflow.eager.RunComponentFunctionResponse
+	(*KeepAliveRequest)(nil),                     // 13: tensorflow.eager.KeepAliveRequest
+	(*KeepAliveResponse)(nil),                    // 14: tensorflow.eager.KeepAliveResponse
+	(*CloseContextRequest)(nil),                  // 15: tensorflow.eager.CloseContextRequest
+	(*CloseContextResponse)(nil),                 // 16: tensorflow.eager.CloseContextResponse
+	(*RegisterFunctionOp)(nil),                   // 17: tensorflow.eager.RegisterFunctionOp
+	(*CleanupFunctionOp)(nil),                    // 18: tensorflow.eager.CleanupFunctionOp
+	(*SyncRemoteExecutorForStream)(nil),          // 19: tensorflow.eager.SyncRemoteExecutorForStream
+	(*SendTensorOp)(nil),                         // 20: tensorflow.eager.SendTensorOp
+	(*SendPackedHandleOp)(nil),                   // 21: tensorflow.eager.SendPackedHandleOp
+	(*Operation_Input)(nil),                      // 22: tensorflow.eager.Operation.Input
+	nil,                                          // 23: tensorflow.eager.Operation.AttrsEntry
+	(*SendPackedHandleOp_LocalTensorHandle)(nil), // 24: tensorflow.eager.SendPackedHandleOp.LocalTensorHandle
+	(*SendPackedHandleOp_Handle)(nil),            // 25: tensorflow.eager.SendPackedHandleOp.Handle
+	(*RemoteTensorHandle)(nil),                   // 26: tensorflow.eager.RemoteTensorHandle
+	(*TensorShapeProto)(nil),                     // 27: tensorflow.TensorShapeProto
+	(*TensorProto)(nil),                          // 28: tensorflow.TensorProto
+	(*ServerDef)(nil),                            // 29: tensorflow.ServerDef
+	(*VersionDef)(nil),                           // 30: tensorflow.VersionDef
+	(*DeviceAttributes)(nil),                     // 31: tensorflow.DeviceAttributes
+	(*FunctionDef)(nil),                          // 32: tensorflow.FunctionDef
+	(*FunctionDefLibrary)(nil),                   // 33: tensorflow.FunctionDefLibrary
+	(*AttrValue)(nil),                            // 34: tensorflow.AttrValue
 }
 var file_tensorflow_core_protobuf_eager_service_proto_depIdxs = []int32{
 	22, // 0: tensorflow.eager.Operation.op_inputs:type_name -> tensorflow.eager.Operation.Input

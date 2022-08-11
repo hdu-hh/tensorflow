@@ -9,9 +9,9 @@
 package pbs
 
 import (
-	wrappers "github.com/golang/protobuf/ptypes/wrappers"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	wrappers "google.golang.org/protobuf/types/known/wrapperspb"
 	reflect "reflect"
 	sync "sync"
 )
@@ -449,7 +449,7 @@ type TensorDescriptorProto struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Dimensions []int64  `protobuf:"varint,1,rep,packed,name=dimensions,proto3" json:"dimensions,omitempty"`
+	Dimensions []int64     `protobuf:"varint,1,rep,packed,name=dimensions,proto3" json:"dimensions,omitempty"`
 	DataType   DnnDataType `protobuf:"varint,2,opt,name=data_type,json=dataType,proto3,enum=stream_executor.dnn.DataType" json:"data_type,omitempty"`
 	// Types that are assignable to LayoutOneof:
 	//	*TensorDescriptorProto_DataLayout

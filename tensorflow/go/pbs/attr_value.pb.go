@@ -7,9 +7,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -292,14 +289,14 @@ type AttrValue_ListValue struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	S      [][]byte                                  `protobuf:"bytes,2,rep,name=s,proto3" json:"s,omitempty"`                                        // "list(string)"
-	I      []int64                                   `protobuf:"varint,3,rep,packed,name=i,proto3" json:"i,omitempty"`                                // "list(int)"
-	F      []float32                                 `protobuf:"fixed32,4,rep,packed,name=f,proto3" json:"f,omitempty"`                               // "list(float)"
-	B      []bool                                    `protobuf:"varint,5,rep,packed,name=b,proto3" json:"b,omitempty"`                                // "list(bool)"
-	Type   []DataType                 `protobuf:"varint,6,rep,packed,name=type,proto3,enum=tensorflow.DataType" json:"type,omitempty"` // "list(type)"
+	S      [][]byte            `protobuf:"bytes,2,rep,name=s,proto3" json:"s,omitempty"`                                        // "list(string)"
+	I      []int64             `protobuf:"varint,3,rep,packed,name=i,proto3" json:"i,omitempty"`                                // "list(int)"
+	F      []float32           `protobuf:"fixed32,4,rep,packed,name=f,proto3" json:"f,omitempty"`                               // "list(float)"
+	B      []bool              `protobuf:"varint,5,rep,packed,name=b,proto3" json:"b,omitempty"`                                // "list(bool)"
+	Type   []DataType          `protobuf:"varint,6,rep,packed,name=type,proto3,enum=tensorflow.DataType" json:"type,omitempty"` // "list(type)"
 	Shape  []*TensorShapeProto `protobuf:"bytes,7,rep,name=shape,proto3" json:"shape,omitempty"`                                // "list(shape)"
-	Tensor []*TensorProto            `protobuf:"bytes,8,rep,name=tensor,proto3" json:"tensor,omitempty"`                              // "list(tensor)"
-	Func   []*NameAttrList                           `protobuf:"bytes,9,rep,name=func,proto3" json:"func,omitempty"`                                  // "list(attr)"
+	Tensor []*TensorProto      `protobuf:"bytes,8,rep,name=tensor,proto3" json:"tensor,omitempty"`                              // "list(tensor)"
+	Func   []*NameAttrList     `protobuf:"bytes,9,rep,name=func,proto3" json:"func,omitempty"`                                  // "list(attr)"
 }
 
 func (x *AttrValue_ListValue) Reset() {
@@ -481,13 +478,13 @@ func file_tensorflow_core_framework_attr_value_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_attr_value_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_tensorflow_core_framework_attr_value_proto_goTypes = []interface{}{
-	(*AttrValue)(nil),            // 0: tensorflow.AttrValue
-	(*NameAttrList)(nil),         // 1: tensorflow.NameAttrList
-	(*AttrValue_ListValue)(nil),  // 2: tensorflow.AttrValue.ListValue
-	nil,                          // 3: tensorflow.NameAttrList.AttrEntry
-	(DataType)(0), // 4: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 5: tensorflow.TensorShapeProto
-	(*TensorProto)(nil),            // 6: tensorflow.TensorProto
+	(*AttrValue)(nil),           // 0: tensorflow.AttrValue
+	(*NameAttrList)(nil),        // 1: tensorflow.NameAttrList
+	(*AttrValue_ListValue)(nil), // 2: tensorflow.AttrValue.ListValue
+	nil,                         // 3: tensorflow.NameAttrList.AttrEntry
+	(DataType)(0),               // 4: tensorflow.DataType
+	(*TensorShapeProto)(nil),    // 5: tensorflow.TensorShapeProto
+	(*TensorProto)(nil),         // 6: tensorflow.TensorProto
 }
 var file_tensorflow_core_framework_attr_value_proto_depIdxs = []int32{
 	4,  // 0: tensorflow.AttrValue.type:type_name -> tensorflow.DataType

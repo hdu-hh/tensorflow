@@ -7,8 +7,6 @@
 package pbs
 
 import (
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1943,42 +1941,42 @@ func file_tensorflow_core_protobuf_coordination_service_proto_rawDescGZIP() []by
 
 var file_tensorflow_core_protobuf_coordination_service_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
 var file_tensorflow_core_protobuf_coordination_service_proto_goTypes = []interface{}{
-	(*CoordinatedTask)(nil),                             // 0: tensorflow.CoordinatedTask
-	(*CoordinationServiceError)(nil),                    // 1: tensorflow.CoordinationServiceError
-	(*TfDeviceList)(nil),                                // 2: tensorflow.TfDeviceList
-	(*XlaDeviceList)(nil),                               // 3: tensorflow.XlaDeviceList
-	(*CoordinationServiceDeviceInfo)(nil),               // 4: tensorflow.CoordinationServiceDeviceInfo
-	(*RegisterTaskRequest)(nil),                         // 5: tensorflow.RegisterTaskRequest
-	(*RegisterTaskResponse)(nil),                        // 6: tensorflow.RegisterTaskResponse
-	(*HeartbeatRequest)(nil),                            // 7: tensorflow.HeartbeatRequest
-	(*HeartbeatResponse)(nil),                           // 8: tensorflow.HeartbeatResponse
-	(*WaitForAllTasksRequest)(nil),                      // 9: tensorflow.WaitForAllTasksRequest
-	(*WaitForAllTasksResponse)(nil),                     // 10: tensorflow.WaitForAllTasksResponse
-	(*ShutdownTaskRequest)(nil),                         // 11: tensorflow.ShutdownTaskRequest
-	(*ShutdownTaskResponse)(nil),                        // 12: tensorflow.ShutdownTaskResponse
-	(*ResetTaskRequest)(nil),                            // 13: tensorflow.ResetTaskRequest
-	(*ResetTaskResponse)(nil),                           // 14: tensorflow.ResetTaskResponse
-	(*ReportErrorToTaskRequest)(nil),                    // 15: tensorflow.ReportErrorToTaskRequest
-	(*ReportErrorToTaskResponse)(nil),                   // 16: tensorflow.ReportErrorToTaskResponse
-	(*ReportErrorToServiceRequest)(nil),                 // 17: tensorflow.ReportErrorToServiceRequest
-	(*ReportErrorToServiceResponse)(nil),                // 18: tensorflow.ReportErrorToServiceResponse
-	(*KeyValueEntry)(nil),                               // 19: tensorflow.KeyValueEntry
-	(*InsertKeyValueRequest)(nil),                       // 20: tensorflow.InsertKeyValueRequest
-	(*InsertKeyValueResponse)(nil),                      // 21: tensorflow.InsertKeyValueResponse
-	(*GetKeyValueRequest)(nil),                          // 22: tensorflow.GetKeyValueRequest
-	(*GetKeyValueResponse)(nil),                         // 23: tensorflow.GetKeyValueResponse
-	(*TryGetKeyValueRequest)(nil),                       // 24: tensorflow.TryGetKeyValueRequest
-	(*TryGetKeyValueResponse)(nil),                      // 25: tensorflow.TryGetKeyValueResponse
-	(*GetKeyValueDirRequest)(nil),                       // 26: tensorflow.GetKeyValueDirRequest
-	(*GetKeyValueDirResponse)(nil),                      // 27: tensorflow.GetKeyValueDirResponse
-	(*DeleteKeyValueRequest)(nil),                       // 28: tensorflow.DeleteKeyValueRequest
-	(*DeleteKeyValueResponse)(nil),                      // 29: tensorflow.DeleteKeyValueResponse
-	(*BarrierRequest)(nil),                              // 30: tensorflow.BarrierRequest
-	(*BarrierResponse)(nil),                             // 31: tensorflow.BarrierResponse
-	(*CancelBarrierRequest)(nil),                        // 32: tensorflow.CancelBarrierRequest
-	(*CancelBarrierResponse)(nil),                       // 33: tensorflow.CancelBarrierResponse
-	(*DeviceAttributes)(nil), // 34: tensorflow.DeviceAttributes
-	(*GlobalTopologyProto)(nil),       // 35: xla.GlobalTopologyProto
+	(*CoordinatedTask)(nil),               // 0: tensorflow.CoordinatedTask
+	(*CoordinationServiceError)(nil),      // 1: tensorflow.CoordinationServiceError
+	(*TfDeviceList)(nil),                  // 2: tensorflow.TfDeviceList
+	(*XlaDeviceList)(nil),                 // 3: tensorflow.XlaDeviceList
+	(*CoordinationServiceDeviceInfo)(nil), // 4: tensorflow.CoordinationServiceDeviceInfo
+	(*RegisterTaskRequest)(nil),           // 5: tensorflow.RegisterTaskRequest
+	(*RegisterTaskResponse)(nil),          // 6: tensorflow.RegisterTaskResponse
+	(*HeartbeatRequest)(nil),              // 7: tensorflow.HeartbeatRequest
+	(*HeartbeatResponse)(nil),             // 8: tensorflow.HeartbeatResponse
+	(*WaitForAllTasksRequest)(nil),        // 9: tensorflow.WaitForAllTasksRequest
+	(*WaitForAllTasksResponse)(nil),       // 10: tensorflow.WaitForAllTasksResponse
+	(*ShutdownTaskRequest)(nil),           // 11: tensorflow.ShutdownTaskRequest
+	(*ShutdownTaskResponse)(nil),          // 12: tensorflow.ShutdownTaskResponse
+	(*ResetTaskRequest)(nil),              // 13: tensorflow.ResetTaskRequest
+	(*ResetTaskResponse)(nil),             // 14: tensorflow.ResetTaskResponse
+	(*ReportErrorToTaskRequest)(nil),      // 15: tensorflow.ReportErrorToTaskRequest
+	(*ReportErrorToTaskResponse)(nil),     // 16: tensorflow.ReportErrorToTaskResponse
+	(*ReportErrorToServiceRequest)(nil),   // 17: tensorflow.ReportErrorToServiceRequest
+	(*ReportErrorToServiceResponse)(nil),  // 18: tensorflow.ReportErrorToServiceResponse
+	(*KeyValueEntry)(nil),                 // 19: tensorflow.KeyValueEntry
+	(*InsertKeyValueRequest)(nil),         // 20: tensorflow.InsertKeyValueRequest
+	(*InsertKeyValueResponse)(nil),        // 21: tensorflow.InsertKeyValueResponse
+	(*GetKeyValueRequest)(nil),            // 22: tensorflow.GetKeyValueRequest
+	(*GetKeyValueResponse)(nil),           // 23: tensorflow.GetKeyValueResponse
+	(*TryGetKeyValueRequest)(nil),         // 24: tensorflow.TryGetKeyValueRequest
+	(*TryGetKeyValueResponse)(nil),        // 25: tensorflow.TryGetKeyValueResponse
+	(*GetKeyValueDirRequest)(nil),         // 26: tensorflow.GetKeyValueDirRequest
+	(*GetKeyValueDirResponse)(nil),        // 27: tensorflow.GetKeyValueDirResponse
+	(*DeleteKeyValueRequest)(nil),         // 28: tensorflow.DeleteKeyValueRequest
+	(*DeleteKeyValueResponse)(nil),        // 29: tensorflow.DeleteKeyValueResponse
+	(*BarrierRequest)(nil),                // 30: tensorflow.BarrierRequest
+	(*BarrierResponse)(nil),               // 31: tensorflow.BarrierResponse
+	(*CancelBarrierRequest)(nil),          // 32: tensorflow.CancelBarrierRequest
+	(*CancelBarrierResponse)(nil),         // 33: tensorflow.CancelBarrierResponse
+	(*DeviceAttributes)(nil),              // 34: tensorflow.DeviceAttributes
+	(*GlobalTopologyProto)(nil),           // 35: xla.GlobalTopologyProto
 }
 var file_tensorflow_core_protobuf_coordination_service_proto_depIdxs = []int32{
 	0,  // 0: tensorflow.CoordinationServiceError.source_task:type_name -> tensorflow.CoordinatedTask

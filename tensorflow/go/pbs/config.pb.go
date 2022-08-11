@@ -7,9 +7,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -2966,9 +2963,9 @@ var file_tensorflow_core_protobuf_config_proto_goTypes = []interface{}{
 	(*RewriterConfig)(nil),                                // 24: tensorflow.RewriterConfig
 	(*ClusterDef)(nil),                                    // 25: tensorflow.ClusterDef
 	(*DebugOptions)(nil),                                  // 26: tensorflow.DebugOptions
-	(*StepStats)(nil),                 // 27: tensorflow.StepStats
-	(*CostGraphDef)(nil),              // 28: tensorflow.CostGraphDef
-	(*GraphDef)(nil),                       // 29: tensorflow.GraphDef
+	(*StepStats)(nil),                                     // 27: tensorflow.StepStats
+	(*CostGraphDef)(nil),                                  // 28: tensorflow.CostGraphDef
+	(*GraphDef)(nil),                                      // 29: tensorflow.GraphDef
 	(*CoordinationServiceConfig)(nil),                     // 30: tensorflow.CoordinationServiceConfig
 }
 var file_tensorflow_core_protobuf_config_proto_depIdxs = []int32{
