@@ -69,11 +69,11 @@ func Func(scope *Scope, fn *tf.Func, inputs ...tf.Input) []tf.Output {
 
 // GoFunc is a function signature used for building a [tf.Func] from a go function.
 // It returns the outputs, their names and a description string.
-// Please see [BuildFunc] for an example.
+// Please see op.[BuildFunc] for an example.
 type GoFunc func(s *Scope, inputs ...tf.Output) (outputs []tf.Output, outNames []string, desc string)
 
-// BuildFunc returns a `tf.Func` matching to a go function.
-// The provided go function must have the GoFunc signature.
+// BuildFunc returns a [tf.Func] matching to a go function.
+// The provided go function must have the [GoFunc] signature.
 // e.g.
 //	 goFunc := func(s *Scope, x ...tf.Output) (y []tf.Output, outNames []string, desc string) {
 //		return []tf.Output{op.Add(s, x[0], x[1])}, nil, "just adding"
@@ -107,8 +107,8 @@ func BuildFunc(name string, goFunc GoFunc, dtypes ...tf.DataType) *tf.Func {
 	return tfFunc
 }
 
-// BuildFuncPair returns a tf.Func pair for functions sharing their signature.
-// Operations like op.While require such pairs and benefit from this.
+// BuildFuncPair returns a [tf.Func] pair for functions sharing their signature.
+// Operations like op.[While] require such pairs and benefit from this.
 func BuildFuncPair(name1, name2 string, goFn1, goFn2 GoFunc, dtypes ...tf.DataType) (*tf.Func, *tf.Func) {
 	tfFn1 := BuildFunc(name1, goFn1, dtypes...)
 	tfFn2 := BuildFunc(name2, goFn2, dtypes...)

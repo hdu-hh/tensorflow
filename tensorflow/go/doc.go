@@ -23,4 +23,8 @@ limitations under the License.
 // functionality to build and execute such graphs and depends on
 // TensorFlow being available. For installation instructions see
 // https://github.com/hdu-hh/tensorflow/blob/master/tensorflow/go/README.md
+//
+// This package is from an experimental fork of the upstream Tensorflow
+// go binding that focusses on improving its suitability for building and
+// training tensorflow graphs.
 package tensorflow

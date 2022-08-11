@@ -23,7 +23,7 @@ import (
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
-// Scope encapsulates common operation properties when building a Graph.
+// Scope encapsulates common operation properties when building a [tf.Graph].
 //
 // A Scope object (and its derivatives, e.g., obtained from Scope.SubScope)
 // act as a builder for graphs. They allow common properties (such as
@@ -56,7 +56,7 @@ func NewScopeWithGraph(g *tf.Graph) *Scope {
 	return &Scope{graph: g, namemap: make(map[string]int), err: new(scopeErr)}
 }
 
-// Finalize returns the Graph on which this scope operates on and renders s
+// Finalize returns the [tf.Graph] on which this scope operates on and renders s
 // unusable. If there was an error during graph construction, that error is
 // returned instead.
 func (s *Scope) Finalize() (*tf.Graph, error) {
@@ -67,7 +67,7 @@ func (s *Scope) Finalize() (*tf.Graph, error) {
 	return s.graph, nil
 }
 
-// AddOperation adds the operation to the Graph managed by s.
+// AddOperation adds the operation to the [tf.Graph] managed by Scope s.
 //
 // If there is a name prefix associated with s (such as if s was created
 // by a call to SubScope), then this prefix will be applied to the name
@@ -152,7 +152,7 @@ func (s *Scope) WithDevice(device string) *Scope {
 }
 
 // Err returns the error, if any, encountered during the construction
-// of the Graph managed by s.
+// of the [tf.Graph] managed by Scope s.
 //
 // Once Err returns a non-nil error, all future calls will do the same,
 // indicating that the scope should be discarded as the graph could not
@@ -187,8 +187,8 @@ func (s *Scope) opName(typ string) string {
 	return s.namespace + "/" + typ
 }
 
-// RegisterFunc copies and registers the tensorflow function
-// and its eventual gradient into the graph and makes it available.
+// RegisterFunc copies and registers the [tf.Func] function and its eventual
+// gradient into the graph and makes it available to be used in the graph.
 // The function must not be nil.
 func (s *Scope) RegisterFunc(fn, grad *tf.Func) error {
 	if err := s.graph.RegisterFunc(fn, grad); err != nil {
