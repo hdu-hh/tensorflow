@@ -7,10 +7,6 @@
 package pbs
 
 import (
-
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -333,8 +329,8 @@ type OpDef_ArgDef struct {
 	// * For a sequence of tensors, the "type_list_attr" field will be set
 	//   to the name of an attr with type "list(type)".
 	Type       DataType `protobuf:"varint,3,opt,name=type,proto3,enum=tensorflow.DataType" json:"type,omitempty"`
-	TypeAttr   string                  `protobuf:"bytes,4,opt,name=type_attr,json=typeAttr,proto3" json:"type_attr,omitempty"`       // if specified, attr must have type "type"
-	NumberAttr string                  `protobuf:"bytes,5,opt,name=number_attr,json=numberAttr,proto3" json:"number_attr,omitempty"` // if specified, attr must have type "int"
+	TypeAttr   string   `protobuf:"bytes,4,opt,name=type_attr,json=typeAttr,proto3" json:"type_attr,omitempty"`       // if specified, attr must have type "type"
+	NumberAttr string   `protobuf:"bytes,5,opt,name=number_attr,json=numberAttr,proto3" json:"number_attr,omitempty"` // if specified, attr must have type "int"
 	// If specified, attr must have type "list(type)", and none of
 	// type, type_attr, and number_attr may be specified.
 	TypeListAttr string `protobuf:"bytes,6,opt,name=type_list_attr,json=typeListAttr,proto3" json:"type_list_attr,omitempty"`
@@ -692,15 +688,15 @@ func file_tensorflow_core_framework_op_def_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_op_def_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_tensorflow_core_framework_op_def_proto_goTypes = []interface{}{
-	(*OpDef)(nil),                // 0: tensorflow.OpDef
-	(*OpDeprecation)(nil),        // 1: tensorflow.OpDeprecation
-	(*OpList)(nil),               // 2: tensorflow.OpList
-	(*OpDef_ArgDef)(nil),         // 3: tensorflow.OpDef.ArgDef
-	(*OpDef_AttrDef)(nil),        // 4: tensorflow.OpDef.AttrDef
-	(DataType)(0), // 5: tensorflow.DataType
+	(*OpDef)(nil),                             // 0: tensorflow.OpDef
+	(*OpDeprecation)(nil),                     // 1: tensorflow.OpDeprecation
+	(*OpList)(nil),                            // 2: tensorflow.OpList
+	(*OpDef_ArgDef)(nil),                      // 3: tensorflow.OpDef.ArgDef
+	(*OpDef_AttrDef)(nil),                     // 4: tensorflow.OpDef.AttrDef
+	(DataType)(0),                             // 5: tensorflow.DataType
 	(*ResourceHandleProto_DtypeAndShape)(nil), // 6: tensorflow.ResourceHandleProto.DtypeAndShape
-	(*FullTypeDef)(nil),                             // 7: tensorflow.FullTypeDef
-	(*AttrValue)(nil),                              // 8: tensorflow.AttrValue
+	(*FullTypeDef)(nil),                       // 7: tensorflow.FullTypeDef
+	(*AttrValue)(nil),                         // 8: tensorflow.AttrValue
 }
 var file_tensorflow_core_framework_op_def_proto_depIdxs = []int32{
 	3,  // 0: tensorflow.OpDef.input_arg:type_name -> tensorflow.OpDef.ArgDef

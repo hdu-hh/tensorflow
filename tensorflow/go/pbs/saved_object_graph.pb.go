@@ -9,9 +9,6 @@ package pbs
 import (
 	any "github.com/golang/protobuf/ptypes/any"
 
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -840,13 +837,13 @@ type SavedVariable struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Dtype           DataType                   `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
-	Shape           *TensorShapeProto   `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
-	Trainable       bool                                      `protobuf:"varint,3,opt,name=trainable,proto3" json:"trainable,omitempty"`
+	Dtype           DataType                `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Shape           *TensorShapeProto       `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
+	Trainable       bool                    `protobuf:"varint,3,opt,name=trainable,proto3" json:"trainable,omitempty"`
 	Synchronization VariableSynchronization `protobuf:"varint,4,opt,name=synchronization,proto3,enum=tensorflow.VariableSynchronization" json:"synchronization,omitempty"`
 	Aggregation     VariableAggregation     `protobuf:"varint,5,opt,name=aggregation,proto3,enum=tensorflow.VariableAggregation" json:"aggregation,omitempty"`
-	Name            string                                    `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
-	Device          string                                    `protobuf:"bytes,7,opt,name=device,proto3" json:"device,omitempty"`
+	Name            string                  `protobuf:"bytes,6,opt,name=name,proto3" json:"name,omitempty"`
+	Device          string                  `protobuf:"bytes,7,opt,name=device,proto3" json:"device,omitempty"`
 	// List of component variables for a distributed variable.
 	//
 	// When this field is non-empty, the SavedVariable will be assumed
@@ -1404,11 +1401,11 @@ var file_tensorflow_core_protobuf_saved_object_graph_proto_goTypes = []interface
 	nil,                               // 15: tensorflow.SavedObject.SaveableObjectsEntry
 	(*TrackableObjectGraph_TrackableObject_ObjectReference)(nil),       // 16: tensorflow.TrackableObjectGraph.TrackableObject.ObjectReference
 	(*TrackableObjectGraph_TrackableObject_SlotVariableReference)(nil), // 17: tensorflow.TrackableObjectGraph.TrackableObject.SlotVariableReference
-	(*any.Any)(nil),                                // 18: google.protobuf.Any
+	(*any.Any)(nil),              // 18: google.protobuf.Any
 	(*VersionDef)(nil),           // 19: tensorflow.VersionDef
-	(*StructuredValue)(nil),                        // 20: tensorflow.StructuredValue
-	(DataType)(0),                   // 21: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 22: tensorflow.TensorShapeProto
+	(*StructuredValue)(nil),      // 20: tensorflow.StructuredValue
+	(DataType)(0),                // 21: tensorflow.DataType
+	(*TensorShapeProto)(nil),     // 22: tensorflow.TensorShapeProto
 	(VariableSynchronization)(0), // 23: tensorflow.VariableSynchronization
 	(VariableAggregation)(0),     // 24: tensorflow.VariableAggregation
 }

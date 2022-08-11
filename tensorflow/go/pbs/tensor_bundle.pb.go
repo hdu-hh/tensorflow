@@ -7,10 +7,6 @@
 package pbs
 
 import (
-
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -154,7 +150,7 @@ type BundleEntryProto struct {
 	unknownFields protoimpl.UnknownFields
 
 	// The tensor dtype and shape.
-	Dtype DataType                 `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Dtype DataType          `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 	Shape *TensorShapeProto `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
 	// The binary content of the tensor lies in:
 	//   File "shard_id": bytes [offset, offset + size).
@@ -328,13 +324,13 @@ func file_tensorflow_core_protobuf_tensor_bundle_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_protobuf_tensor_bundle_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tensorflow_core_protobuf_tensor_bundle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_tensorflow_core_protobuf_tensor_bundle_proto_goTypes = []interface{}{
-	(BundleHeaderProto_Endianness)(0),              // 0: tensorflow.BundleHeaderProto.Endianness
-	(*BundleHeaderProto)(nil),                      // 1: tensorflow.BundleHeaderProto
-	(*BundleEntryProto)(nil),                       // 2: tensorflow.BundleEntryProto
-	(*VersionDef)(nil),           // 3: tensorflow.VersionDef
-	(DataType)(0),                   // 4: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 5: tensorflow.TensorShapeProto
-	(*TensorSliceProto)(nil), // 6: tensorflow.TensorSliceProto
+	(BundleHeaderProto_Endianness)(0), // 0: tensorflow.BundleHeaderProto.Endianness
+	(*BundleHeaderProto)(nil),         // 1: tensorflow.BundleHeaderProto
+	(*BundleEntryProto)(nil),          // 2: tensorflow.BundleEntryProto
+	(*VersionDef)(nil),                // 3: tensorflow.VersionDef
+	(DataType)(0),                     // 4: tensorflow.DataType
+	(*TensorShapeProto)(nil),          // 5: tensorflow.TensorShapeProto
+	(*TensorSliceProto)(nil),          // 6: tensorflow.TensorSliceProto
 }
 var file_tensorflow_core_protobuf_tensor_bundle_proto_depIdxs = []int32{
 	0, // 0: tensorflow.BundleHeaderProto.endianness:type_name -> tensorflow.BundleHeaderProto.Endianness

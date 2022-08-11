@@ -22,9 +22,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -1485,35 +1482,35 @@ func file_tensorflow_core_protobuf_master_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_protobuf_master_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
 var file_tensorflow_core_protobuf_master_proto_goTypes = []interface{}{
-	(*CreateSessionRequest)(nil),                        // 0: tensorflow.CreateSessionRequest
-	(*CreateSessionResponse)(nil),                       // 1: tensorflow.CreateSessionResponse
-	(*ExtendSessionRequest)(nil),                        // 2: tensorflow.ExtendSessionRequest
-	(*ExtendSessionResponse)(nil),                       // 3: tensorflow.ExtendSessionResponse
-	(*RunStepRequest)(nil),                              // 4: tensorflow.RunStepRequest
-	(*RunStepResponse)(nil),                             // 5: tensorflow.RunStepResponse
-	(*PartialRunSetupRequest)(nil),                      // 6: tensorflow.PartialRunSetupRequest
-	(*PartialRunSetupResponse)(nil),                     // 7: tensorflow.PartialRunSetupResponse
-	(*CloseSessionRequest)(nil),                         // 8: tensorflow.CloseSessionRequest
-	(*CloseSessionResponse)(nil),                        // 9: tensorflow.CloseSessionResponse
-	(*ResetRequest)(nil),                                // 10: tensorflow.ResetRequest
-	(*ResetResponse)(nil),                               // 11: tensorflow.ResetResponse
-	(*ListDevicesRequest)(nil),                          // 12: tensorflow.ListDevicesRequest
-	(*ListDevicesResponse)(nil),                         // 13: tensorflow.ListDevicesResponse
-	(*MakeCallableRequest)(nil),                         // 14: tensorflow.MakeCallableRequest
-	(*MakeCallableResponse)(nil),                        // 15: tensorflow.MakeCallableResponse
-	(*RunCallableRequest)(nil),                          // 16: tensorflow.RunCallableRequest
-	(*RunCallableResponse)(nil),                         // 17: tensorflow.RunCallableResponse
-	(*ReleaseCallableRequest)(nil),                      // 18: tensorflow.ReleaseCallableRequest
-	(*ReleaseCallableResponse)(nil),                     // 19: tensorflow.ReleaseCallableResponse
-	(*GraphDef)(nil),                     // 20: tensorflow.GraphDef
-	(*ConfigProto)(nil),                                 // 21: tensorflow.ConfigProto
-	(*NamedTensorProto)(nil),                            // 22: tensorflow.NamedTensorProto
-	(*RunOptions)(nil),                                  // 23: tensorflow.RunOptions
-	(*RunMetadata)(nil),                                 // 24: tensorflow.RunMetadata
-	(Code)(0),                                           // 25: tensorflow.error.Code
-	(*DeviceAttributes)(nil), // 26: tensorflow.DeviceAttributes
-	(*CallableOptions)(nil),                             // 27: tensorflow.CallableOptions
-	(*TensorProto)(nil),                 // 28: tensorflow.TensorProto
+	(*CreateSessionRequest)(nil),    // 0: tensorflow.CreateSessionRequest
+	(*CreateSessionResponse)(nil),   // 1: tensorflow.CreateSessionResponse
+	(*ExtendSessionRequest)(nil),    // 2: tensorflow.ExtendSessionRequest
+	(*ExtendSessionResponse)(nil),   // 3: tensorflow.ExtendSessionResponse
+	(*RunStepRequest)(nil),          // 4: tensorflow.RunStepRequest
+	(*RunStepResponse)(nil),         // 5: tensorflow.RunStepResponse
+	(*PartialRunSetupRequest)(nil),  // 6: tensorflow.PartialRunSetupRequest
+	(*PartialRunSetupResponse)(nil), // 7: tensorflow.PartialRunSetupResponse
+	(*CloseSessionRequest)(nil),     // 8: tensorflow.CloseSessionRequest
+	(*CloseSessionResponse)(nil),    // 9: tensorflow.CloseSessionResponse
+	(*ResetRequest)(nil),            // 10: tensorflow.ResetRequest
+	(*ResetResponse)(nil),           // 11: tensorflow.ResetResponse
+	(*ListDevicesRequest)(nil),      // 12: tensorflow.ListDevicesRequest
+	(*ListDevicesResponse)(nil),     // 13: tensorflow.ListDevicesResponse
+	(*MakeCallableRequest)(nil),     // 14: tensorflow.MakeCallableRequest
+	(*MakeCallableResponse)(nil),    // 15: tensorflow.MakeCallableResponse
+	(*RunCallableRequest)(nil),      // 16: tensorflow.RunCallableRequest
+	(*RunCallableResponse)(nil),     // 17: tensorflow.RunCallableResponse
+	(*ReleaseCallableRequest)(nil),  // 18: tensorflow.ReleaseCallableRequest
+	(*ReleaseCallableResponse)(nil), // 19: tensorflow.ReleaseCallableResponse
+	(*GraphDef)(nil),                // 20: tensorflow.GraphDef
+	(*ConfigProto)(nil),             // 21: tensorflow.ConfigProto
+	(*NamedTensorProto)(nil),        // 22: tensorflow.NamedTensorProto
+	(*RunOptions)(nil),              // 23: tensorflow.RunOptions
+	(*RunMetadata)(nil),             // 24: tensorflow.RunMetadata
+	(Code)(0),                       // 25: tensorflow.error.Code
+	(*DeviceAttributes)(nil),        // 26: tensorflow.DeviceAttributes
+	(*CallableOptions)(nil),         // 27: tensorflow.CallableOptions
+	(*TensorProto)(nil),             // 28: tensorflow.TensorProto
 }
 var file_tensorflow_core_protobuf_master_proto_depIdxs = []int32{
 	20, // 0: tensorflow.CreateSessionRequest.graph_def:type_name -> tensorflow.GraphDef

@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -891,16 +890,16 @@ func file_tensorflow_core_framework_summary_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_framework_summary_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tensorflow_core_framework_summary_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_tensorflow_core_framework_summary_proto_goTypes = []interface{}{
-	(DataClass)(0),                      // 0: tensorflow.DataClass
-	(*SummaryDescription)(nil),          // 1: tensorflow.SummaryDescription
-	(*HistogramProto)(nil),              // 2: tensorflow.HistogramProto
-	(*SummaryMetadata)(nil),             // 3: tensorflow.SummaryMetadata
-	(*Summary)(nil),                     // 4: tensorflow.Summary
-	(*SummaryMetadata_PluginData)(nil),  // 5: tensorflow.SummaryMetadata.PluginData
-	(*Summary_Image)(nil),               // 6: tensorflow.Summary.Image
-	(*Summary_Audio)(nil),               // 7: tensorflow.Summary.Audio
-	(*Summary_Value)(nil),               // 8: tensorflow.Summary.Value
-	(*TensorProto)(nil), // 9: tensorflow.TensorProto
+	(DataClass)(0),                     // 0: tensorflow.DataClass
+	(*SummaryDescription)(nil),         // 1: tensorflow.SummaryDescription
+	(*HistogramProto)(nil),             // 2: tensorflow.HistogramProto
+	(*SummaryMetadata)(nil),            // 3: tensorflow.SummaryMetadata
+	(*Summary)(nil),                    // 4: tensorflow.Summary
+	(*SummaryMetadata_PluginData)(nil), // 5: tensorflow.SummaryMetadata.PluginData
+	(*Summary_Image)(nil),              // 6: tensorflow.Summary.Image
+	(*Summary_Audio)(nil),              // 7: tensorflow.Summary.Audio
+	(*Summary_Value)(nil),              // 8: tensorflow.Summary.Value
+	(*TensorProto)(nil),                // 9: tensorflow.TensorProto
 }
 var file_tensorflow_core_framework_summary_proto_depIdxs = []int32{
 	5, // 0: tensorflow.SummaryMetadata.plugin_data:type_name -> tensorflow.SummaryMetadata.PluginData

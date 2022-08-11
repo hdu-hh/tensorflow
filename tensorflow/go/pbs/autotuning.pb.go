@@ -865,7 +865,7 @@ var file_tensorflow_core_protobuf_autotuning_proto_goTypes = []interface{}{
 	(*AutotuneResult_GemmKey)(nil),         // 7: tensorflow.AutotuneResult.GemmKey
 	(*AutotuneResult_CudaConvPlanKey)(nil), // 8: tensorflow.AutotuneResult.CudaConvPlanKey
 	(*duration.Duration)(nil),              // 9: google.protobuf.Duration
-	(*AlgorithmProto)(nil), // 10: dnn.AlgorithmProto
+	(*AlgorithmProto)(nil),                 // 10: dnn.AlgorithmProto
 	(*any.Any)(nil),                        // 11: google.protobuf.Any
 }
 var file_tensorflow_core_protobuf_autotuning_proto_depIdxs = []int32{

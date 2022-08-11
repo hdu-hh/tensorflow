@@ -10,7 +10,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -632,13 +631,13 @@ func file_tensorflow_core_framework_api_def_proto_rawDescGZIP() []byte {
 var file_tensorflow_core_framework_api_def_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_tensorflow_core_framework_api_def_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_tensorflow_core_framework_api_def_proto_goTypes = []interface{}{
-	(ApiDef_Visibility)(0),                // 0: tensorflow.ApiDef.Visibility
-	(*ApiDef)(nil),                        // 1: tensorflow.ApiDef
-	(*ApiDefs)(nil),                       // 2: tensorflow.ApiDefs
-	(*ApiDef_Endpoint)(nil),               // 3: tensorflow.ApiDef.Endpoint
-	(*ApiDef_Arg)(nil),                    // 4: tensorflow.ApiDef.Arg
-	(*ApiDef_Attr)(nil),                   // 5: tensorflow.ApiDef.Attr
-	(*AttrValue)(nil), // 6: tensorflow.AttrValue
+	(ApiDef_Visibility)(0),  // 0: tensorflow.ApiDef.Visibility
+	(*ApiDef)(nil),          // 1: tensorflow.ApiDef
+	(*ApiDefs)(nil),         // 2: tensorflow.ApiDefs
+	(*ApiDef_Endpoint)(nil), // 3: tensorflow.ApiDef.Endpoint
+	(*ApiDef_Arg)(nil),      // 4: tensorflow.ApiDef.Arg
+	(*ApiDef_Attr)(nil),     // 5: tensorflow.ApiDef.Attr
+	(*AttrValue)(nil),       // 6: tensorflow.AttrValue
 }
 var file_tensorflow_core_framework_api_def_proto_depIdxs = []int32{
 	0, // 0: tensorflow.ApiDef.visibility:type_name -> tensorflow.ApiDef.Visibility

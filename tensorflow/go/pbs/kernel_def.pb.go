@@ -7,7 +7,6 @@
 package pbs
 
 import (
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -283,10 +282,10 @@ func file_tensorflow_core_framework_kernel_def_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_kernel_def_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
 var file_tensorflow_core_framework_kernel_def_proto_goTypes = []interface{}{
-	(*KernelDef)(nil),                     // 0: tensorflow.KernelDef
-	(*KernelList)(nil),                    // 1: tensorflow.KernelList
-	(*KernelDef_AttrConstraint)(nil),      // 2: tensorflow.KernelDef.AttrConstraint
-	(*AttrValue)(nil), // 3: tensorflow.AttrValue
+	(*KernelDef)(nil),                // 0: tensorflow.KernelDef
+	(*KernelList)(nil),               // 1: tensorflow.KernelList
+	(*KernelDef_AttrConstraint)(nil), // 2: tensorflow.KernelDef.AttrConstraint
+	(*AttrValue)(nil),                // 3: tensorflow.AttrValue
 }
 var file_tensorflow_core_framework_kernel_def_proto_depIdxs = []int32{
 	2, // 0: tensorflow.KernelDef.constraint:type_name -> tensorflow.KernelDef.AttrConstraint

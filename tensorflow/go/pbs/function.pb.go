@@ -7,9 +7,6 @@
 package pbs
 
 import (
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -102,8 +99,8 @@ type FunctionDef struct {
 	// attrs etc.
 	Signature *OpDef `protobuf:"bytes,1,opt,name=signature,proto3" json:"signature,omitempty"`
 	// Attributes specific to this function definition.
-	Attr    map[string]*AttrValue `protobuf:"bytes,5,rep,name=attr,proto3" json:"attr,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
-	ArgAttr map[uint32]*FunctionDef_ArgAttrs          `protobuf:"bytes,7,rep,name=arg_attr,json=argAttr,proto3" json:"arg_attr,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	Attr    map[string]*AttrValue            `protobuf:"bytes,5,rep,name=attr,proto3" json:"attr,omitempty" protobuf_key:"bytes,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
+	ArgAttr map[uint32]*FunctionDef_ArgAttrs `protobuf:"bytes,7,rep,name=arg_attr,json=argAttr,proto3" json:"arg_attr,omitempty" protobuf_key:"varint,1,opt,name=key,proto3" protobuf_val:"bytes,2,opt,name=value,proto3"`
 	// Unique IDs for each resource argument, used to track aliasing resources. If
 	// Argument A and Argument B alias each other, then
 	// resource_arg_unique_ids[A.index] == resource_arg_unique_ids[B.index].
@@ -515,20 +512,20 @@ func file_tensorflow_core_framework_function_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_function_proto_msgTypes = make([]protoimpl.MessageInfo, 11)
 var file_tensorflow_core_framework_function_proto_goTypes = []interface{}{
-	(*FunctionDefLibrary)(nil),            // 0: tensorflow.FunctionDefLibrary
-	(*FunctionDef)(nil),                   // 1: tensorflow.FunctionDef
-	(*GradientDef)(nil),                   // 2: tensorflow.GradientDef
-	(*RegisteredGradient)(nil),            // 3: tensorflow.RegisteredGradient
-	nil,                                   // 4: tensorflow.FunctionDef.AttrEntry
-	(*FunctionDef_ArgAttrs)(nil),          // 5: tensorflow.FunctionDef.ArgAttrs
-	nil,                                   // 6: tensorflow.FunctionDef.ArgAttrEntry
-	nil,                                   // 7: tensorflow.FunctionDef.ResourceArgUniqueIdEntry
-	nil,                                   // 8: tensorflow.FunctionDef.RetEntry
-	nil,                                   // 9: tensorflow.FunctionDef.ControlRetEntry
-	nil,                                   // 10: tensorflow.FunctionDef.ArgAttrs.AttrEntry
-	(*OpDef)(nil),         // 11: tensorflow.OpDef
-	(*NodeDef)(nil),     // 12: tensorflow.NodeDef
-	(*AttrValue)(nil), // 13: tensorflow.AttrValue
+	(*FunctionDefLibrary)(nil),   // 0: tensorflow.FunctionDefLibrary
+	(*FunctionDef)(nil),          // 1: tensorflow.FunctionDef
+	(*GradientDef)(nil),          // 2: tensorflow.GradientDef
+	(*RegisteredGradient)(nil),   // 3: tensorflow.RegisteredGradient
+	nil,                          // 4: tensorflow.FunctionDef.AttrEntry
+	(*FunctionDef_ArgAttrs)(nil), // 5: tensorflow.FunctionDef.ArgAttrs
+	nil,                          // 6: tensorflow.FunctionDef.ArgAttrEntry
+	nil,                          // 7: tensorflow.FunctionDef.ResourceArgUniqueIdEntry
+	nil,                          // 8: tensorflow.FunctionDef.RetEntry
+	nil,                          // 9: tensorflow.FunctionDef.ControlRetEntry
+	nil,                          // 10: tensorflow.FunctionDef.ArgAttrs.AttrEntry
+	(*OpDef)(nil),                // 11: tensorflow.OpDef
+	(*NodeDef)(nil),              // 12: tensorflow.NodeDef
+	(*AttrValue)(nil),            // 13: tensorflow.AttrValue
 }
 var file_tensorflow_core_framework_function_proto_depIdxs = []int32{
 	1,  // 0: tensorflow.FunctionDefLibrary.function:type_name -> tensorflow.FunctionDef

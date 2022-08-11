@@ -7,8 +7,6 @@
 package pbs
 
 import (
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -126,7 +124,7 @@ type ResourceHandleProto_DtypeAndShape struct {
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Dtype DataType                 `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Dtype DataType          `protobuf:"varint,1,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 	Shape *TensorShapeProto `protobuf:"bytes,2,opt,name=shape,proto3" json:"shape,omitempty"`
 }
 
@@ -237,9 +235,9 @@ func file_tensorflow_core_framework_resource_handle_proto_rawDescGZIP() []byte {
 
 var file_tensorflow_core_framework_resource_handle_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_tensorflow_core_framework_resource_handle_proto_goTypes = []interface{}{
-	(*ResourceHandleProto)(nil),                    // 0: tensorflow.ResourceHandleProto
-	(*ResourceHandleProto_DtypeAndShape)(nil),      // 1: tensorflow.ResourceHandleProto.DtypeAndShape
-	(DataType)(0),                   // 2: tensorflow.DataType
+	(*ResourceHandleProto)(nil),               // 0: tensorflow.ResourceHandleProto
+	(*ResourceHandleProto_DtypeAndShape)(nil), // 1: tensorflow.ResourceHandleProto.DtypeAndShape
+	(DataType)(0),            // 2: tensorflow.DataType
 	(*TensorShapeProto)(nil), // 3: tensorflow.TensorShapeProto
 }
 var file_tensorflow_core_framework_resource_handle_proto_depIdxs = []int32{

@@ -9,9 +9,6 @@ package pbs
 import (
 	any "github.com/golang/protobuf/ptypes/any"
 
-
-
-
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	reflect "reflect"
@@ -333,8 +330,8 @@ type TensorInfo struct {
 	//	*TensorInfo_Name
 	//	*TensorInfo_CooSparse_
 	//	*TensorInfo_CompositeTensor_
-	Encoding isTensorInfo_Encoding   `protobuf_oneof:"encoding"`
-	Dtype    DataType `protobuf:"varint,2,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
+	Encoding isTensorInfo_Encoding `protobuf_oneof:"encoding"`
+	Dtype    DataType              `protobuf:"varint,2,opt,name=dtype,proto3,enum=tensorflow.DataType" json:"dtype,omitempty"`
 	// The static shape should be recorded here, to the extent that it can
 	// be known in advance.  In the case of a SparseTensor, this field describes
 	// the logical shape of the represented tensor (aka dense_shape).
@@ -1395,14 +1392,14 @@ var file_tensorflow_core_protobuf_meta_graph_proto_goTypes = []interface{}{
 	(*TensorInfo_CompositeTensor)(nil), // 15: tensorflow.TensorInfo.CompositeTensor
 	nil,                                // 16: tensorflow.SignatureDef.InputsEntry
 	nil,                                // 17: tensorflow.SignatureDef.OutputsEntry
-	(*GraphDef)(nil),    // 18: tensorflow.GraphDef
+	(*GraphDef)(nil),                   // 18: tensorflow.GraphDef
 	(*SaverDef)(nil),                   // 19: tensorflow.SaverDef
 	(*SavedObjectGraph)(nil),           // 20: tensorflow.SavedObjectGraph
-	(DataType)(0),       // 21: tensorflow.DataType
-	(*TensorShapeProto)(nil), // 22: tensorflow.TensorShapeProto
-	(*OpList)(nil),                 // 23: tensorflow.OpList
-	(*any.Any)(nil),                                // 24: google.protobuf.Any
-	(*TypeSpecProto)(nil),                          // 25: tensorflow.TypeSpecProto
+	(DataType)(0),                      // 21: tensorflow.DataType
+	(*TensorShapeProto)(nil),           // 22: tensorflow.TensorShapeProto
+	(*OpList)(nil),                     // 23: tensorflow.OpList
+	(*any.Any)(nil),                    // 24: google.protobuf.Any
+	(*TypeSpecProto)(nil),              // 25: tensorflow.TypeSpecProto
 }
 var file_tensorflow_core_protobuf_meta_graph_proto_depIdxs = []int32{
 	5,  // 0: tensorflow.MetaGraphDef.meta_info_def:type_name -> tensorflow.MetaGraphDef.MetaInfoDef
