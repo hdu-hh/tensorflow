@@ -90,7 +90,7 @@ func TestControlDependencies(t *testing.T) {
 	)
 	// We intend for `read` to have a control dependency on `update`.
 	s = s.WithControlDependencies(readDeps...)
-	// Ensure that Scope.WithControlDependencies makes a copy of the underlying
+	// Ensure that [Scope.WithControlDependencies] makes a copy of the underlying
 	// array, rather than just holding a slice reference to the same user-supplied
 	// underlying array.  If the copy is correctly performed, overwriting
 	// readDeps[0] should have no effect on control dependencies for `read`.
@@ -177,10 +177,9 @@ func TestScopeWithGraph(t *testing.T) {
 	}
 }
 
-func Example() {
+func ExampleScope() {
 	// This example creates a Graph that multiplies a constant matrix with
-	// a matrix to be provided during graph execution (via
-	// tensorflow.Session).
+	// a matrix to be provided during graph execution (via [tf.Session]).
 	s := NewScope()
 	input := Placeholder(s, tf.Float) // Matrix to be provided to Session.Run
 	output := MatMul(s,
@@ -196,7 +195,7 @@ func Example() {
 	// Output: [2, ?]
 }
 
-func ExampleScope_SubScope() {
+func ExampleSubScope() {
 	var (
 		s  = NewScope()
 		c1 = Const(s.SubScope("x"), int64(1))

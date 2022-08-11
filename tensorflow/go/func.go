@@ -66,7 +66,7 @@ func (g *Graph) RegisterFunc(fn, grad *Func) error {
 	return status.Err()
 }
 
-// Functions returns the list of functions registered in the graph.
+// Functions returns the list of functions ([Func]) registered in the graph.
 func (g *Graph) Functions() []*Func {
 	numFuncs := C.TF_GraphNumFunctions(g.c)
 	if numFuncs <= 0 {
@@ -86,7 +86,7 @@ func (g *Graph) Functions() []*Func {
 	return goFuncs
 }
 
-// AsFunc returns the tensorflow function corresponding to the graph.
+// AsFunc returns the tensorflow function ([Func]) corresponding to the graph.
 func (g *Graph) AsFunc(name string, inputs, outputs []Output, outNames []string, desc string) (*Func, error) {
 	if numOuts, numNames := len(outputs), len(outNames); numOuts != numNames && numNames != 0 {
 		return nil, fmt.Errorf("mismatch of outputs and their names: %d vs %d", numOuts, numNames)
@@ -169,7 +169,7 @@ func (fn *Func) WriteTo(w io.Writer) (int64, error) {
 	return int64(n), err
 }
 
-// ImportFunc creates a Func from the binary serialization
+// ImportFunc creates a [Func] from the binary serialization
 // of a [pbs.FunctionDef] protocol buffer.
 func ImportFunc(proto []byte) (*Func, error) {
 	if len(proto) == 0 {
@@ -223,7 +223,7 @@ func (fn *Func) WriteAttrTo(attrName string, w io.Writer) (int64, error) {
 	return int64(n), err
 }
 
-// Signature returns the function signature as OpDef object
+// Signature returns the function signature as [pbs.OpDef] object
 func (fn *Func) Signature() *pbs.OpDef {
 	buf := bytes.Buffer{}
 	if _, err := fn.WriteTo(&buf); err != nil {
