@@ -19,6 +19,7 @@ limitations under the License.
 package op
 
 import (
+	"fmt"
 	"testing"
 	"time"
 
@@ -81,6 +82,24 @@ func TestShapeAttribute(t *testing.T) {
 	if got, want := fetched[0].Value().([]int32), []int32{14}; len(got) != len(want) || len(got) != 1 || got[0] != want[0] {
 		t.Fatalf("Got %v, want %v", got, want)
 	}
+}
+
+func ExampleVariable() {
+	var (
+		s       = NewScope()
+		v       = Variable(s, tf.MakeShape(2, 3), tf.Float)
+		ph      = Placeholder(s, tf.Float)
+		wr      = Assign(s, v, ph)
+		g, _    = s.Finalize()
+		sess, _ = tf.NewSession(g, nil)
+	)
+	// assign tensor to variable
+	t, _ := tf.NewTensor([][]float32{{1.3, 2.2, 3.1}, {4.6, 5.5, 6.4}})
+	sess.Run(map[tf.Output]*tf.Tensor{ph: t}, nil, []*tf.Operation{wr.Op})
+	// read tensor from variable
+	f, _ := sess.Run(nil, []tf.Output{v}, nil)
+	fmt.Println(f[0].Value())
+	// Output: [[1.3 2.2 3.1] [4.6 5.5 6.4]]
 }
 
 func TestDataset(t *testing.T) {
