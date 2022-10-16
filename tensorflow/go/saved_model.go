@@ -18,10 +18,13 @@ package tensorflow
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"runtime"
+	"strings"
 	"unsafe"
 
-	corepb "github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
+	"github.com/hdu-hh/tensorflow/tensorflow/go/pbs"
 	"google.golang.org/protobuf/proto"
 )
 
@@ -37,13 +40,15 @@ type SavedModel struct {
 	Signatures map[string]Signature
 }
 
-// LoadSavedModel creates a new SavedModel from a model previously
+// LoadSavedModel creates a new [SavedModel] from a model previously
 // exported to a directory on disk.
 //
 // Exported models contain a set of graphs and, optionally, variable values.
 // Tags in the model identify a single graph. LoadSavedModel initializes a
 // session with the identified graph and with variables initialized to from the
 // checkpoints on disk.
+//
+// Tags per graph can be listed using the [ListSavedModelDetails] function.
 //
 // The tensorflow package currently does not have the ability to export a model
 // to a directory from Go. This function thus currently targets loading models
@@ -59,7 +64,9 @@ func LoadSavedModel(exportDir string, tags []string, options *SessionOptions) (*
 	}
 	cExportDir := C.CString(exportDir)
 	if len(tags) == 0 {
-		return nil, fmt.Errorf("empty tags are not allowed")
+		return nil, fmt.Errorf("empty tags are not allowed." +
+			" Use the ListSavedModelDetails() function to list tags per graph",
+		)
 	}
 	cTags := make([]*C.char, len(tags))
 	for i := range tags {
@@ -75,8 +82,15 @@ func LoadSavedModel(exportDir string, tags []string, options *SessionOptions) (*
 	}
 	C.free(unsafe.Pointer(cExportDir))
 
+	if err := status.Err(); err != nil {
+		if e := err.Error(); strings.Contains(e, "To inspect available tag-sets in the SavedModel") {
+			err = fmt.Errorf("%s or use the ListSavedModelDetails() function", e)
+		}
+		return nil, err
+	}
+
 	metaGraphDefBytes := C.GoBytes(metaGraphDefBuf.data, C.int(metaGraphDefBuf.length))
-	metaGraphDef := new(corepb.MetaGraphDef)
+	metaGraphDef := new(pbs.MetaGraphDef)
 	if err := proto.Unmarshal(metaGraphDefBytes, metaGraphDef); err != nil {
 		return nil, err
 	}
@@ -91,10 +105,33 @@ func LoadSavedModel(exportDir string, tags []string, options *SessionOptions) (*
 	return &SavedModel{Session: s, Graph: graph, Signatures: signatures}, nil
 }
 
-func generateSignatures(pb map[string]*corepb.SignatureDef) map[string]Signature {
+func generateSignatures(pb map[string]*pbs.SignatureDef) map[string]Signature {
 	signatures := make(map[string]Signature)
 	for name, signature := range pb {
 		signatures[name] = signatureDefFromProto(signature)
 	}
 	return signatures
+}
+
+// ListSavedModelDetails lists the tags and signatures per MetaGraph
+// from a model previously exported to a directory on disk.
+func ListSavedModelDetails(exportDir string) (tags [][]string, signatures []map[string]Signature, err error) {
+	path := filepath.Join(exportDir, "saved_model.pb")
+	if model, err := loadSavedModelProto(path); err == nil {
+		for _, m := range model.GetMetaGraphs() {
+			tags = append(tags, m.MetaInfoDef.Tags)
+			signatures = append(signatures, generateSignatures(m.GetSignatureDef()))
+		}
+	}
+	return
+}
+
+// loadSavedModelProto loads the saved model protobuf from the specified path.
+func loadSavedModelProto(path string) (model *pbs.SavedModel, err error) {
+	var buf []byte
+	if buf, err = os.ReadFile(path); err == nil {
+		model = &pbs.SavedModel{}
+		err = proto.Unmarshal(buf, model)
+	}
+	return
 }
