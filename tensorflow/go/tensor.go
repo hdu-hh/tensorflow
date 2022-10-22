@@ -38,7 +38,7 @@ import (
 	"unsafe"
 )
 
-// DataType holds the type for a scalar value.  E.g., one slot in a tensor.
+// DataType holds the type for a scalar value. E.g., one element in a tensor.
 type DataType C.TF_DataType
 
 // Types of scalar values in the TensorFlow type system.
@@ -167,7 +167,7 @@ func unpackEFace(obj interface{}) *eface {
 	return (*eface)(unsafe.Pointer(&obj))
 }
 
-// ReadTensor constructs a Tensor with the provided type and shape from the
+// ReadTensor constructs a [Tensor] with the provided type and shape from the
 // serialized tensor contents in r.
 //
 // See also WriteContentsTo.
@@ -221,21 +221,38 @@ func (t *Tensor) DataType() DataType { return DataType(C.TF_TensorType(t.c)) }
 // Shape returns the shape of the Tensor.
 func (t *Tensor) Shape() []int64 { return t.shape }
 
-// Reshape  updates tensor's shape in place if this is possible or returns an error otherwise.
+// Reshape updates tensor's shape in place if this is possible or returns an error otherwise.
 func (t *Tensor) Reshape(newShape []int64) error {
 	oldShapeSize := numElements(t.shape)
-	newShapeSize := numElements(newShape)
+	// allow one undefined dimension in the new shape
+	var newShapeSize int64 = 1
+	undefIdx := -1
+	for i, n := range newShape {
+		if n != -1 {
+			newShapeSize *= n
+		} else if undefIdx < 0 {
+			undefIdx = i
+		} else {
+			return fmt.Errorf("only one undefined dimension allowed in shape %v", newShape)
+		}
+	}
+	if undefIdx >= 0 {
+		n := oldShapeSize / newShapeSize
+		newShapeSize *= n
+		newShape = append([]int64{}, newShape...)
+		newShape[undefIdx] = n
+	}
 
 	if oldShapeSize != newShapeSize {
-		return fmt.Errorf("unable to convert shape %v (num_elements: %d) into shape %v (num_elements: %d)", t.shape, oldShapeSize, newShape, newShapeSize)
+		return fmt.Errorf("unable to convert shape %v (num_elements: %d) into shape %v (num_elements: %d)",
+			t.shape, oldShapeSize, newShape, newShapeSize)
 	}
 
 	if len(newShape) == 0 {
 		return nil
 	}
 
-	var shapePtr *C.int64_t
-	shapePtr = (*C.int64_t)(unsafe.Pointer(&newShape[0]))
+	var shapePtr *C.int64_t = (*C.int64_t)(unsafe.Pointer(&newShape[0]))
 
 	status := newStatus()
 	C.TF_TensorBitcastFrom(t.c, C.TF_TensorType(t.c), t.c, shapePtr, C.int(len(newShape)), status.c)
