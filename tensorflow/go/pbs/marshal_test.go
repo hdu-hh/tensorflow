@@ -14,11 +14,21 @@ func ExampleMustMarshal() {
 				OptLevel: OptimizerOptions_L1,
 			},
 		},
-		Experimental: &ConfigProto_Experimental{},
+		Experimental: &ConfigProto_Experimental{
+			OptimizeForStaticGraph: true,
+			UseTfrt:                false,
+		},
+		GpuOptions: &GPUOptions{
+			Experimental: &GPUOptions_Experimental{
+				VirtualDevices: []*GPUOptions_Experimental_VirtualDevices{
+					{MemoryLimitMb: []float32{2000}},
+				},
+			},
+		},
 	}
 	b := MustMarshal(&m)
 	fmt.Printf("[]byte(%q)", b)
-	// Output: []byte("8\x01R\x02\x1a\x00X\x90N\x82\x01\x00")
+	// Output: []byte("2\nJ\b\n\x06\n\x04\x00\x00\xfaD8\x01R\x02\x1a\x00X\x90N\x82\x01\x02`\x01")
 }
 
 func ExampleMustUnmarshal() {
