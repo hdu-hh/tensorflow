@@ -264,6 +264,14 @@ func (t *Tensor) Reshape(newShape []int64) error {
 	return nil
 }
 
+// Reshape updates a tensor's shape in place. It panics if the reshape failed.
+func (t *Tensor) MustReshape(newShape ...int64) *Tensor {
+	if err := t.Reshape(newShape); err != nil {
+		panic(err)
+	}
+	return t
+}
+
 // Value converts the Tensor to a Go value. For now, not all Tensor types are
 // supported, and this function may panic if it encounters an unsupported
 // DataType.
