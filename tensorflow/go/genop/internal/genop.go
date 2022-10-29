@@ -208,7 +208,11 @@ var (
 
 package op
 
-import tf "github.com/hdu-hh/tensorflow/tensorflow/go"
+import (
+	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
+	"math/rand"
+	"strconv"
+)
 
 // optionalAttr is an intentionally un-exported type to hide
 // details of how optional attributes to operations are implemented.
@@ -344,6 +348,12 @@ func {{.Op.Name}}
 	}
 	{{end -}}
 	{{end -}}
+	{{if .HasSharedName -}}
+	// default to unique shared_name attribute
+	if _, ok := attrs["shared_name"]; !ok {
+		attrs["shared_name"] = "$" + strconv.FormatInt(rand.Int63(), 36)
+	}
+	{{end -}}
 	opspec := tf.OpSpec{
 		Type: {{printf "%q" .Op.Name}},
 		{{if .InArgs -}}
@@ -419,6 +429,7 @@ type tmplArgs struct {
 	//     values) and thus do not appear in the function signature.
 	RequiredAttrs []*attrWrapper
 	OptionalAttrs []*attrWrapper
+	HasSharedName bool
 	InArgs        []*argWrapper
 	// Input arguments ordered based on arg_order field of ApiDef.
 	InArgsReordered []*argWrapper
@@ -486,12 +497,18 @@ func newTmplArgs(op *pbs.OpDef, apidef *pbs.ApiDef) (*tmplArgs, error) {
 			ret.RequiredAttrs = append(ret.RequiredAttrs, &attrCombined)
 		} else {
 			ret.OptionalAttrs = append(ret.OptionalAttrs, &attrCombined)
+			if attrCombined.Name() == "shared_name" {
+				ret.HasSharedName = true
+			}
 		}
 	}
 	return &ret, nil
 }
 
-func (a *tmplArgs) HasAttrs() bool { return len(a.RequiredAttrs)+len(a.OptionalAttrs) > 0 }
+func (a *tmplArgs) HasAttrs() bool {
+	return len(a.RequiredAttrs)+len(a.OptionalAttrs) > 0
+}
+
 func (a *tmplArgs) DescribeArguments() bool {
 	for _, arg := range a.InArgs {
 		if arg.Description() != "" {
