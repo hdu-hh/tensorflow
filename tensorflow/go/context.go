@@ -28,7 +28,7 @@ import (
 // ContextOptions contains configuration information for a session
 type ContextOptions struct {
 	// Config is a binary-serialized representation of the
-	// tensorflow.ConfigProto protocol message
+	// [pbs.ConfigProto] protocol message
 	// (https://www.tensorflow.org/code/tensorflow/core/protobuf/config.proto).
 	Config []byte
 
@@ -51,7 +51,7 @@ func (o *ContextOptions) c() (*C.TFE_ContextOptions, error) {
 		C.free(cConfig)
 		if err := status.Err(); err != nil {
 			C.TFE_DeleteContextOptions(opt)
-			return nil, fmt.Errorf("invalid ContextOptions.Config: %v", err)
+			return nil, fmt.Errorf("invalid ContextOptions.Config: %w", err)
 		}
 	}
 
@@ -102,7 +102,7 @@ func (c *Context) ListDevices() ([]Device, error) {
 	status := newStatus()
 	devicesList := C.TFE_ContextListDevices(c.c, status.c)
 	if err := status.Err(); err != nil {
-		return nil, fmt.Errorf("SessionListDevices() failed: %v", err)
+		return nil, fmt.Errorf("SessionListDevices() failed: %w", err)
 	}
 	defer C.TF_DeleteDeviceList(devicesList)
 	return deviceSliceFromDeviceList(devicesList)

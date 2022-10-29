@@ -89,17 +89,17 @@ func deviceSliceFromDeviceList(list *C.TF_DeviceList) ([]Device, error) {
 	for i := 0; i < int(C.TF_DeviceListCount(list)); i++ {
 		name := C.TF_DeviceListName(list, C.int(i), status.c)
 		if err := status.Err(); err != nil {
-			return nil, fmt.Errorf("DeviceListName(index=%d) failed: %v", i, err)
+			return nil, fmt.Errorf("DeviceListName(index=%d) failed: %w", i, err)
 		}
 
 		deviceType := C.TF_DeviceListType(list, C.int(i), status.c)
 		if err := status.Err(); err != nil {
-			return nil, fmt.Errorf("DeviceListType(index=%d) failed: %v", i, err)
+			return nil, fmt.Errorf("DeviceListType(index=%d) failed: %w", i, err)
 		}
 
 		memoryLimitBytes := C.TF_DeviceListMemoryBytes(list, C.int(i), status.c)
 		if err := status.Err(); err != nil {
-			return nil, fmt.Errorf("DeviceListMemoryBytes(index=%d) failed: %v", i, err)
+			return nil, fmt.Errorf("DeviceListMemoryBytes(index=%d) failed: %w", i, err)
 		}
 
 		device := Device{
@@ -119,7 +119,7 @@ func (s *Session) ListDevices() ([]Device, error) {
 	status := newStatus()
 	devicesList := C.TF_SessionListDevices(s.c, status.c)
 	if err := status.Err(); err != nil {
-		return nil, fmt.Errorf("SessionListDevices() failed: %v", err)
+		return nil, fmt.Errorf("SessionListDevices() failed: %w", err)
 	}
 	defer C.TF_DeleteDeviceList(devicesList)
 	return deviceSliceFromDeviceList(devicesList)
@@ -341,7 +341,7 @@ func (o *SessionOptions) c() (ret *C.TF_SessionOptions, done func(), err error) 
 		C.TF_SetConfig(opt, cConfig, C.size_t(sz), status.c)
 		if err := status.Err(); err != nil {
 			C.TF_DeleteSessionOptions(opt)
-			return nil, func() {}, fmt.Errorf("invalid SessionOptions.Config: %v", err)
+			return nil, func() {}, fmt.Errorf("invalid SessionOptions.Config: %w", err)
 		}
 	}
 	return opt, func() {
