@@ -248,9 +248,9 @@ description: "Norna dorna fjord\nkajorna\nhahaha"
 type DecodeJpegAttr func(optionalAttr)
 
 // DecodeJpegChannels sets the optional channels attribute to value.
-//
-// value: Number of color channels for the decoded image.
-// If not specified, defaults to 0
+//	- value: Number of color channels for the decoded image.
+//	  If not specified, defaults to 0
+
 func DecodeJpegChannels(value int64) DecodeJpegAttr {
 	return func(m optionalAttr) {
 		m["channels"] = value
@@ -258,10 +258,10 @@ func DecodeJpegChannels(value int64) DecodeJpegAttr {
 }
 
 // DecodeJpegFancyUpscaling sets the optional fancy_upscaling attribute to value.
-//
-// value: If true use a slower but nicer upscaling of the
-// chroma planes (yuv420/422 only).
-// If not specified, defaults to true
+//	- value: If true use a slower but nicer upscaling of the
+//	  chroma planes (yuv420/422 only).
+//	  If not specified, defaults to true
+
 func DecodeJpegFancyUpscaling(value bool) DecodeJpegAttr {
 	return func(m optionalAttr) {
 		m["fancy_upscaling"] = value
@@ -269,10 +269,10 @@ func DecodeJpegFancyUpscaling(value bool) DecodeJpegAttr {
 }
 
 // DecodeJpegAcceptableFraction sets the optional acceptable_fraction attribute to value.
-//
-// value: The minimum required fraction of lines before a truncated
-// input is accepted.
-// If not specified, defaults to 1
+//	- value: The minimum required fraction of lines before a truncated
+//	  input is accepted.
+//	  If not specified, defaults to 1
+
 func DecodeJpegAcceptableFraction(value float32) DecodeJpegAttr {
 	return func(m optionalAttr) {
 		m["acceptable_fraction"] = value
@@ -286,7 +286,7 @@ func DecodeJpegAcceptableFraction(value float32) DecodeJpegAttr {
 // hahaha
 //
 // Arguments:
-//	contents: 0-D.  The JPEG-encoded image.
+//   - contents: 0-D.  The JPEG-encoded image.
 //
 // Returns 3-D with shape [height, width, channels]
 func DecodeJpeg(scope *Scope, contents tf.Output, optional ...DecodeJpegAttr) (image tf.Output) {
@@ -434,7 +434,7 @@ func ShapeN(scope *Scope, input []tf.Output, optional ...ShapeNAttr) (output []t
 	}
 	var idx int
 	var err error
-	if output, idx, err = makeOutputList(op, idx, "output"); err != nil {
+	if output, _, err = makeOutputList(op, idx, "output"); err != nil {
 		scope.UpdateErr("ShapeN", err)
 		return
 	}
@@ -500,9 +500,9 @@ description: "Description for TestOp."
 type TestOpAttr func(optionalAttr)
 
 // TestOpDd sets the optional dd attribute to value.
-//
-// value: Description for dd.
-// If not specified, defaults to 0
+//	- value: Description for dd.
+//	  If not specified, defaults to 0
+
 func TestOpDd(value int64) TestOpAttr {
 	return func(m optionalAttr) {
 		m["d"] = value
@@ -514,8 +514,8 @@ func TestOpDd(value int64) TestOpAttr {
 // Description for TestOp.
 //
 // Arguments:
-//	bb: Description for bb.
-//	aa: Description for aa.
+//   - bb: Description for bb.
+//   - aa: Description for aa.
 //
 // Returns Description for cc.
 func TestOp(scope *Scope, bb tf.Output, aa tf.Output, optional ...TestOpAttr) (cc tf.Output) {
@@ -692,9 +692,9 @@ op {
 type SampleDistortedBoundingBoxAttr func(optionalAttr)
 
 // SampleDistortedBoundingBoxSeed sets the optional seed attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to 0
+//	- value: Blah blah
+//	  If not specified, defaults to 0
+
 func SampleDistortedBoundingBoxSeed(value int64) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["seed"] = value
@@ -702,9 +702,9 @@ func SampleDistortedBoundingBoxSeed(value int64) SampleDistortedBoundingBoxAttr 
 }
 
 // SampleDistortedBoundingBoxSeed2 sets the optional seed2 attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to 0
+//	- value: Blah blah
+//	  If not specified, defaults to 0
+
 func SampleDistortedBoundingBoxSeed2(value int64) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["seed2"] = value
@@ -712,9 +712,9 @@ func SampleDistortedBoundingBoxSeed2(value int64) SampleDistortedBoundingBoxAttr
 }
 
 // SampleDistortedBoundingBoxMinObjectCovered sets the optional min_object_covered attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to 0.1
+//	- value: Blah blah
+//	  If not specified, defaults to 0.1
+
 func SampleDistortedBoundingBoxMinObjectCovered(value float32) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["min_object_covered"] = value
@@ -722,9 +722,9 @@ func SampleDistortedBoundingBoxMinObjectCovered(value float32) SampleDistortedBo
 }
 
 // SampleDistortedBoundingBoxAspectRatioRange sets the optional aspect_ratio_range attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to {f:0.75 f:1.33}
+//	- value: Blah blah
+//	  If not specified, defaults to {f:0.75 f:1.33}
+
 func SampleDistortedBoundingBoxAspectRatioRange(value []float32) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["aspect_ratio_range"] = value
@@ -732,9 +732,9 @@ func SampleDistortedBoundingBoxAspectRatioRange(value []float32) SampleDistorted
 }
 
 // SampleDistortedBoundingBoxAreaRange sets the optional area_range attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to {f:0.05 f:1}
+//	- value: Blah blah
+//	  If not specified, defaults to {f:0.05 f:1}
+
 func SampleDistortedBoundingBoxAreaRange(value []float32) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["area_range"] = value
@@ -742,9 +742,9 @@ func SampleDistortedBoundingBoxAreaRange(value []float32) SampleDistortedBoundin
 }
 
 // SampleDistortedBoundingBoxMaxAttempts sets the optional max_attempts attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to 100
+//	- value: Blah blah
+//	  If not specified, defaults to 100
+
 func SampleDistortedBoundingBoxMaxAttempts(value int64) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["max_attempts"] = value
@@ -752,9 +752,9 @@ func SampleDistortedBoundingBoxMaxAttempts(value int64) SampleDistortedBoundingB
 }
 
 // SampleDistortedBoundingBoxUseImageIfNoBoundingBoxes sets the optional use_image_if_no_bounding_boxes attribute to value.
-//
-// value: Blah blah
-// If not specified, defaults to false
+//	- value: Blah blah
+//	  If not specified, defaults to false
+
 func SampleDistortedBoundingBoxUseImageIfNoBoundingBoxes(value bool) SampleDistortedBoundingBoxAttr {
 	return func(m optionalAttr) {
 		m["use_image_if_no_bounding_boxes"] = value
@@ -763,16 +763,16 @@ func SampleDistortedBoundingBoxUseImageIfNoBoundingBoxes(value bool) SampleDisto
 
 // Generate a single randomly distorted bounding box for an image.
 //
-// Blah blah
+// # Blah blah
 //
 // Arguments:
-//	image_size: Blah blah
-//	bounding_boxes: Blah blah
+//   - image_size: Blah blah
+//   - bounding_boxes: Blah blah
 //
 // Returns:
-//	begin: Blah blah
-//	size: Blah blah
-//	bboxes: Blah blah
+//   - begin: Blah blah
+//   - size: Blah blah
+//   - bboxes: Blah blah
 func SampleDistortedBoundingBox(scope *Scope, image_size tf.Output, bounding_boxes tf.Output, optional ...SampleDistortedBoundingBoxAttr) (begin tf.Output, size tf.Output, bboxes tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -815,6 +815,7 @@ func SampleDistortedBoundingBox(scope *Scope, image_size tf.Output, bounding_box
 			if err != nil {
 				t.Fatalf("Unable to format: %v\n%s", err, test.wanted)
 			}
+			got, want = bytes.TrimSpace(got), bytes.TrimSpace(want) // ignore whitespace diff for now
 			if !bytes.Equal(got, want) {
 				t.Fatalf("Got:\n%s\nWant:\n%s\n", got, want)
 			}
