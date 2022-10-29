@@ -233,6 +233,7 @@ func makeOutputList(op *tf.Operation, start int, output string) ([]tf.Output, in
 
 	tmplOp = template.Must(template.New("op").Funcs(template.FuncMap{
 		"MakeComment":         makeComment,
+		"MakeOfsComment":      MakeOfsComment,
 		"GoType":              goType,
 		"CamelCase":           camelCase,
 		"Identifier":          identifier,
@@ -248,10 +249,11 @@ type {{.Op.Name}}Attr func(optionalAttr)
 {{range .OptionalAttrs}}
 // {{$.Op.Name}}{{CamelCase .RenameTo}} sets the optional {{.RenameTo}} attribute to value.
 {{- if .Description}}
-//
-// value: {{MakeComment .Description}}
-{{- end}}
+//	- value: {{MakeOfsComment 5 .Description}}
+//	  If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
+{{else}}
 // If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
+{{- end}}
 {{- if .HasMinimum}}
 //
 // {{if .IsListAttr }}REQUIRES: len(value) >= {{.Minimum}}{{else}}REQUIRES: value >= {{.Minimum}}{{end}}
@@ -285,14 +287,13 @@ func {{$.Op.Name}}{{CamelCase .RenameTo}}(value {{GoType .Type}}) {{$.Op.Name}}A
 {{- if .DescribeArguments}}
 //
 // Arguments:
-{{- range .InArgsReordered}}
-//	{{if .Description}}{{Identifier .RenameTo}}: {{MakeComment .Description}}{{end}}
+{{- range .InArgsReordered}}{{if .Description}}
+//	- {{Identifier .RenameTo}}: {{MakeOfsComment 5 .Description}}{{end}}
 {{- end -}}
-{{- range .RequiredAttrs}}
-//	{{if .Description}}{{Identifier .RenameTo}}: {{MakeComment .Description}}{{end}}
+{{- range .RequiredAttrs}}{{if .Description}}
+//	- {{Identifier .RenameTo}}: {{MakeOfsComment 5 .Description}}{{end}}
 {{- end -}}
 {{- end -}}
-
 {{- if (not .Op.OutputArg) }}
 //
 // Returns the created operation.
@@ -304,7 +305,7 @@ func {{$.Op.Name}}{{CamelCase .RenameTo}}(value {{GoType .Type}}) {{$.Op.Name}}A
 {{- else }}
 // Returns:
 {{- range .OutArgs}}
-//	{{Identifier .RenameTo}}{{if .Description}}: {{MakeComment .Description}}{{end}}
+//	- {{Identifier .RenameTo}}{{if .Description}}: {{MakeOfsComment 5 .Description}}{{end}}
 {{- end -}}
 {{- end -}}
 {{- end -}}
@@ -542,6 +543,12 @@ func (a *tmplArgs) HasListOutput() bool {
 
 func makeComment(lines string) string {
 	return strings.Join(strings.SplitAfter(lines, "\n"), "// ")
+}
+
+func MakeOfsComment(ofs int, lines string) string {
+	l := strings.SplitAfter(lines, "\n")
+	s := strings.Join(l, "//\t   "[:ofs])
+	return strings.TrimSpace(s)
 }
 
 // goType converts a TensorFlow "type" ('string', 'int', 'list(string)' etc.)
