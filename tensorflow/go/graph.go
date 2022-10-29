@@ -216,8 +216,8 @@ func (g *Graph) Operations() []Operation {
 // AddGradients adds operations to compute the partial derivatives of the sum of tensors in y
 // with respect to tensors in x, i.e., d(y[0] + y[1] + ...) / d x[0], d(y[0] + y[1] + ... ) / d x[1] etc.
 //
-//   prefix, if non-empty, is the name prefix used for all operations
-//   added to the graph to compute these gradients.
+//   - prefix, if non-empty, is the name prefix used for all operations
+//     added to the graph to compute these gradients.
 func (g *Graph) AddGradients(prefix string, y []Output, x []Output, dx []Output) ([]Output, error) {
 	var (
 		cprefix *C.char

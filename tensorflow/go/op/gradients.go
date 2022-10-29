@@ -26,9 +26,9 @@ import (
 //
 // Arguments:
 //
-//	y: output of the function to derive
-//	x: inputs of the function for which partial derivatives are computed
-//	dx: if not null, the partial derivatives of some loss function L w.r.t. y
+//   - y: output of the function to derive
+//   - x: inputs of the function for which partial derivatives are computed
+//   - dx: if not null, the partial derivatives of some loss function L w.r.t. y
 //
 //	return the partial derivatives
 func Gradients(scope *Scope, y []tf.Output, x []tf.Output, dx ...tf.Output) (output []tf.Output) {
