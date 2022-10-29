@@ -5,12 +5,14 @@ op {
     name: "resource"
     description: <<END
 Resource variable for concatenated input tensors across all dimensions.
+END
   }
   in_arg {
     name: "inputs"
     description: <<END
 Input tensor slices in row-major order to merge across all dimensions. All
 inputs must have the same shape.
+END
   }
   out_arg {
     name: "output"
