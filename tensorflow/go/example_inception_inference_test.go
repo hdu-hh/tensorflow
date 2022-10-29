@@ -22,7 +22,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -76,7 +75,7 @@ func ExampleInception5h() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	model, err := ioutil.ReadFile(modelfile)
+	model, err := os.ReadFile(modelfile)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -147,7 +146,7 @@ func printBestLabel(probabilities []float32, labelsFile string) {
 
 // Convert the image in filename to a Tensor suitable as input to the Inception model.
 func makeTensorFromImage(filename string) (*tf.Tensor, error) {
-	bytes, err := ioutil.ReadFile(filename)
+	bytes, err := os.ReadFile(filename)
 	if err != nil {
 		return nil, err
 	}
@@ -233,10 +232,10 @@ func modelFiles(dir string) (modelfile, labelsfile string, err error) {
 		return "", "", err
 	}
 	if err := download(URL, zipfile); err != nil {
-		return "", "", fmt.Errorf("failed to download %v - %v", URL, err)
+		return "", "", fmt.Errorf("failed to download %v - %w", URL, err)
 	}
 	if err := unzip(dir, zipfile); err != nil {
-		return "", "", fmt.Errorf("failed to extract contents from model archive: %v", err)
+		return "", "", fmt.Errorf("failed to extract contents from model archive: %w", err)
 	}
 	os.Remove(zipfile)
 	return model, labels, filesExist(model, labels)
@@ -245,7 +244,7 @@ func modelFiles(dir string) (modelfile, labelsfile string, err error) {
 func filesExist(files ...string) error {
 	for _, f := range files {
 		if _, err := os.Stat(f); err != nil {
-			return fmt.Errorf("unable to stat %s: %v", f, err)
+			return fmt.Errorf("unable to stat %s: %w", f, err)
 		}
 	}
 	return nil

@@ -39,7 +39,6 @@ import "C"
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path"
@@ -97,7 +96,7 @@ func registeredOps() (*pbs.OpList, *apiDefMap, error) {
 }
 
 func updateAPIDefs(m *apiDefMap, dir string) error {
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
 		return err
 	}
@@ -105,12 +104,13 @@ func updateAPIDefs(m *apiDefMap, dir string) error {
 		if file.IsDir() || !strings.HasSuffix(file.Name(), ".pbtxt") {
 			continue
 		}
-		data, err := ioutil.ReadFile(path.Join(dir, file.Name()))
+		data, err := os.ReadFile(path.Join(dir, file.Name()))
 		if err != nil {
-			return fmt.Errorf("failed to read %q: %v", file.Name(), err)
+			return fmt.Errorf("failed to read %q: %w", file.Name(), err)
 		}
 		if err = m.Put(string(data)); err != nil {
-			err := fmt.Errorf("failed to process %q: %v", file.Name(), err)
+			err := fmt.Errorf("failed to process %q in %q:\n\t%w",
+				file.Name(), dir, err)
 			fmt.Fprintln(os.Stderr, err.Error())
 		}
 	}
@@ -233,7 +233,7 @@ func makeOutputList(op *tf.Operation, start int, output string) ([]tf.Output, in
 
 	tmplOp = template.Must(template.New("op").Funcs(template.FuncMap{
 		"MakeComment":         makeComment,
-		"MakeOfsComment":      MakeOfsComment,
+		"MakeOfsComment":      makeOfsComment,
 		"GoType":              goType,
 		"CamelCase":           camelCase,
 		"Identifier":          identifier,
@@ -251,8 +251,8 @@ type {{.Op.Name}}Attr func(optionalAttr)
 {{- if .Description}}
 //	- value: {{MakeOfsComment 5 .Description}}
 //	  If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
-{{else}}
-// If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
+{{- else}}
+//	- value: If not specified, defaults to {{MarshalProtoMessage .DefaultValue}}
 {{- end}}
 {{- if .HasMinimum}}
 //
@@ -545,7 +545,7 @@ func makeComment(lines string) string {
 	return strings.Join(strings.SplitAfter(lines, "\n"), "// ")
 }
 
-func MakeOfsComment(ofs int, lines string) string {
+func makeOfsComment(ofs int, lines string) string {
 	l := strings.SplitAfter(lines, "\n")
 	s := strings.Join(l, "//\t   "[:ofs])
 	return strings.TrimSpace(s)

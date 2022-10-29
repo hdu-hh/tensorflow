@@ -165,7 +165,7 @@ func (s *Scope) Err() error {
 // while creating the operation op.
 func (s *Scope) UpdateErr(op string, err error) {
 	if s.err.err == nil {
-		s.err.err = fmt.Errorf("failed to add operation %q: %v (Stacktrace: %s)", op, err, debug.Stack())
+		s.err.err = fmt.Errorf("failed to add operation %q: %w (Stacktrace: %s)", op, err, debug.Stack())
 	}
 	// be vigilant
 	panic(s.err.err)

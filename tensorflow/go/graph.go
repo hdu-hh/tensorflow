@@ -216,8 +216,8 @@ func (g *Graph) Operations() []Operation {
 // AddGradients adds operations to compute the partial derivatives of the sum of tensors in y
 // with respect to tensors in x, i.e., d(y[0] + y[1] + ...) / d x[0], d(y[0] + y[1] + ... ) / d x[1] etc.
 //
-//   prefix, if non-empty, is the name prefix used for all operations
-//   added to the graph to compute these gradients.
+//	prefix, if non-empty, is the name prefix used for all operations
+//	added to the graph to compute these gradients.
 func (g *Graph) AddGradients(prefix string, y []Output, x []Output, dx []Output) ([]Output, error) {
 	var (
 		cprefix *C.char
@@ -357,7 +357,7 @@ func (g *Graph) AddOperation(args OpSpec) (*Operation, error) {
 			// with the memory leak.  If it becomes a real problem,
 			// consider adding a TF_DeleteOperationDescription
 			// function to the C API.
-			return nil, fmt.Errorf("%v (memory will be leaked)", err)
+			return nil, fmt.Errorf("%w (memory will be leaked)", err)
 		}
 	}
 	if len(args.Device) > 0 {
@@ -452,7 +452,7 @@ func setAttr(cdesc *C.TF_OperationDescription, status *status, name string, valu
 	case *Tensor:
 		C.TF_SetAttrTensor(cdesc, cAttrName, value.c, status.c)
 		if err := status.Err(); err != nil {
-			return fmt.Errorf("bad value for attribute %q: %v", name, err)
+			return fmt.Errorf("bad value for attribute %q: %w", name, err)
 		}
 	case []*Tensor:
 		size := len(value)
@@ -466,7 +466,7 @@ func setAttr(cdesc *C.TF_OperationDescription, status *status, name string, valu
 		}
 		C.TF_SetAttrTensorList(cdesc, cAttrName, plist, C.int(size), status.c)
 		if err := status.Err(); err != nil {
-			return fmt.Errorf("bad value for attribute %q: %v", name, err)
+			return fmt.Errorf("bad value for attribute %q: %w", name, err)
 		}
 	case Shape:
 		ndims := C.int(value.NumDimensions())
