@@ -26,7 +26,7 @@ import (
 func TestSignatureFromProto(t *testing.T) {
 	got := signatureDefFromProto(&pbs.SignatureDef{
 		Inputs: map[string]*pbs.TensorInfo{
-			"input_1": &pbs.TensorInfo{
+			"input_1": {
 				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_1",
 				},
@@ -39,7 +39,7 @@ func TestSignatureFromProto(t *testing.T) {
 					},
 				},
 			},
-			"input_2": &pbs.TensorInfo{
+			"input_2": {
 				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_2",
 				},
@@ -54,7 +54,7 @@ func TestSignatureFromProto(t *testing.T) {
 			},
 		},
 		Outputs: map[string]*pbs.TensorInfo{
-			"output_1": &pbs.TensorInfo{
+			"output_1": {
 				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_3",
 				},
@@ -67,7 +67,7 @@ func TestSignatureFromProto(t *testing.T) {
 					},
 				},
 			},
-			"output_2": &pbs.TensorInfo{
+			"output_2": {
 				Encoding: &pbs.TensorInfo_Name{
 					Name: "tensor_4",
 				},
@@ -86,24 +86,24 @@ func TestSignatureFromProto(t *testing.T) {
 
 	want := Signature{
 		Inputs: map[string]TensorInfo{
-			"input_1": TensorInfo{
+			"input_1": {
 				Name:  "tensor_1",
 				DType: Int8,
 				Shape: MakeShape(1, 2, 3),
 			},
-			"input_2": TensorInfo{
+			"input_2": {
 				Name:  "tensor_2",
 				DType: Float,
 				Shape: MakeShape(4, 5, 6),
 			},
 		},
 		Outputs: map[string]TensorInfo{
-			"output_1": TensorInfo{
+			"output_1": {
 				Name:  "tensor_3",
 				DType: String,
 				Shape: MakeShape(1, 2, 3),
 			},
-			"output_2": TensorInfo{
+			"output_2": {
 				Name:  "tensor_4",
 				DType: Bool,
 				Shape: MakeShape(4, 5, 6),

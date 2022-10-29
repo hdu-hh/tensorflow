@@ -30,14 +30,14 @@ import (
 //   - x: inputs of the function for which partial derivatives are computed
 //   - dx: if not null, the partial derivatives of some loss function L w.r.t. y
 //
-//	return the partial derivatives
+// Returns the partial derivatives
 func Gradients(scope *Scope, y []tf.Output, x []tf.Output, dx ...tf.Output) (output []tf.Output) {
 	if len(scope.controlDependencies) > 0 {
-		scope.UpdateErr("Gradients", fmt.Errorf("Gradients does not currently support control dependencies (via Scope.WithControlDependencies)."))
+		scope.UpdateErr("Gradients", fmt.Errorf("Gradients does not currently support control dependencies (via Scope.WithControlDependencies)"))
 		return
 	}
 	if scope.device != "" {
-		scope.UpdateErr("Gradients", fmt.Errorf("Gradients does not currently support device annotations (via Scope.WithDevice)."))
+		scope.UpdateErr("Gradients", fmt.Errorf("Gradients does not currently support device annotations (via Scope.WithDevice)"))
 		return
 	}
 
