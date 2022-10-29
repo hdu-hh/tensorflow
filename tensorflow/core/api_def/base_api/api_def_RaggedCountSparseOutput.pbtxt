@@ -36,7 +36,7 @@ END
     name: "output_dense_shape"
     description: <<END
 Shape tensor for the resulting sparse tensor object.
-  END
+END
   }
   attr {
     name: "T"
