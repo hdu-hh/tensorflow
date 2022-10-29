@@ -365,7 +365,7 @@ func {{.Op.Name}}
 	var err error
 	{{- range $i, $a := .OutArgs}}
 	{{- if $a.IsListArg}}
-	if {{Identifier .RenameTo}}, idx, err = makeOutputList(op, idx, {{printf "%q" .Name}}); err != nil {
+	if {{Identifier .RenameTo}}, _, err = makeOutputList(op, idx, {{printf "%q" .Name}}); err != nil {
 		scope.UpdateErr({{printf "%q" $.Op.Name}}, err)
 		return
 	}
