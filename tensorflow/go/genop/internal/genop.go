@@ -43,6 +43,7 @@ import (
 	"os"
 	"path"
 	"reflect"
+	"regexp"
 	"sort"
 	"strings"
 	"text/template"
@@ -542,13 +543,40 @@ func (a *tmplArgs) HasListOutput() bool {
 }
 
 func makeComment(lines string) string {
-	return strings.Join(strings.SplitAfter(lines, "\n"), "// ")
+	lines = fixupMultilineComments(lines)
+	l := strings.SplitAfter(lines, "\n")
+	return strings.Join(l, "// ")
 }
 
 func makeOfsComment(ofs int, lines string) string {
 	l := strings.SplitAfter(lines, "\n")
 	s := strings.Join(l, "//\t   "[:ofs])
 	return strings.TrimSpace(s)
+}
+
+var mlquoteRe = regexp.MustCompile("(?m)$\\s*```([a-z]*\\s*)$")
+
+func fixupMultilineComments(lines string) string {
+	found := mlquoteRe.FindAllStringSubmatchIndex(lines, -1)
+	if found != nil {
+		fixed := strings.Builder{}
+		oldIdx := 0
+		for i := 0; i < len(found); i += 2 {
+			m := found[i]
+			n := []int{len(lines), len(lines), len(lines), len(lines)}
+			if i+1 < len(found) {
+				n = found[i+1]
+			}
+			fixed.WriteString(lines[oldIdx:m[0]])
+			oldIdx = n[1]
+			quote := lines[m[1]:n[0]]
+			indented := strings.ReplaceAll(quote, "\n", "\n\t")
+			fixed.WriteString(indented)
+		}
+		fixed.WriteString(lines[oldIdx:])
+		lines = fixed.String()
+	}
+	return lines
 }
 
 // goType converts a TensorFlow "type" ('string', 'int', 'list(string)' etc.)
