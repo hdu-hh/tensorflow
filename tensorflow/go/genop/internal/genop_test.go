@@ -811,3 +811,22 @@ func SampleDistortedBoundingBox(scope *Scope, image_size tf.Output, bounding_box
 		})
 	}
 }
+
+func TestFixupMultilineQuote(t *testing.T) {
+	for _, s := range []struct{ name, from, want string }{{
+		name: "single-line",
+		from: "```abc```",
+		want: "```abc```",
+	}, {
+		name: "multi-line",
+		from: "abc\n```python\ndef\n   \ngjh\n```\nijk",
+		want: "abc\n\tdef\n\t   \n\tgjh\nijk",
+	}} {
+		t.Run(s.name, func(t *testing.T) {
+			got := fixupMultilineComments(s.from)
+			if got != s.want {
+				t.Errorf("\ngot:  %q\nwant: %q", got, s.want)
+			}
+		})
+	}
+}
