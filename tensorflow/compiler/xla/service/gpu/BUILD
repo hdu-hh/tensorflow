@@ -887,6 +887,7 @@ cc_library(
         "TENSORFLOW_USE_ROCM=1",
     ]),
     deps = [
+        ":non_atomically_upgradeable_rw_lock",
         ":backend_configs_cc",
         ":buffer_allocations",
         ":cusolver_context",
