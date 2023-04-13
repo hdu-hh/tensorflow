@@ -37,6 +37,7 @@ package internal
 import "C"
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 	"log"
@@ -47,6 +48,7 @@ import (
 	"sort"
 	"strings"
 	"text/template"
+	"unicode"
 	"unsafe"
 
 	"google.golang.org/protobuf/encoding/prototext"
@@ -235,6 +237,7 @@ func makeOutputList(op *tf.Operation, start int, output string) ([]tf.Output, in
 	tmplOp = template.Must(template.New("op").Funcs(template.FuncMap{
 		"MakeComment":         makeComment,
 		"MakeOfsComment":      makeOfsComment,
+		"MakeLowComment":      makeLowComment,
 		"GoType":              goType,
 		"CamelCase":           camelCase,
 		"Identifier":          identifier,
@@ -302,7 +305,7 @@ func {{$.Op.Name}}{{CamelCase .RenameTo}}(value {{GoType .Type}}) {{$.Op.Name}}A
 {{- if .DescribeOutputs}}
 //
 {{- if eq (len .OutArgs) 1 }}
-// Returns {{range .OutArgs}}{{MakeComment .Description}}{{end}}
+// Returns {{range .OutArgs}}{{MakeLowComment .Description}}{{end}}
 {{- else }}
 // Returns:
 {{- range .OutArgs}}
@@ -548,10 +551,27 @@ func makeComment(lines string) string {
 	return strings.Join(l, "// ")
 }
 
+// adapt lines to go structured comment
 func makeOfsComment(ofs int, lines string) string {
 	l := strings.SplitAfter(lines, "\n")
 	s := strings.Join(l, "//\t   "[:ofs])
 	return strings.TrimSpace(s)
+}
+
+// lowercase first rune in a comment
+func makeLowComment(lines string) (out string) {
+	out = makeComment(lines)
+	if len(lines) > 0 {
+		ci := rune(out[0]) // assuming ASCII
+		co := unicode.ToLower(ci)
+		if ci != co {
+			var b bytes.Buffer
+			b.WriteRune(co)
+			b.WriteString(out[1:])
+			out = b.String()
+		}
+	}
+	return
 }
 
 var mlquoteRe = regexp.MustCompile("(?m)$\\s*```([a-z]*\\s*)$")

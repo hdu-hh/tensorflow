@@ -755,7 +755,7 @@ func AngleTout(value tf.DataType) AngleAttr {
 // For example:
 //
 //	# tensor 'input' is [-2.25 + 4.75j, 3.25 + 5.75j]
-//	tf.angle(input) ==> [2.0132, 1.056]
+//	tf.math.angle(input) ==> [2.0132, 1.056]
 //
 // @compatibility(numpy)
 // Equivalent to np.angle.
@@ -1179,7 +1179,7 @@ func ApplyAdaMaxUseLocking(value bool) ApplyAdaMaxAttr {
 //   - epsilon: Ridge term. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdaMax(scope *Scope, var_ tf.Output, m tf.Output, v tf.Output, beta1_power tf.Output, lr tf.Output, beta1 tf.Output, beta2 tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyAdaMaxAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1228,7 +1228,7 @@ func ApplyAdadeltaUseLocking(value bool) ApplyAdadeltaAttr {
 //   - epsilon: Constant factor. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdadelta(scope *Scope, var_ tf.Output, accum tf.Output, accum_update tf.Output, lr tf.Output, rho tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyAdadeltaAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1281,7 +1281,7 @@ func ApplyAdagradUpdateSlots(value bool) ApplyAdagradAttr {
 //   - lr: Scaling factor. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdagrad(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, grad tf.Output, optional ...ApplyAdagradAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1326,7 +1326,7 @@ func ApplyAdagradDAUseLocking(value bool) ApplyAdagradDAAttr {
 //   - l2: L2 regularization. Must be a scalar.
 //   - global_step: Training step number. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdagradDA(scope *Scope, var_ tf.Output, gradient_accumulator tf.Output, gradient_squared_accumulator tf.Output, grad tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, global_step tf.Output, optional ...ApplyAdagradDAAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1380,7 +1380,7 @@ func ApplyAdagradV2UpdateSlots(value bool) ApplyAdagradV2Attr {
 //   - epsilon: Constant factor. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdagradV2(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyAdagradV2Attr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1442,7 +1442,7 @@ func ApplyAdamUseNesterov(value bool) ApplyAdamAttr {
 //   - epsilon: Ridge term. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAdam(scope *Scope, var_ tf.Output, m tf.Output, v tf.Output, beta1_power tf.Output, beta2_power tf.Output, lr tf.Output, beta1 tf.Output, beta2 tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyAdamAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1491,7 +1491,7 @@ func ApplyAddSignUseLocking(value bool) ApplyAddSignAttr {
 //   - beta: Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyAddSign(scope *Scope, var_ tf.Output, m tf.Output, lr tf.Output, alpha tf.Output, sign_decay tf.Output, beta tf.Output, grad tf.Output, optional ...ApplyAddSignAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1557,7 +1557,7 @@ func ApplyCenteredRMSPropUseLocking(value bool) ApplyCenteredRMSPropAttr {
 //   - epsilon: Ridge term. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyCenteredRMSProp(scope *Scope, var_ tf.Output, mg tf.Output, ms tf.Output, mom tf.Output, lr tf.Output, rho tf.Output, momentum tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyCenteredRMSPropAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1617,7 +1617,7 @@ func ApplyFtrlMultiplyLinearByLr(value bool) ApplyFtrlAttr {
 //   - l2: L2 regularization. Must be a scalar.
 //   - lr_power: Scaling factor. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyFtrl(scope *Scope, var_ tf.Output, accum tf.Output, linear tf.Output, grad tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, lr_power tf.Output, optional ...ApplyFtrlAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1681,7 +1681,7 @@ func ApplyFtrlV2MultiplyLinearByLr(value bool) ApplyFtrlV2Attr {
 //   - l2: L2 shrinkage regularization. Must be a scalar.
 //   - lr_power: Scaling factor. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyFtrlV2(scope *Scope, var_ tf.Output, accum tf.Output, linear tf.Output, grad tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, l2_shrinkage tf.Output, lr_power tf.Output, optional ...ApplyFtrlV2Attr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1721,7 +1721,7 @@ func ApplyGradientDescentUseLocking(value bool) ApplyGradientDescentAttr {
 //   - alpha: Scaling factor. Must be a scalar.
 //   - delta: The change.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyGradientDescent(scope *Scope, var_ tf.Output, alpha tf.Output, delta tf.Output, optional ...ApplyGradientDescentAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1780,7 +1780,7 @@ func ApplyMomentumUseNesterov(value bool) ApplyMomentumAttr {
 //   - grad: The gradient.
 //   - momentum: Momentum. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyMomentum(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, grad tf.Output, momentum tf.Output, optional ...ApplyMomentumAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1829,7 +1829,7 @@ func ApplyPowerSignUseLocking(value bool) ApplyPowerSignAttr {
 //   - beta: Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyPowerSign(scope *Scope, var_ tf.Output, m tf.Output, lr tf.Output, logbase tf.Output, sign_decay tf.Output, beta tf.Output, grad tf.Output, optional ...ApplyPowerSignAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1876,7 +1876,7 @@ func ApplyProximalAdagradUseLocking(value bool) ApplyProximalAdagradAttr {
 //   - l2: L2 regularization. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyProximalAdagrad(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, grad tf.Output, optional ...ApplyProximalAdagradAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1921,7 +1921,7 @@ func ApplyProximalGradientDescentUseLocking(value bool) ApplyProximalGradientDes
 //   - l2: L2 regularization. Must be a scalar.
 //   - delta: The change.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyProximalGradientDescent(scope *Scope, var_ tf.Output, alpha tf.Output, l1 tf.Output, l2 tf.Output, delta tf.Output, optional ...ApplyProximalGradientDescentAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -1977,7 +1977,7 @@ func ApplyRMSPropUseLocking(value bool) ApplyRMSPropAttr {
 //   - epsilon: Ridge term. Must be a scalar.
 //   - grad: The gradient.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func ApplyRMSProp(scope *Scope, var_ tf.Output, ms tf.Output, mom tf.Output, lr tf.Output, rho tf.Output, momentum tf.Output, epsilon tf.Output, grad tf.Output, optional ...ApplyRMSPropAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -2823,7 +2823,7 @@ func AudioSummaryMaxOutputs(value int64) AudioSummaryAttr {
 //   - tensor: 2-D of shape `[batch_size, frames]`.
 //   - sample_rate: The sample rate of the signal in hertz.
 //
-// Returns Scalar. Serialized `Summary` protocol buffer.
+// Returns scalar. Serialized `Summary` protocol buffer.
 func AudioSummary(scope *Scope, tag tf.Output, tensor tf.Output, sample_rate float32, optional ...AudioSummaryAttr) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -2876,7 +2876,7 @@ func AudioSummaryV2MaxOutputs(value int64) AudioSummaryV2Attr {
 //   - tensor: 2-D of shape `[batch_size, frames]`.
 //   - sample_rate: The sample rate of the signal in hertz.
 //
-// Returns Scalar. Serialized `Summary` protocol buffer.
+// Returns scalar. Serialized `Summary` protocol buffer.
 func AudioSummaryV2(scope *Scope, tag tf.Output, tensor tf.Output, sample_rate tf.Output, optional ...AudioSummaryV2Attr) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -5009,7 +5009,7 @@ func BiasAddDataFormat(value string) BiasAddAttr {
 //   - value: Any number of dimensions.
 //   - bias: 1-D with size the last dimension of `value`.
 //
-// Returns Broadcasted sum of `value` and `bias`.
+// Returns broadcasted sum of `value` and `bias`.
 func BiasAdd(scope *Scope, value tf.Output, bias tf.Output, optional ...BiasAddAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -5087,7 +5087,7 @@ func BiasAddGrad(scope *Scope, out_backprop tf.Output, optional ...BiasAddGradAt
 //   - value: Any number of dimensions.
 //   - bias: 1-D with size the last dimension of `value`.
 //
-// Returns Broadcasted sum of `value` and `bias`.
+// Returns broadcasted sum of `value` and `bias`.
 func BiasAddV1(scope *Scope, value tf.Output, bias tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -5187,7 +5187,9 @@ func Bincount(scope *Scope, arr tf.Output, size tf.Output, weights tf.Output) (b
 //	 [  0   0 128  63]], shape=(3, 4), dtype=uint8)
 //
 // *NOTE*: Bitcast is implemented as a low-level cast, so machines with different
-// endian orderings will give different results.
+// endian orderings will give different results. A copy from input buffer to output
+// buffer is made on BE machines when types are of different sizes in order to get
+// the same casting results as on LE machines.
 func Bitcast(scope *Scope, input tf.Output, type_ tf.DataType) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -5822,7 +5824,7 @@ func BoostedTreesCalculateBestGainsPerFeature(scope *Scope, node_id_range tf.Out
 //   - l1: l1 regularization factor on leaf weights, per instance based.
 //   - l2: l2 regularization factor on leaf weights, per instance based.
 //
-// Returns Bool, whether to continue bias centering.
+// Returns bool, whether to continue bias centering.
 func BoostedTreesCenterBias(scope *Scope, tree_ensemble_handle tf.Output, mean_gradients tf.Output, mean_hessians tf.Output, l1 tf.Output, l2 tf.Output) (continue_centering tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -5972,7 +5974,7 @@ func BoostedTreesEnsembleResourceHandleOp(scope *Scope, optional ...BoostedTrees
 //   - logits_dimension: scalar, dimension of the logits, to be used for constructing the protos in
 //     examples_debug_outputs_serialized.
 //
-// Returns Output rank 1 Tensor containing a proto serialized as a string for each example.
+// Returns output rank 1 Tensor containing a proto serialized as a string for each example.
 func BoostedTreesExampleDebugOutputs(scope *Scope, tree_ensemble_handle tf.Output, bucketized_features []tf.Output, logits_dimension int64) (examples_debug_outputs_serialized tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -6123,7 +6125,7 @@ func BoostedTreesMakeStatsSummary(scope *Scope, node_ids tf.Output, gradients tf
 //   - logits_dimension: scalar, dimension of the logits, to be used for partial logits
 //     shape.
 //
-// Returns Output rank 2 Tensor containing logits for each example.
+// Returns output rank 2 Tensor containing logits for each example.
 func BoostedTreesPredict(scope *Scope, tree_ensemble_handle tf.Output, bucketized_features []tf.Output, logits_dimension int64) (logits tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -6680,7 +6682,7 @@ func BroadcastTo(scope *Scope, input tf.Output, shape tf.Output) (output tf.Outp
 //   - input: Any shape of Tensor contains with int or float type.
 //   - boundaries: A sorted list of floats gives the boundary of the buckets.
 //
-// Returns Same shape with 'input', each value of input replaced with bucket index.
+// Returns same shape with 'input', each value of input replaced with bucket index.
 //
 // @compatibility(numpy)
 // Equivalent to np.digitize.
@@ -7383,7 +7385,7 @@ func CheckNumericsV2(scope *Scope, tensor tf.Output, message string) (output tf.
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[..., M, M]`.
+// Returns shape is `[..., M, M]`.
 func Cholesky(scope *Scope, input tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -7411,7 +7413,7 @@ func Cholesky(scope *Scope, input tf.Output) (output tf.Output) {
 //     Algorithm depends only on lower triangular part of the innermost matrices of
 //     this tensor.
 //
-// Returns Symmetrized version of df/dA . Shape is `[..., M, M]`
+// Returns symmetrized version of df/dA . Shape is `[..., M, M]`
 func CholeskyGrad(scope *Scope, l tf.Output, grad tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -8553,7 +8555,7 @@ func ConfigureDistributedTPUTpuCancellationClosesChips(value int64) ConfigureDis
 
 // Sets up the centralized structures for a distributed TPU system.
 //
-// Returns a [pbs.tpu].TopologyProto that describes the TPU
+// Returns a serialized tensorflow.tpu.TopologyProto that describes the TPU
 // topology.
 func ConfigureDistributedTPU(scope *Scope, optional ...ConfigureDistributedTPUAttr) (topology tf.Output) {
 	if scope.Err() != nil {
@@ -9648,7 +9650,7 @@ func CropAndResizeGradImage(scope *Scope, grads tf.Output, boxes tf.Output, box_
 //   - a: A tensor containing 3-element vectors.
 //   - b: Another tensor, of same type and shape as `a`.
 //
-// Returns Pairwise cross product of the vectors in `a` and `b`.
+// Returns pairwise cross product of the vectors in `a` and `b`.
 func Cross(scope *Scope, a tf.Output, b tf.Output) (product tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -11435,7 +11437,7 @@ func DataFormatVecPermuteDstFormat(value string) DataFormatVecPermuteAttr {
 // Arguments:
 //   - x: Tensor of rank 1 or 2 in source data format.
 //
-// Returns Tensor of rank 1 or 2 in destination data format.
+// Returns tensor of rank 1 or 2 in destination data format.
 func DataFormatVecPermute(scope *Scope, x tf.Output, optional ...DataFormatVecPermuteAttr) (y tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -12470,7 +12472,7 @@ func DecodeAndCropJpeg(scope *Scope, contents tf.Output, crop_window tf.Output, 
 // Arguments:
 //   - input: Base64 strings to decode.
 //
-// Returns Decoded strings.
+// Returns decoded strings.
 func DecodeBase64(scope *Scope, input tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -12583,7 +12585,7 @@ func DecodeCSVSelectCols(value []int64) DecodeCSVAttr {
 //     scalar default value for that column or an empty vector if the column is
 //     required.
 //
-// Returns Each tensor will have the same shape as records.
+// Returns each tensor will have the same shape as records.
 func DecodeCSV(scope *Scope, records tf.Output, record_defaults []tf.Output, optional ...DecodeCSVAttr) (output []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -12779,7 +12781,7 @@ func DecodeImage(scope *Scope, contents tf.Output, optional ...DecodeImageAttr) 
 //   - json_examples: Each string is a JSON object serialized according to the JSON
 //     mapping of the Example proto.
 //
-// Returns Each string is a binary Example protocol buffer corresponding
+// Returns each string is a binary Example protocol buffer corresponding
 // to the respective element of `json_examples`.
 func DecodeJSONExample(scope *Scope, json_examples tf.Output) (binary_examples tf.Output) {
 	if scope.Err() != nil {
@@ -14847,6 +14849,11 @@ func DynamicEnqueueTPUEmbeddingArbitraryTensorBatch(scope *Scope, sample_indices
 // <img style="width:100%" src="https://www.tensorflow.org/images/DynamicPartition.png" alt>
 // </div>
 //
+// Raises:
+//   - `InvalidArgumentError` in following cases:
+//   - If partitions is not in range `[0, num_partiions)`
+//   - If `partitions.shape` does not match prefix of `data.shape` argument.
+//
 // Arguments:
 //   - partitions: Any shape.  Indices in the range `[0, num_partitions)`.
 //   - num_partitions: The number of partitions to output.
@@ -15210,7 +15217,7 @@ func Eig(scope *Scope, input tf.Output, Tout tf.DataType, optional ...EigAttr) (
 //   - inputs: List of 1 or 2 Tensors.
 //   - equation: String describing the Einstein Summation operation; in the format of np.einsum.
 //
-// Returns Output Tensor with shape depending upon `equation`.
+// Returns output Tensor with shape depending upon `equation`.
 func Einsum(scope *Scope, inputs []tf.Output, equation string) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -15382,7 +15389,7 @@ func EncodeBase64Pad(value bool) EncodeBase64Attr {
 // Arguments:
 //   - input: Strings to be encoded.
 //
-// Returns Input strings encoded in base64.
+// Returns input strings encoded in base64.
 func EncodeBase64(scope *Scope, input tf.Output, optional ...EncodeBase64Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -15662,7 +15669,7 @@ func EncodeProtoDescriptorSource(value string) EncodeProtoAttr {
 //   - field_names: List of strings containing proto field names.
 //   - message_type: Name of the proto message type to decode.
 //
-// Returns Tensor of serialized protos with shape `batch_shape`.
+// Returns tensor of serialized protos with shape `batch_shape`.
 func EncodeProto(scope *Scope, sizes tf.Output, values []tf.Output, field_names []string, message_type string, optional ...EncodeProtoAttr) (bytes tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -16456,7 +16463,7 @@ func Exp(scope *Scope, x tf.Output) (y tf.Output) {
 //     expand the shape of `input`. Must be in the range
 //     `[-rank(input) - 1, rank(input)]`.
 //
-// Returns Contains the same data as `input`, but its shape has an additional
+// Returns contains the same data as `input`, but its shape has an additional
 // dimension of size 1 added.
 func ExpandDims(scope *Scope, input tf.Output, axis tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -18095,7 +18102,11 @@ func FakeQuantWithMinMaxArgsNarrowRange(value bool) FakeQuantWithMinMaxArgsAttr 
 	}
 }
 
-// Fake-quantize the 'inputs' tensor, type float to 'outputs' tensor of same type.
+// Fake-quantize the 'inputs' tensor, type float to 'outputs' tensor of same shape and type.
+//
+//	Quantization is called fake since the output is still in floating point.
+//	The API converts inputs into values within the range [min and max] and returns
+//	as output.
 //
 // # Attributes
 //
@@ -18116,7 +18127,21 @@ func FakeQuantWithMinMaxArgsNarrowRange(value bool) FakeQuantWithMinMaxArgsAttr 
 // *   If `min <= 0 <= max`: `scale = (max - min) / (2^num_bits - 1) `,
 // `min_adj = scale * round(min / scale)` and `max_adj = max + min_adj - min`.
 //
-// Quantization is called fake since the output is still in floating point.
+// Examples
+//
+//	inp = tf.constant ([10.03, -10.23, 3])
+//	out = tf.quantization.fake_quant_with_min_max_args(inp, min=-5, max=5,
+//	                                                   num_bits=16)
+//	print(out)
+//
+//	#  Output:
+//	#  tf.Tensor([ 4.9999237 -5.0000763  3.0000763], shape=(3,), dtype=float32)
+//
+// Raises:
+//   - InvalidArgumentError:
+//   - If num_bits are outside of range [2, 16].
+//   - If min >= max.
+//   - ValueError: If `inputs` are of any other type than float32.
 func FakeQuantWithMinMaxArgs(scope *Scope, inputs tf.Output, optional ...FakeQuantWithMinMaxArgsAttr) (outputs tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -18177,7 +18202,7 @@ func FakeQuantWithMinMaxArgsGradientNarrowRange(value bool) FakeQuantWithMinMaxA
 //   - gradients: Backpropagated gradients above the FakeQuantWithMinMaxArgs operation.
 //   - inputs: Values passed as inputs to the FakeQuantWithMinMaxArgs operation.
 //
-// Returns Backpropagated gradients below the FakeQuantWithMinMaxArgs operation:
+// Returns backpropagated gradients below the FakeQuantWithMinMaxArgs operation:
 // `gradients * (inputs >= min && inputs <= max)`.
 func FakeQuantWithMinMaxArgsGradient(scope *Scope, gradients tf.Output, inputs tf.Output, optional ...FakeQuantWithMinMaxArgsGradientAttr) (backprops tf.Output) {
 	if scope.Err() != nil {
@@ -20467,7 +20492,7 @@ func Gather(scope *Scope, params tf.Output, indices tf.Output, optional ...Gathe
 //   - params: The tensor from which to gather values.
 //   - indices: Index tensor.
 //
-// Returns Values from `params` gathered from indices given by `indices`, with
+// Returns values from `params` gathered from indices given by `indices`, with
 // shape `indices.shape[:-1] + params.shape[indices.shape[-1]:]`.
 func GatherNd(scope *Scope, params tf.Output, indices tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -20529,7 +20554,7 @@ func GatherV2BatchDims(value int64) GatherV2Attr {
 //   - axis: The axis in `params` to gather `indices` from. Defaults to the first
 //     dimension. Supports negative indexes.
 //
-// Returns Values from `params` gathered from indices given by `indices`, with
+// Returns values from `params` gathered from indices given by `indices`, with
 // shape `params.shape[:axis] + indices.shape + params.shape[axis + 1:]`.
 func GatherV2(scope *Scope, params tf.Output, indices tf.Output, axis tf.Output, optional ...GatherV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
@@ -21062,7 +21087,7 @@ func HashTableUseNodeNameSharing(value bool) HashTableAttr {
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func HashTable(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...HashTableAttr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -21127,7 +21152,7 @@ func HashTableV2UseNodeNameSharing(value bool) HashTableV2Attr {
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func HashTableV2(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...HashTableV2Attr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -21215,7 +21240,7 @@ func HistogramFixedWidth(scope *Scope, values tf.Output, value_range tf.Output, 
 //   - tag: Scalar.  Tag to use for the `Summary.Value`.
 //   - values: Any shape. Values to use to build the histogram.
 //
-// Returns Scalar. Serialized `Summary` protocol buffer.
+// Returns scalar. Serialized `Summary` protocol buffer.
 func HistogramSummary(scope *Scope, tag tf.Output, values tf.Output) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -22028,7 +22053,7 @@ func ImageSummaryBadColor(value tf.Tensor) ImageSummaryAttr {
 //   - tensor: 4-D of shape `[batch_size, height, width, channels]` where
 //     `channels` is 1, 3, or 4.
 //
-// Returns Scalar. Serialized `Summary` protocol buffer.
+// Returns scalar. Serialized `Summary` protocol buffer.
 func ImageSummary(scope *Scope, tag tf.Output, tensor tf.Output, optional ...ImageSummaryAttr) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -22109,7 +22134,7 @@ func ImportEvent(scope *Scope, writer tf.Output, event tf.Output) (o *tf.Operati
 //   - targets: A `batch_size` vector of class ids.
 //   - k: Number of top elements to look at for computing precision.
 //
-// Returns Computed Precision at `k` as a `bool Tensor`.
+// Returns computed Precision at `k` as a `bool Tensor`.
 func InTopK(scope *Scope, predictions tf.Output, targets tf.Output, k int64) (precision tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -22148,7 +22173,7 @@ func InTopK(scope *Scope, predictions tf.Output, targets tf.Output, k int64) (pr
 //   - targets: A `batch_size` vector of class ids.
 //   - k: Number of top elements to look at for computing precision.
 //
-// Returns Computed precision at `k` as a `bool Tensor`.
+// Returns computed precision at `k` as a `bool Tensor`.
 func InTopKV2(scope *Scope, predictions tf.Output, targets tf.Output, k tf.Output) (precision tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -23281,7 +23306,7 @@ func IteratorV2(scope *Scope, shared_name string, container string, output_types
 //     for each candidate point.
 //   - seed: Scalar. Seed for initializing the random number generator.
 //
-// Returns Scalar with the index of the sampled point.
+// Returns scalar with the index of the sampled point.
 func KMC2ChainInitialization(scope *Scope, distances tf.Output, seed tf.Output) (index tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -23312,7 +23337,7 @@ func KMC2ChainInitialization(scope *Scope, distances tf.Output, seed tf.Output) 
 //     distribution before selecting the best. If a negative value is specified, a
 //     heuristic is used to sample O(log(num_to_sample)) additional points.
 //
-// Returns Matrix of shape (num_to_sample, d). The sampled rows.
+// Returns matrix of shape (num_to_sample, d). The sampled rows.
 func KmeansPlusPlusInitialization(scope *Scope, points tf.Output, num_to_sample tf.Output, seed tf.Output, num_retries_per_sample tf.Output) (samples tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -24301,7 +24326,7 @@ func LoadAndRemapMatrixMaxRowsInMemory(value int64) LoadAndRemapMatrixAttr {
 //   - num_rows: Number of rows (length of the 1st dimension) in the output matrix.
 //   - num_cols: Number of columns (length of the 2nd dimension) in the output matrix.
 //
-// Returns Output matrix containing existing values loaded from the
+// Returns output matrix containing existing values loaded from the
 // checkpoint, and with any missing values filled in from initializing_values.
 func LoadAndRemapMatrix(scope *Scope, ckpt_path tf.Output, old_tensor_name tf.Output, row_remapping tf.Output, col_remapping tf.Output, initializing_values tf.Output, num_rows int64, num_cols int64, optional ...LoadAndRemapMatrixAttr) (output_matrix tf.Output) {
 	if scope.Err() != nil {
@@ -25191,7 +25216,7 @@ func LogMatrixDeterminant(scope *Scope, input tf.Output) (sign tf.Output, log_ab
 // Arguments:
 //   - logits: 2-D with shape `[batch_size, num_classes]`.
 //
-// Returns Same shape as `logits`.
+// Returns same shape as `logits`.
 func LogSoftmax(scope *Scope, logits tf.Output) (logsoftmax tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -25396,7 +25421,7 @@ func LookupTableExportV2(scope *Scope, table_handle tf.Output, Tkeys tf.DataType
 //   - table_handle: Handle to the table.
 //   - keys: Any shape.  Keys to look up.
 //
-// Returns Same shape as `keys`.  Values found in the table, or `default_values`
+// Returns same shape as `keys`.  Values found in the table, or `default_values`
 // for missing keys.
 func LookupTableFind(scope *Scope, table_handle tf.Output, keys tf.Output, default_value tf.Output) (values tf.Output) {
 	if scope.Err() != nil {
@@ -25424,7 +25449,7 @@ func LookupTableFind(scope *Scope, table_handle tf.Output, keys tf.Output, defau
 //   - table_handle: Handle to the table.
 //   - keys: Any shape.  Keys to look up.
 //
-// Returns Same shape as `keys`.  Values found in the table, or `default_values`
+// Returns same shape as `keys`.  Values found in the table, or `default_values`
 // for missing keys.
 func LookupTableFindV2(scope *Scope, table_handle tf.Output, keys tf.Output, default_value tf.Output) (values tf.Output) {
 	if scope.Err() != nil {
@@ -25564,7 +25589,7 @@ func LookupTableRemoveV2(scope *Scope, table_handle tf.Output, keys tf.Output) (
 // Arguments:
 //   - table_handle: Handle to the table.
 //
-// Returns Scalar that contains number of elements in the table.
+// Returns scalar that contains number of elements in the table.
 func LookupTableSize(scope *Scope, table_handle tf.Output) (size tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -25584,7 +25609,7 @@ func LookupTableSize(scope *Scope, table_handle tf.Output) (size tf.Output) {
 // Arguments:
 //   - table_handle: Handle to the table.
 //
-// Returns Scalar that contains number of elements in the table.
+// Returns scalar that contains number of elements in the table.
 func LookupTableSizeV2(scope *Scope, table_handle tf.Output) (size tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -26572,7 +26597,7 @@ func MatchingFilesDataset(scope *Scope, patterns tf.Output) (handle tf.Output) {
 //   - num_upper: 0-D tensor. Number of superdiagonals to keep. If negative, keep
 //     entire upper triangle.
 //
-// Returns Rank `k` tensor of the same shape as input. The extracted banded tensor.
+// Returns rank `k` tensor of the same shape as input. The extracted banded tensor.
 func MatrixBandPart(scope *Scope, input tf.Output, num_lower tf.Output, num_upper tf.Output) (band tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -26596,7 +26621,7 @@ func MatrixBandPart(scope *Scope, input tf.Output, num_lower tf.Output, num_uppe
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[...]`.
+// Returns shape is `[...]`.
 func MatrixDeterminant(scope *Scope, input tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -26641,7 +26666,7 @@ func MatrixDeterminant(scope *Scope, input tf.Output) (output tf.Output) {
 // Arguments:
 //   - diagonal: Rank `k`, where `k >= 1`.
 //
-// Returns Rank `k+1`, with `output.shape = diagonal.shape + [diagonal.shape[-1]]`.
+// Returns rank `k+1`, with `output.shape = diagonal.shape + [diagonal.shape[-1]]`.
 func MatrixDiag(scope *Scope, diagonal tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27039,7 +27064,7 @@ func MatrixDiagPartV3(scope *Scope, input tf.Output, k tf.Output, padding_value 
 //   - padding_value: The number to fill the area outside the specified diagonal band with.
 //     Default is 0.
 //
-// Returns Has rank `r+1` when `k` is an integer or `k[0] == k[1]`, rank `r` otherwise.
+// Returns has rank `r+1` when `k` is an integer or `k[0] == k[1]`, rank `r` otherwise.
 func MatrixDiagV2(scope *Scope, diagonal tf.Output, k tf.Output, num_rows tf.Output, num_cols tf.Output, padding_value tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27200,7 +27225,7 @@ func MatrixDiagV3Align(value string) MatrixDiagV3Attr {
 //   - padding_value: The number to fill the area outside the specified diagonal band with.
 //     Default is 0.
 //
-// Returns Has rank `r+1` when `k` is an integer or `k[0] == k[1]`, rank `r` otherwise.
+// Returns has rank `r+1` when `k` is an integer or `k[0] == k[1]`, rank `r` otherwise.
 func MatrixDiagV3(scope *Scope, diagonal tf.Output, k tf.Output, num_rows tf.Output, num_cols tf.Output, padding_value tf.Output, optional ...MatrixDiagV3Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27263,7 +27288,7 @@ func MatrixInverseAdjoint(value bool) MatrixInverseAttr {
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[..., M, M]`.
+// Returns shape is `[..., M, M]`.
 //
 // @compatibility(numpy)
 // Equivalent to np.linalg.inv
@@ -27307,7 +27332,7 @@ func MatrixInverse(scope *Scope, input tf.Output, optional ...MatrixInverseAttr)
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[..., M, M]`.
+// Returns shape is `[..., M, M]`.
 //
 // @compatibility(scipy)
 // Equivalent to scipy.linalg.logm
@@ -27345,7 +27370,7 @@ func MatrixLogarithm(scope *Scope, input tf.Output) (output tf.Output) {
 //   - input: Rank `k+1`, where `k >= 1`.
 //   - diagonal: Rank `k`, where `k >= 1`.
 //
-// Returns Rank `k+1`, with `output.shape = input.shape`.
+// Returns rank `k+1`, with `output.shape = input.shape`.
 func MatrixSetDiag(scope *Scope, input tf.Output, diagonal tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27437,7 +27462,7 @@ func MatrixSetDiag(scope *Scope, input tf.Output, diagonal tf.Output) (output tf
 //     (for a single diagonal) or a pair of integers specifying the low and high ends
 //     of a matrix band. `k[0]` must not be larger than `k[1]`.
 //
-// Returns Rank `r+1`, with `output.shape = input.shape`.
+// Returns rank `r+1`, with `output.shape = input.shape`.
 func MatrixSetDiagV2(scope *Scope, input tf.Output, diagonal tf.Output, k tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27580,7 +27605,7 @@ func MatrixSetDiagV3Align(value string) MatrixSetDiagV3Attr {
 //     (for a single diagonal) or a pair of integers specifying the low and high ends
 //     of a matrix band. `k[0]` must not be larger than `k[1]`.
 //
-// Returns Rank `r+1`, with `output.shape = input.shape`.
+// Returns rank `r+1`, with `output.shape = input.shape`.
 func MatrixSetDiagV3(scope *Scope, input tf.Output, diagonal tf.Output, k tf.Output, optional ...MatrixSetDiagV3Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27626,7 +27651,7 @@ func MatrixSolveAdjoint(value bool) MatrixSolveAttr {
 //   - matrix: Shape is `[..., M, M]`.
 //   - rhs: Shape is `[..., M, K]`.
 //
-// Returns Shape is `[..., M, K]`.
+// Returns shape is `[..., M, K]`.
 func MatrixSolve(scope *Scope, matrix tf.Output, rhs tf.Output, optional ...MatrixSolveAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27706,7 +27731,7 @@ func MatrixSolveLsFast(value bool) MatrixSolveLsAttr {
 //     Equivalent to np.linalg.lstsq
 //     @end_compatibility
 //
-// Returns Shape is `[..., N, K]`.
+// Returns shape is `[..., N, K]`.
 func MatrixSolveLs(scope *Scope, matrix tf.Output, rhs tf.Output, l2_regularizer tf.Output, optional ...MatrixSolveLsAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -27747,7 +27772,7 @@ func MatrixSolveLs(scope *Scope, matrix tf.Output, rhs tf.Output, l2_regularizer
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[..., M, M]`.
+// Returns shape is `[..., M, M]`.
 //
 // @compatibility(scipy)
 // Equivalent to scipy.linalg.sqrtm
@@ -27844,7 +27869,7 @@ func MatrixTriangularSolveAdjoint(value bool) MatrixTriangularSolveAttr {
 //   - matrix: Shape is `[..., M, M]`.
 //   - rhs: Shape is `[..., M, K]`.
 //
-// Returns Shape is `[..., M, K]`.
+// Returns shape is `[..., M, K]`.
 func MatrixTriangularSolve(scope *Scope, matrix tf.Output, rhs tf.Output, optional ...MatrixTriangularSolveAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28101,7 +28126,7 @@ func MaxPool3DGradGradDataFormat(value string) MaxPool3DGradGradAttr {
 //     dimension of `input`. Must have `strides[0] = strides[4] = 1`.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients of gradients w.r.t. the input to `max_pool`.
+// Returns gradients of gradients w.r.t. the input to `max_pool`.
 func MaxPool3DGradGrad(scope *Scope, orig_input tf.Output, orig_output tf.Output, grad tf.Output, ksize []int64, strides []int64, padding string, optional ...MaxPool3DGradGradAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28156,7 +28181,7 @@ func MaxPoolGradDataFormat(value string) MaxPoolGradAttr {
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients w.r.t. the input to `max_pool`.
+// Returns gradients w.r.t. the input to `max_pool`.
 func MaxPoolGrad(scope *Scope, orig_input tf.Output, orig_output tf.Output, grad tf.Output, ksize []int64, strides []int64, padding string, optional ...MaxPoolGradAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28203,7 +28228,7 @@ func MaxPoolGradGradDataFormat(value string) MaxPoolGradGradAttr {
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients of gradients w.r.t. the input to `max_pool`.
+// Returns gradients of gradients w.r.t. the input to `max_pool`.
 func MaxPoolGradGrad(scope *Scope, orig_input tf.Output, orig_output tf.Output, grad tf.Output, ksize []int64, strides []int64, padding string, optional ...MaxPoolGradGradAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28250,7 +28275,7 @@ func MaxPoolGradGradV2DataFormat(value string) MaxPoolGradGradV2Attr {
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients of gradients w.r.t. the input to `max_pool`.
+// Returns gradients of gradients w.r.t. the input to `max_pool`.
 func MaxPoolGradGradV2(scope *Scope, orig_input tf.Output, orig_output tf.Output, grad tf.Output, ksize tf.Output, strides tf.Output, padding string, optional ...MaxPoolGradGradV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28294,7 +28319,7 @@ func MaxPoolGradGradWithArgmaxIncludeBatchInIndex(value bool) MaxPoolGradGradWit
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients of gradients w.r.t. the input of `max_pool`.
+// Returns gradients of gradients w.r.t. the input of `max_pool`.
 func MaxPoolGradGradWithArgmax(scope *Scope, input tf.Output, grad tf.Output, argmax tf.Output, ksize []int64, strides []int64, padding string, optional ...MaxPoolGradGradWithArgmaxAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28341,7 +28366,7 @@ func MaxPoolGradV2DataFormat(value string) MaxPoolGradV2Attr {
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients w.r.t. the input to `max_pool`.
+// Returns gradients w.r.t. the input to `max_pool`.
 func MaxPoolGradV2(scope *Scope, orig_input tf.Output, orig_output tf.Output, grad tf.Output, ksize tf.Output, strides tf.Output, padding string, optional ...MaxPoolGradV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28385,7 +28410,7 @@ func MaxPoolGradWithArgmaxIncludeBatchInIndex(value bool) MaxPoolGradWithArgmaxA
 //     input tensor.
 //   - padding: The type of padding algorithm to use.
 //
-// Returns Gradients w.r.t. the input of `max_pool`.
+// Returns gradients w.r.t. the input of `max_pool`.
 func MaxPoolGradWithArgmax(scope *Scope, input tf.Output, grad tf.Output, argmax tf.Output, ksize []int64, strides []int64, padding string, optional ...MaxPoolGradWithArgmaxAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -28615,7 +28640,7 @@ func Merge(scope *Scope, inputs []tf.Output) (output tf.Output, value_index tf.O
 //   - inputs: Can be of any shape.  Each must contain serialized `Summary` protocol
 //     buffers.
 //
-// Returns Scalar. Serialized `Summary` protocol buffer.
+// Returns scalar. Serialized `Summary` protocol buffer.
 func MergeSummary(scope *Scope, inputs []tf.Output) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29072,7 +29097,7 @@ func MulNoNan(scope *Scope, x tf.Output, y tf.Output) (z tf.Output) {
 //   - output_types: The type list for the return values.
 //   - output_shapes: The list of shapes being produced.
 //
-// Returns Handle to the resource created.
+// Returns handle to the resource created.
 func MultiDeviceIterator(scope *Scope, devices []string, shared_name string, container string, output_types []tf.DataType, output_shapes []tf.Shape) (handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29146,7 +29171,7 @@ func MultiDeviceIteratorFromStringHandle(scope *Scope, string_handle tf.Output, 
 //   - output_types: The type list for the return values.
 //   - output_shapes: The list of shapes being produced.
 //
-// Returns Result of the get_next on the dataset.
+// Returns result of the get_next on the dataset.
 func MultiDeviceIteratorGetNextFromShard(scope *Scope, multi_device_iterator tf.Output, shard_num tf.Output, incarnation_id tf.Output, output_types []tf.DataType, output_shapes []tf.Shape) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29347,7 +29372,7 @@ func MutableDenseHashTableMaxLoadFactor(value float32) MutableDenseHashTableAttr
 //     be used in insert or lookup operations.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableDenseHashTable(scope *Scope, empty_key tf.Output, value_dtype tf.DataType, optional ...MutableDenseHashTableAttr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29445,7 +29470,7 @@ func MutableDenseHashTableV2MaxLoadFactor(value float32) MutableDenseHashTableV2
 //     be used in insert or lookup operations.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableDenseHashTableV2(scope *Scope, empty_key tf.Output, deleted_key tf.Output, value_dtype tf.DataType, optional ...MutableDenseHashTableV2Attr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29512,7 +29537,7 @@ func MutableHashTableUseNodeNameSharing(value bool) MutableHashTableAttr {
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableHashTable(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...MutableHashTableAttr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29583,7 +29608,7 @@ func MutableHashTableOfTensorsValueShape(value tf.Shape) MutableHashTableOfTenso
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableHashTableOfTensors(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...MutableHashTableOfTensorsAttr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29654,7 +29679,7 @@ func MutableHashTableOfTensorsV2ValueShape(value tf.Shape) MutableHashTableOfTen
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableHashTableOfTensorsV2(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...MutableHashTableOfTensorsV2Attr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -29719,7 +29744,7 @@ func MutableHashTableV2UseNodeNameSharing(value bool) MutableHashTableV2Attr {
 //   - key_dtype: Type of the table keys.
 //   - value_dtype: Type of the table values.
 //
-// Returns Handle to a table.
+// Returns handle to a table.
 func MutableHashTableV2(scope *Scope, key_dtype tf.DataType, value_dtype tf.DataType, optional ...MutableHashTableV2Attr) (table_handle tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -30094,7 +30119,7 @@ func NonDeterministicIntsDtype(value tf.DataType) NonDeterministicIntsAttr {
 // Arguments:
 //   - shape: The shape of the output tensor.
 //
-// Returns Non-deterministic integer values with specified shape.
+// Returns non-deterministic integer values with specified shape.
 func NonDeterministicInts(scope *Scope, shape tf.Output, optional ...NonDeterministicIntsAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -33741,7 +33766,7 @@ func ParseSingleSequenceExample(scope *Scope, serialized tf.Output, feature_list
 	return context_sparse_indices, context_sparse_values, context_sparse_shapes, context_dense_values, feature_list_sparse_indices, feature_list_sparse_values, feature_list_sparse_shapes, feature_list_dense_values
 }
 
-// Transforms a [pbs.]TensorProto proto into a Tensor.
+// Transforms a serialized tensorflow.TensorProto proto into a Tensor.
 //
 // Arguments:
 //   - serialized: A scalar string containing a serialized TensorProto proto.
@@ -37156,7 +37181,7 @@ func QueueDequeueTimeoutMs(value int64) QueueDequeueAttr {
 //   - handle: The handle to a queue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeue(scope *Scope, handle tf.Output, component_types []tf.DataType, optional ...QueueDequeueAttr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -37220,7 +37245,7 @@ func QueueDequeueManyTimeoutMs(value int64) QueueDequeueManyAttr {
 //   - n: The number of tuples to dequeue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeueMany(scope *Scope, handle tf.Output, n tf.Output, component_types []tf.DataType, optional ...QueueDequeueManyAttr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -37284,7 +37309,7 @@ func QueueDequeueManyV2TimeoutMs(value int64) QueueDequeueManyV2Attr {
 //   - n: The number of tuples to dequeue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeueManyV2(scope *Scope, handle tf.Output, n tf.Output, component_types []tf.DataType, optional ...QueueDequeueManyV2Attr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -37352,7 +37377,7 @@ func QueueDequeueUpToTimeoutMs(value int64) QueueDequeueUpToAttr {
 //   - n: The number of tuples to dequeue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeueUpTo(scope *Scope, handle tf.Output, n tf.Output, component_types []tf.DataType, optional ...QueueDequeueUpToAttr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -37420,7 +37445,7 @@ func QueueDequeueUpToV2TimeoutMs(value int64) QueueDequeueUpToV2Attr {
 //   - n: The number of tuples to dequeue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeueUpToV2(scope *Scope, handle tf.Output, n tf.Output, component_types []tf.DataType, optional ...QueueDequeueUpToV2Attr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -37476,7 +37501,7 @@ func QueueDequeueV2TimeoutMs(value int64) QueueDequeueV2Attr {
 //   - handle: The handle to a queue.
 //   - component_types: The type of each component in a tuple.
 //
-// Returns One or more tensors that were dequeued as a tuple.
+// Returns one or more tensors that were dequeued as a tuple.
 func QueueDequeueV2(scope *Scope, handle tf.Output, component_types []tf.DataType, optional ...QueueDequeueV2Attr) (components []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -38467,7 +38492,7 @@ func RaggedTensorToVariant(scope *Scope, rt_nested_splits []tf.Output, rt_dense_
 //   - dense_values_shape: Shape of the dense_values that was used as an input to the
 //     RaggedTensorToVariant op.
 //
-// Returns Gradient for the dense_values of the RaggedTensorToVariant op.
+// Returns gradient for the dense_values of the RaggedTensorToVariant op.
 func RaggedTensorToVariantGradient(scope *Scope, encoded_ragged_grad tf.Output, row_splits tf.Output, dense_values_shape tf.Output, Tvalues tf.DataType) (dense_values_grad tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -39410,7 +39435,7 @@ func ReadVariableXlaSplitNDPaddings(value []int64) ReadVariableXlaSplitNDAttr {
 //   - num_splits: Number of ways to split per dimension. Shape dimensions must be evenly
 //     divisible.
 //
-// Returns Output slices based on input and num_splits defined, in row-major order.
+// Returns output slices based on input and num_splits defined, in row-major order.
 func ReadVariableXlaSplitND(scope *Scope, resource tf.Output, T tf.DataType, N int64, num_splits []int64, optional ...ReadVariableXlaSplitNDAttr) (outputs []tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -40188,7 +40213,7 @@ func ReduceJoinSeparator(value string) ReduceJoinAttr {
 //     order specified.  Omitting `reduction_indices` is equivalent to passing
 //     `[n-1, n-2, ..., 0]`.  Negative indices from `-n` to `-1` are supported.
 //
-// Returns Has shape equal to that of the input with reduced dimensions removed or
+// Returns has shape equal to that of the input with reduced dimensions removed or
 // set to `1` depending on `keep_dims`.
 func ReduceJoin(scope *Scope, inputs tf.Output, reduction_indices tf.Output, optional ...ReduceJoinAttr) (output tf.Output) {
 	if scope.Err() != nil {
@@ -44687,7 +44712,7 @@ func RetrieveTPUEmbeddingStochasticGradientDescentParametersConfig(value string)
 // the correct embedding table configuration. For example, this op is
 // used to retrieve updated parameters before saving a checkpoint.
 //
-// Returns Parameter parameters updated by the stochastic gradient descent optimization algorithm.
+// Returns parameter parameters updated by the stochastic gradient descent optimization algorithm.
 func RetrieveTPUEmbeddingStochasticGradientDescentParameters(scope *Scope, num_shards int64, shard_id int64, optional ...RetrieveTPUEmbeddingStochasticGradientDescentParametersAttr) (parameters tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -46060,7 +46085,7 @@ func RngSkip(scope *Scope, resource tf.Output, algorithm tf.Output, delta tf.Out
 //     total shift for that axis will be the sum of all the shifts that belong to that
 //     axis.
 //
-// Returns Has the same shape and size as the input. The elements are shifted
+// Returns has the same shape and size as the input. The elements are shifted
 // positively (towards larger indices) by the offsets of `shift` along the
 // dimensions of `axis`.
 func Roll(scope *Scope, input tf.Output, shift tf.Output, axis tf.Output) (output tf.Output) {
@@ -46796,7 +46821,7 @@ func SaveV2(scope *Scope, prefix tf.Output, tensor_names tf.Output, shape_and_sl
 //   - tags: Tags for the summary.
 //   - values: Same shape as `tags.  Values for the summary.
 //
-// Returns Scalar.  Serialized `Summary` protocol buffer.
+// Returns scalar.  Serialized `Summary` protocol buffer.
 func ScalarSummary(scope *Scope, tags tf.Output, values tf.Output) (summary tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -47407,7 +47432,7 @@ func ScatterNdAddUseLocking(value bool) ScatterNdAddAttr {
 //   - updates: A Tensor. Must have the same type as ref. A tensor of updated values
 //     to add to ref.
 //
-// Returns Same as ref. Returned as a convenience for operations that want
+// Returns same as ref. Returned as a convenience for operations that want
 // to use the updated values after the update is done.
 func ScatterNdAdd(scope *Scope, ref tf.Output, indices tf.Output, updates tf.Output, optional ...ScatterNdAddAttr) (output_ref tf.Output) {
 	if scope.Err() != nil {
@@ -47451,7 +47476,7 @@ func ScatterNdMaxUseLocking(value bool) ScatterNdMaxAttr {
 //   - updates: A Tensor. Must have the same type as ref. A tensor of updated values
 //     to add to ref.
 //
-// Returns Same as ref. Returned as a convenience for operations that want
+// Returns same as ref. Returned as a convenience for operations that want
 // to use the updated values after the update is done.
 func ScatterNdMax(scope *Scope, ref tf.Output, indices tf.Output, updates tf.Output, optional ...ScatterNdMaxAttr) (output_ref tf.Output) {
 	if scope.Err() != nil {
@@ -47495,7 +47520,7 @@ func ScatterNdMinUseLocking(value bool) ScatterNdMinAttr {
 //   - updates: A Tensor. Must have the same type as ref. A tensor of updated values
 //     to add to ref.
 //
-// Returns Same as ref. Returned as a convenience for operations that want
+// Returns same as ref. Returned as a convenience for operations that want
 // to use the updated values after the update is done.
 func ScatterNdMin(scope *Scope, ref tf.Output, indices tf.Output, updates tf.Output, optional ...ScatterNdMinAttr) (output_ref tf.Output) {
 	if scope.Err() != nil {
@@ -47630,7 +47655,7 @@ func ScatterNdSubUseLocking(value bool) ScatterNdSubAttr {
 //   - updates: A Tensor. Must have the same type as ref. A tensor of updated values
 //     to subtract from ref.
 //
-// Returns Same as ref. Returned as a convenience for operations that want
+// Returns same as ref. Returned as a convenience for operations that want
 // to use the updated values after the update is done.
 func ScatterNdSub(scope *Scope, ref tf.Output, indices tf.Output, updates tf.Output, optional ...ScatterNdSubAttr) (output_ref tf.Output) {
 	if scope.Err() != nil {
@@ -47708,7 +47733,7 @@ func ScatterNdUpdateUseLocking(value bool) ScatterNdUpdateAttr {
 //   - updates: A Tensor. Must have the same type as ref. A tensor of updated
 //     values to add to ref.
 //
-// Returns Same as ref. Returned as a convenience for operations that want to
+// Returns same as ref. Returned as a convenience for operations that want to
 // use the updated values after the update is done.
 func ScatterNdUpdate(scope *Scope, ref tf.Output, indices tf.Output, updates tf.Output, optional ...ScatterNdUpdateAttr) (output_ref tf.Output) {
 	if scope.Err() != nil {
@@ -48136,7 +48161,7 @@ func SdcaShrinkL1(scope *Scope, weights []tf.Output, l1 float32, l2 float32) (o 
 //     Caution: The values are always validated to be sorted on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SegmentMax(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -48192,7 +48217,7 @@ func SegmentMax(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.
 //     Caution: The values are always validated to be sorted on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SegmentMean(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -48246,7 +48271,7 @@ func SegmentMean(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf
 //     Caution: The values are always validated to be sorted on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SegmentMin(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -48300,7 +48325,7 @@ func SegmentMin(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.
 //     Caution: The values are always validated to be sorted on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SegmentProd(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -48354,7 +48379,7 @@ func SegmentProd(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf
 //     Caution: The values are always validated to be sorted on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SegmentSum(scope *Scope, data tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -48459,7 +48484,7 @@ func SelectV2(scope *Scope, condition tf.Output, t tf.Output, e tf.Output) (outp
 // Arguments:
 //   - input: Shape is `[..., M, M]`.
 //
-// Returns Shape is `[..., M+1, M]`.
+// Returns shape is `[..., M+1, M]`.
 func SelfAdjointEig(scope *Scope, input tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -48851,7 +48876,7 @@ func SetSizeValidateIndices(value bool) SetSizeAttr {
 //   - set_values: 1D `Tensor`, values of a `SparseTensor`.
 //   - set_shape: 1D `Tensor`, shape of a `SparseTensor`.
 //
-// Returns For `set` ranked `n`, this is a `Tensor` with rank `n-1`, and the same 1st
+// Returns for `set` ranked `n`, this is a `Tensor` with rank `n-1`, and the same 1st
 // `n-1` dimensions as `set`. Each value is the number of unique elements in
 // the corresponding `[0...n-1]` dimension of `set`.
 func SetSize(scope *Scope, set_indices tf.Output, set_values tf.Output, set_shape tf.Output, optional ...SetSizeAttr) (size tf.Output) {
@@ -49943,7 +49968,7 @@ func SobolSample(scope *Scope, dim tf.Output, num_results tf.Output, skip tf.Out
 // Arguments:
 //   - logits: 2-D with shape `[batch_size, num_classes]`.
 //
-// Returns Same shape as `logits`.
+// Returns same shape as `logits`.
 func Softmax(scope *Scope, logits tf.Output) (softmax tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50174,32 +50199,32 @@ func SpaceToBatch(scope *Scope, input tf.Output, paddings tf.Output, block_size 
 //
 // 2. Reshape `padded` to `reshaped_padded` of shape:
 //
-//		[batch] +
-//		[padded_shape[1] / block_shape[0],
-//		  block_shape[0],
-//		 ...,
-//		 padded_shape[M] / block_shape[M-1],
-//		 block_shape[M-1]] +
-//		remaining_shape
+//	[batch] +
+//	[padded_shape[1] / block_shape[0],
+//	  block_shape[0],
+//	 ...,
+//	 padded_shape[M] / block_shape[M-1],
+//	 block_shape[M-1]] +
+//	remaining_shape
 //
-//	 3. Permute dimensions of `reshaped_padded` to produce
-//	    `permuted_reshaped_padded` of shape:
+//  3. Permute dimensions of `reshaped_padded` to produce
+//     `permuted_reshaped_padded` of shape:
 //
-//	    block_shape +
-//	    [batch] +
-//	    [padded_shape[1] / block_shape[0],
-//	    ...,
-//	    padded_shape[M] / block_shape[M-1]] +
-//	    remaining_shape
+//     block_shape +
+//     [batch] +
+//     [padded_shape[1] / block_shape[0],
+//     ...,
+//     padded_shape[M] / block_shape[M-1]] +
+//     remaining_shape
 //
-//	 4. Reshape `permuted_reshaped_padded` to flatten `block_shape` into the batch
-//	    dimension, producing an output tensor of shape:
+//  4. Reshape `permuted_reshaped_padded` to flatten `block_shape` into the batch
+//     dimension, producing an output tensor of shape:
 //
-//	    [batch * prod(block_shape)] +
-//	    [padded_shape[1] / block_shape[0],
-//	    ...,
-//	    padded_shape[M] / block_shape[M-1]] +
-//	    remaining_shape
+//     [batch * prod(block_shape)] +
+//     [padded_shape[1] / block_shape[0],
+//     ...,
+//     padded_shape[M] / block_shape[M-1]] +
+//     remaining_shape
 //
 // Some examples:
 //
@@ -50550,7 +50575,7 @@ func SparseApplyAdadeltaUseLocking(value bool) SparseApplyAdadeltaAttr {
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var and accum.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyAdadelta(scope *Scope, var_ tf.Output, accum tf.Output, accum_update tf.Output, lr tf.Output, rho tf.Output, epsilon tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyAdadeltaAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50605,7 +50630,7 @@ func SparseApplyAdagradUpdateSlots(value bool) SparseApplyAdagradAttr {
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var and accum.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyAdagrad(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyAdagradAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50651,7 +50676,7 @@ func SparseApplyAdagradDAUseLocking(value bool) SparseApplyAdagradDAAttr {
 //   - l2: L2 regularization. Must be a scalar.
 //   - global_step: Training step number. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyAdagradDA(scope *Scope, var_ tf.Output, gradient_accumulator tf.Output, gradient_squared_accumulator tf.Output, grad tf.Output, indices tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, global_step tf.Output, optional ...SparseApplyAdagradDAAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50707,7 +50732,7 @@ func SparseApplyAdagradV2UpdateSlots(value bool) SparseApplyAdagradV2Attr {
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var and accum.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyAdagradV2(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, epsilon tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyAdagradV2Attr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50771,7 +50796,7 @@ func SparseApplyCenteredRMSPropUseLocking(value bool) SparseApplyCenteredRMSProp
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var, ms and mom.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyCenteredRMSProp(scope *Scope, var_ tf.Output, mg tf.Output, ms tf.Output, mom tf.Output, lr tf.Output, rho tf.Output, momentum tf.Output, epsilon tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyCenteredRMSPropAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50833,7 +50858,7 @@ func SparseApplyFtrlMultiplyLinearByLr(value bool) SparseApplyFtrlAttr {
 //   - l2: L2 regularization. Must be a scalar.
 //   - lr_power: Scaling factor. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyFtrl(scope *Scope, var_ tf.Output, accum tf.Output, linear tf.Output, grad tf.Output, indices tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, lr_power tf.Output, optional ...SparseApplyFtrlAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50899,7 +50924,7 @@ func SparseApplyFtrlV2MultiplyLinearByLr(value bool) SparseApplyFtrlV2Attr {
 //   - l2: L2 shrinkage regularization. Must be a scalar.
 //   - lr_power: Scaling factor. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyFtrlV2(scope *Scope, var_ tf.Output, accum tf.Output, linear tf.Output, grad tf.Output, indices tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, l2_shrinkage tf.Output, lr_power tf.Output, optional ...SparseApplyFtrlV2Attr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -50961,7 +50986,7 @@ func SparseApplyMomentumUseNesterov(value bool) SparseApplyMomentumAttr {
 //   - indices: A vector of indices into the first dimension of var and accum.
 //   - momentum: Momentum. Must be a scalar.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyMomentum(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, grad tf.Output, indices tf.Output, momentum tf.Output, optional ...SparseApplyMomentumAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -51011,7 +51036,7 @@ func SparseApplyProximalAdagradUseLocking(value bool) SparseApplyProximalAdagrad
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var and accum.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyProximalAdagrad(scope *Scope, var_ tf.Output, accum tf.Output, lr tf.Output, l1 tf.Output, l2 tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyProximalAdagradAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -51058,7 +51083,7 @@ func SparseApplyProximalGradientDescentUseLocking(value bool) SparseApplyProxima
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var and accum.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyProximalGradientDescent(scope *Scope, var_ tf.Output, alpha tf.Output, l1 tf.Output, l2 tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyProximalGradientDescentAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -51115,7 +51140,7 @@ func SparseApplyRMSPropUseLocking(value bool) SparseApplyRMSPropAttr {
 //   - grad: The gradient.
 //   - indices: A vector of indices into the first dimension of var, ms and mom.
 //
-// Returns Same as "var".
+// Returns same as "var".
 func SparseApplyRMSProp(scope *Scope, var_ tf.Output, ms tf.Output, mom tf.Output, lr tf.Output, rho tf.Output, momentum tf.Output, epsilon tf.Output, grad tf.Output, indices tf.Output, optional ...SparseApplyRMSPropAttr) (out tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -52744,7 +52769,7 @@ func SparseReshape(scope *Scope, input_indices tf.Output, input_shape tf.Output,
 //   - indices: A 1-D tensor. Has same rank as `segment_ids`.
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SparseSegmentMean(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -52798,7 +52823,7 @@ func SparseSegmentMeanGrad(scope *Scope, grad tf.Output, indices tf.Output, segm
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //   - num_segments: Should equal the number of distinct segment IDs.
 //
-// Returns Has same shape as data, except for dimension 0 which has size
+// Returns has same shape as data, except for dimension 0 which has size
 // `num_segments`.
 func SparseSegmentMeanWithNumSegments(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -52824,7 +52849,7 @@ func SparseSegmentMeanWithNumSegments(scope *Scope, data tf.Output, indices tf.O
 //   - indices: A 1-D tensor. Has same rank as `segment_ids`.
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SparseSegmentSqrtN(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -52880,7 +52905,7 @@ func SparseSegmentSqrtNGrad(scope *Scope, grad tf.Output, indices tf.Output, seg
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //   - num_segments: Should equal the number of distinct segment IDs.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SparseSegmentSqrtNWithNumSegments(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -52930,7 +52955,7 @@ func SparseSegmentSqrtNWithNumSegments(scope *Scope, data tf.Output, indices tf.
 //   - indices: A 1-D tensor. Has same rank as `segment_ids`.
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `k`, the number of segments.
 func SparseSegmentSum(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -53003,7 +53028,7 @@ func SparseSegmentSumGrad(scope *Scope, grad tf.Output, indices tf.Output, segme
 //   - segment_ids: A 1-D tensor. Values should be sorted and can be repeated.
 //   - num_segments: Should equal the number of distinct segment IDs.
 //
-// Returns Has same shape as data, except for dimension 0 which
+// Returns has same shape as data, except for dimension 0 which
 // has size `num_segments`.
 func SparseSegmentSumWithNumSegments(scope *Scope, data tf.Output, indices tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
@@ -53457,7 +53482,7 @@ func SparseToDenseValidateIndices(value bool) SparseToDenseAttr {
 //   - default_value: Scalar value to set for indices not specified in
 //     `sparse_indices`.
 //
-// Returns Dense output tensor of shape `output_shape`.
+// Returns dense output tensor of shape `output_shape`.
 func SparseToDense(scope *Scope, sparse_indices tf.Output, output_shape tf.Output, sparse_values tf.Output, default_value tf.Output, optional ...SparseToDenseAttr) (dense tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -53617,7 +53642,7 @@ func Split(scope *Scope, axis tf.Output, value tf.Output, num_split int64) (outp
 //   - axis: 0-D.  The dimension along which to split.  Must be in the range
 //     `[-rank(value), rank(value))`.
 //
-// Returns Tensors whose shape matches that of `value`
+// Returns tensors whose shape matches that of `value`
 // except along `axis`, where their sizes are
 // `size_splits[i]`.
 func SplitV(scope *Scope, value tf.Output, size_splits tf.Output, axis tf.Output, num_split int64) (output []tf.Output) {
@@ -53773,7 +53798,7 @@ func SqueezeAxis(value []int64) SqueezeAttr {
 // Arguments:
 //   - input: The `input` to squeeze.
 //
-// Returns Contains the same data as `input`, but has one or more dimensions of
+// Returns contains the same data as `input`, but has one or more dimensions of
 // size 1 removed.
 func Squeeze(scope *Scope, input tf.Output, optional ...SqueezeAttr) (output tf.Output) {
 	if scope.Err() != nil {
@@ -54488,7 +54513,7 @@ func StatefulTruncatedNormalDtype(value tf.DataType) StatefulTruncatedNormalAttr
 //   - algorithm: The RNG algorithm.
 //   - shape: The shape of the output tensor.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatefulTruncatedNormal(scope *Scope, resource tf.Output, algorithm tf.Output, shape tf.Output, optional ...StatefulTruncatedNormalAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54530,7 +54555,7 @@ func StatefulUniformDtype(value tf.DataType) StatefulUniformAttr {
 //   - algorithm: The RNG algorithm.
 //   - shape: The shape of the output tensor.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatefulUniform(scope *Scope, resource tf.Output, algorithm tf.Output, shape tf.Output, optional ...StatefulUniformAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54571,7 +54596,7 @@ func StatefulUniformFullIntDtype(value tf.DataType) StatefulUniformFullIntAttr {
 //   - algorithm: The RNG algorithm.
 //   - shape: The shape of the output tensor.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatefulUniformFullInt(scope *Scope, resource tf.Output, algorithm tf.Output, shape tf.Output, optional ...StatefulUniformFullIntAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54608,7 +54633,7 @@ func StatefulUniformFullInt(scope *Scope, resource tf.Output, algorithm tf.Outpu
 //   - minval: Minimum value (inclusive, scalar).
 //   - maxval: Maximum value (exclusive, scalar).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatefulUniformInt(scope *Scope, resource tf.Output, algorithm tf.Output, shape tf.Output, minval tf.Output, maxval tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54845,7 +54870,7 @@ func StatelessRandomBinomialDtype(value tf.DataType) StatelessRandomBinomialAttr
 //   - probs: The probability of success for the binomial distribution. Must be broadcastable
 //     with `counts` and broadcastable with the rightmost dimensions of `shape`.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomBinomial(scope *Scope, shape tf.Output, seed tf.Output, counts tf.Output, probs tf.Output, optional ...StatelessRandomBinomialAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54877,7 +54902,7 @@ func StatelessRandomBinomial(scope *Scope, shape tf.Output, seed tf.Output, coun
 //   - alpha: The concentration of the gamma distribution. Shape must match the rightmost
 //     dimensions of `shape`.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomGammaV2(scope *Scope, shape tf.Output, seed tf.Output, alpha tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -54979,7 +55004,7 @@ func StatelessRandomNormalDtype(value tf.DataType) StatelessRandomNormalAttr {
 //   - shape: The shape of the output tensor.
 //   - seed: 2 seeds (shape [2]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomNormal(scope *Scope, shape tf.Output, seed tf.Output, optional ...StatelessRandomNormalAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55023,7 +55048,7 @@ func StatelessRandomNormalV2Dtype(value tf.DataType) StatelessRandomNormalV2Attr
 //   - counter: Initial counter for the counter-based RNG algorithm (shape uint64[2] or uint64[1] depending on the algorithm). If a larger vector is given, only the needed portion on the left (i.e. [:N]) will be used.
 //   - alg: The RNG algorithm (shape int32[]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomNormalV2(scope *Scope, shape tf.Output, key tf.Output, counter tf.Output, alg tf.Output, optional ...StatelessRandomNormalV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55056,7 +55081,7 @@ func StatelessRandomNormalV2(scope *Scope, shape tf.Output, key tf.Output, count
 //     of `shape`.
 //   - dtype: The type of the output.
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomPoisson(scope *Scope, shape tf.Output, seed tf.Output, lam tf.Output, dtype tf.DataType) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55096,7 +55121,7 @@ func StatelessRandomUniformDtype(value tf.DataType) StatelessRandomUniformAttr {
 //   - shape: The shape of the output tensor.
 //   - seed: 2 seeds (shape [2]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniform(scope *Scope, shape tf.Output, seed tf.Output, optional ...StatelessRandomUniformAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55138,7 +55163,7 @@ func StatelessRandomUniformFullIntDtype(value tf.DataType) StatelessRandomUnifor
 //   - shape: The shape of the output tensor.
 //   - seed: 2 seeds (shape [2]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniformFullInt(scope *Scope, shape tf.Output, seed tf.Output, optional ...StatelessRandomUniformFullIntAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55182,7 +55207,7 @@ func StatelessRandomUniformFullIntV2Dtype(value tf.DataType) StatelessRandomUnif
 //   - counter: Initial counter for the counter-based RNG algorithm (shape uint64[2] or uint64[1] depending on the algorithm). If a larger vector is given, only the needed portion on the left (i.e. [:N]) will be used.
 //   - alg: The RNG algorithm (shape int32[]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniformFullIntV2(scope *Scope, shape tf.Output, key tf.Output, counter tf.Output, alg tf.Output, optional ...StatelessRandomUniformFullIntV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55214,7 +55239,7 @@ func StatelessRandomUniformFullIntV2(scope *Scope, shape tf.Output, key tf.Outpu
 //   - minval: Minimum value (inclusive, scalar).
 //   - maxval: Maximum value (exclusive, scalar).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniformInt(scope *Scope, shape tf.Output, seed tf.Output, minval tf.Output, maxval tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55243,7 +55268,7 @@ func StatelessRandomUniformInt(scope *Scope, shape tf.Output, seed tf.Output, mi
 //   - minval: Minimum value (inclusive, scalar).
 //   - maxval: Maximum value (exclusive, scalar).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniformIntV2(scope *Scope, shape tf.Output, key tf.Output, counter tf.Output, alg tf.Output, minval tf.Output, maxval tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55283,7 +55308,7 @@ func StatelessRandomUniformV2Dtype(value tf.DataType) StatelessRandomUniformV2At
 //   - counter: Initial counter for the counter-based RNG algorithm (shape uint64[2] or uint64[1] depending on the algorithm). If a larger vector is given, only the needed portion on the left (i.e. [:N]) will be used.
 //   - alg: The RNG algorithm (shape int32[]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessRandomUniformV2(scope *Scope, shape tf.Output, key tf.Output, counter tf.Output, alg tf.Output, optional ...StatelessRandomUniformV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55473,7 +55498,7 @@ func StatelessTruncatedNormalDtype(value tf.DataType) StatelessTruncatedNormalAt
 //   - shape: The shape of the output tensor.
 //   - seed: 2 seeds (shape [2]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessTruncatedNormal(scope *Scope, shape tf.Output, seed tf.Output, optional ...StatelessTruncatedNormalAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -55519,7 +55544,7 @@ func StatelessTruncatedNormalV2Dtype(value tf.DataType) StatelessTruncatedNormal
 //   - counter: Initial counter for the counter-based RNG algorithm (shape uint64[2] or uint64[1] depending on the algorithm). If a larger vector is given, only the needed portion on the left (i.e. [:N]) will be used.
 //   - alg: The RNG algorithm (shape int32[]).
 //
-// Returns Random values with specified shape.
+// Returns random values with specified shape.
 func StatelessTruncatedNormalV2(scope *Scope, shape tf.Output, key tf.Output, counter tf.Output, alg tf.Output, optional ...StatelessTruncatedNormalV2Attr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -56315,7 +56340,7 @@ func StringLengthUnit(value string) StringLengthAttr {
 // Arguments:
 //   - input: The strings for which to compute the length for each element.
 //
-// Returns Integer tensor that has the same shape as `input`. The output contains the
+// Returns integer tensor that has the same shape as `input`. The output contains the
 // element-wise string lengths of `input`.
 func StringLength(scope *Scope, input tf.Output, optional ...StringLengthAttr) (output tf.Output) {
 	if scope.Err() != nil {
@@ -56876,7 +56901,7 @@ func SubstrUnit(value string) SubstrAttr {
 //   - pos: Scalar defining the position of first character in each substring
 //   - len: Scalar defining the number of characters to include in each substring
 //
-// Returns Tensor of substrings
+// Returns tensor of substrings
 func Substr(scope *Scope, input tf.Output, pos tf.Output, len tf.Output, optional ...SubstrAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -58600,7 +58625,7 @@ func TensorArrayGatherV3ElementShape(value tf.Shape) TensorArrayGatherV3Attr {
 //   - flow_in: A float scalar that enforces proper chaining of operations.
 //   - dtype: The type of the elem that is returned.
 //
-// Returns All of the elements in the TensorArray, concatenated along a new
+// Returns all of the elements in the TensorArray, concatenated along a new
 // axis (the new dimension 0).
 func TensorArrayGatherV3(scope *Scope, handle tf.Output, indices tf.Output, flow_in tf.Output, dtype tf.DataType, optional ...TensorArrayGatherV3Attr) (value tf.Output) {
 	if scope.Err() != nil {
@@ -59001,15 +59026,17 @@ func TensorArraySplitV2(scope *Scope, handle tf.Output, value tf.Output, lengths
 //
 // and that `value` has shape
 //
-//		  (n0 + n1 + ... + n(T-1) x d0 x d1 x ...)
-//		  ```,
+//	(n0 + n1 + ... + n(T-1) x d0 x d1 x ...),
 //
-//		this splits values into a TensorArray with T tensors.
+// this splits values into a TensorArray with T tensors.
 //
-//		TensorArray index t will be the subtensor of values with starting position
-//	  (n0 + n1 + ... + n(t-1), 0, 0, ...)
-//		and having size
-//	  nt x d0 x d1 x ...
+// TensorArray index t will be the subtensor of values with starting position
+//
+//	(n0 + n1 + ... + n(t-1), 0, 0, ...)
+//
+// and having size
+//
+//	nt x d0 x d1 x ...
 //
 // Arguments:
 //   - handle: The handle to a TensorArray.
@@ -60695,8 +60722,15 @@ func TileGrad(scope *Scope, input tf.Output, multiples tf.Output) (output tf.Out
 //
 // Returns the timestamp as a `float64` for seconds since the Unix epoch.
 //
-// Note: the timestamp is computed when the op is executed, not when it is added
-// to the graph.
+// Common usages include:
+// * Logging
+// * Providing a random number seed
+// * Debugging graph execution
+// * Generating timing information, mainly through comparison of timestamps
+//
+// Note: In graph mode, the timestamp is computed when the op is executed,
+// not when it is added to the graph.  In eager mode, the timestamp is computed
+// when the op is eagerly executed.
 func Timestamp(scope *Scope) (ts tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -60932,7 +60966,7 @@ func Transpose(scope *Scope, x tf.Output, perm tf.Output) (y tf.Output) {
 //   - rhs: Tensor of shape `[..., M, N]`, representing MxN matrices to the right of
 //     multiplication.
 //
-// Returns Tensor of shape `[..., M, N]` containing the product.
+// Returns tensor of shape `[..., M, N]` containing the product.
 func TridiagonalMatMul(scope *Scope, superdiag tf.Output, maindiag tf.Output, subdiag tf.Output, rhs tf.Output) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -60986,7 +61020,7 @@ func TridiagonalSolvePerturbSingular(value bool) TridiagonalSolveAttr {
 //   - rhs: Tensor of shape `[..., M, K]`, representing K right-hand sides per each
 //     left-hand side.
 //
-// Returns Tensor of shape `[..., M, K]` containing the solutions
+// Returns tensor of shape `[..., M, K]` containing the solutions
 func TridiagonalSolve(scope *Scope, diagonals tf.Output, rhs tf.Output, optional ...TridiagonalSolveAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -61006,7 +61040,7 @@ func TridiagonalSolve(scope *Scope, diagonals tf.Output, rhs tf.Output, optional
 	return op.Output(0)
 }
 
-// Returns x / y element-wise for integer types.
+// Returns x / y element-wise, rounded towards zero.
 //
 // Truncation designates that negative numbers will round fractional quantities
 // toward zero. I.e. -7 / 5 = -1. This matches C semantics but it is different
@@ -62024,7 +62058,7 @@ func UniqueWithCountsV2OutIdx(value tf.DataType) UniqueWithCountsV2Attr {
 // For example:
 //
 //	x = tf.constant([1, 1, 2, 4, 4, 4, 7, 8, 8])
-//	y, idx, count = UniqueWithCountsV2(x, axis = [0])
+//	y, idx, count = tf.raw_ops.UniqueWithCountsV2(x=x, axis = [0])
 //	y ==> [1, 2, 4, 7, 8]
 //	idx ==> [0, 0, 1, 2, 2, 2, 3, 4, 4]
 //	count ==> [2, 1, 3, 1, 2]
@@ -62034,7 +62068,7 @@ func UniqueWithCountsV2OutIdx(value tf.DataType) UniqueWithCountsV2Attr {
 //	x = tf.constant([[1, 0, 0],
 //	                [1, 0, 0],
 //	                [2, 0, 0]])
-//	y, idx, count = UniqueWithCountsV2(x, axis=[0])
+//	y, idx, count = tf.raw_ops.UniqueWithCountsV2(x=x, axis=[0])
 //	y ==> [[1, 0, 0],
 //	       [2, 0, 0]]
 //	idx ==> [0, 0, 1]
@@ -62045,7 +62079,7 @@ func UniqueWithCountsV2OutIdx(value tf.DataType) UniqueWithCountsV2Attr {
 //	x = tf.constant([[1, 0, 0],
 //	                [1, 0, 0],
 //	                [2, 0, 0]])
-//	y, idx, count = UniqueWithCountsV2(x, axis=[1])
+//	y, idx, count = tf.raw_ops.UniqueWithCountsV2(x=x, axis=[1])
 //	y ==> [[1, 0],
 //	       [1, 0],
 //	       [2, 0]]
@@ -62263,7 +62297,7 @@ func UnsortedSegmentJoin(scope *Scope, inputs tf.Output, segment_ids tf.Output, 
 //     Caution: The values are always validated to be in range on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for the first `segment_ids.rank`
+// Returns has same shape as data, except for the first `segment_ids.rank`
 // dimensions, which are replaced with a single dimension which has size
 // `num_segments`.
 func UnsortedSegmentMax(scope *Scope, data tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
@@ -62322,7 +62356,7 @@ func UnsortedSegmentMax(scope *Scope, data tf.Output, segment_ids tf.Output, num
 //     Caution: The values are always validated to be in range on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for the first `segment_ids.rank`
+// Returns has same shape as data, except for the first `segment_ids.rank`
 // dimensions, which are replaced with a single dimension which has size
 // `num_segments`.
 func UnsortedSegmentMin(scope *Scope, data tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
@@ -62379,7 +62413,7 @@ func UnsortedSegmentMin(scope *Scope, data tf.Output, segment_ids tf.Output, num
 //     Caution: The values are always validated to be in range on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for the first `segment_ids.rank`
+// Returns has same shape as data, except for the first `segment_ids.rank`
 // dimensions, which are replaced with a single dimension which has size
 // `num_segments`.
 func UnsortedSegmentProd(scope *Scope, data tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
@@ -62439,7 +62473,7 @@ func UnsortedSegmentProd(scope *Scope, data tf.Output, segment_ids tf.Output, nu
 //     Caution: The values are always validated to be in range on CPU, never validated
 //     on GPU.
 //
-// Returns Has same shape as data, except for the first `segment_ids.rank`
+// Returns has same shape as data, except for the first `segment_ids.rank`
 // dimensions, which are replaced with a single dimension which has size
 // `num_segments`.
 func UnsortedSegmentSum(scope *Scope, data tf.Output, segment_ids tf.Output, num_segments tf.Output) (output tf.Output) {
@@ -63513,7 +63547,7 @@ func XlaConcatNDPaddings(value []int64) XlaConcatNDAttr {
 //     inputs must have the same shape.
 //   - num_concats: Number of ways to merge per dimension.
 //
-// Returns Output tensor formed from merging input slices based on num_concats defined.
+// Returns output tensor formed from merging input slices based on num_concats defined.
 func XlaConcatND(scope *Scope, inputs []tf.Output, num_concats []int64, optional ...XlaConcatNDAttr) (output tf.Output) {
 	if scope.Err() != nil {
 		return
@@ -63652,7 +63686,7 @@ func XlaCustomCall(scope *Scope, args []tf.Output, target_name string, backend_c
 //   - transpose_output: Boolean to determine if output is transposed. transpose_output
 //     is faster when input is large and rank of input is higher than 1.
 //
-// Returns Output tensors whose types is bloat16. If transpose_output is true,
+// Returns output tensors whose types is bloat16. If transpose_output is true,
 // output shape is [dn * 4, dn-1, ..., d1, d0]. If transpose_output
 // is false, output shape is [d0,..., dn * 4].
 func XlaDequantize(scope *Scope, input tf.Output, min_range float32, max_range float32, mode string, transpose_output bool) (output tf.Output) {
@@ -64567,7 +64601,7 @@ func XlaSplitNDPaddings(value []int64) XlaSplitNDAttr {
 //   - num_splits: Number of ways to split per dimension. Shape dimensions must be evenly
 //     divisible.
 //
-// Returns Output slices based on input and num_splits defined, in row-major order.
+// Returns output slices based on input and num_splits defined, in row-major order.
 func XlaSplitND(scope *Scope, input tf.Output, N int64, num_splits []int64, optional ...XlaSplitNDAttr) (outputs []tf.Output) {
 	if scope.Err() != nil {
 		return
