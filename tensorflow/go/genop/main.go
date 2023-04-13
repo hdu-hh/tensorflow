@@ -61,7 +61,9 @@ func main() {
 	}
 	formatted, err := format.Source(buf.Bytes())
 	if err != nil {
-		log.Fatalf("Failed to generate valid source? 'go fmt' failed: %v", err)
+		os.WriteFile(*filename, buf.Bytes(), 0644)
+		log.Fatalf("Failed to generate valid source? 'go fmt' failed on %q: %v",
+			*filename, err)
 	}
 	if err := os.WriteFile(*filename, formatted, 0644); err != nil {
 		log.Fatalf("Failed to write to %q: %v", *filename, err)
