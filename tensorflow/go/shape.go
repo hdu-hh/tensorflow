@@ -90,6 +90,40 @@ func (s Shape) ToSlice() ([]int64, error) {
 	return cpy, nil
 }
 
+// MustSlice returns the shape as an int64 slice.
+// It panics if a dimension or the number of dimensions is not known.
+func (s Shape) MustSlice() []int64 {
+	if s.dims == nil {
+		err := fmt.Errorf("shape has an unknown number of dimensions")
+		panic(err)
+	}
+	for _, n := range s.dims {
+		if n < 0 {
+			err := fmt.Errorf("shape has unknown dimensions: %v", s.dims)
+			panic(err)
+		}
+	}
+	return append([]int64{}, s.dims...)
+}
+
+// MustNumElements returns the number of elements of a shape.
+// It panics if the number of elements is not known.
+func (s Shape) MustNumElements() (numElems int64) {
+	if s.dims == nil {
+		err := fmt.Errorf("shape has an unknown number of dimensions")
+		panic(err)
+	}
+	numElems = 1
+	for _, n := range s.dims {
+		if n < 0 {
+			err := fmt.Errorf("shape has unknown dimensions: %v", s.dims)
+			panic(err)
+		}
+		numElems *= n
+	}
+	return
+}
+
 func (s Shape) String() string {
 	if s.dims == nil {
 		return "?"
