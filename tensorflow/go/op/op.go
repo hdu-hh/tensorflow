@@ -116,3 +116,12 @@ func BuildFuncPair(name1, name2 string, goFn1, goFn2 GoFunc, dtypes ...tf.DataTy
 	tfFn2 := BuildFunc(name2, goFn2, dtypes...)
 	return tfFn1, tfFn2
 }
+
+// Flatten reshapes a tensor to 1D
+func Flatten(s *Scope, x tf.Output) tf.Output {
+	c := Const(s, []int64{-1})
+	return Reshape(s, x, c)
+}
+
+// ActFunc is the function type of an activation
+type ActFunc func(*Scope, tf.Output) tf.Output
