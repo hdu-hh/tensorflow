@@ -34,26 +34,40 @@ import (
 // are not safe for concurrent use by multiple goroutines.
 type Scope struct {
 	graph               *tf.Graph
-	namemap             map[string]int
+	namemap             *opNameMap
 	namespace           string
 	controlDependencies []*tf.Operation
 	device              string
+	outTagMap           *outTagMap
 	err                 *scopeErr
 }
+
+type opNameMap map[string]int
+type outTagMap map[VarTag][]tf.Output
 
 // scopeErr is used to share errors between all derivatives of a root scope.
 type scopeErr struct {
 	err error
 }
 
-// NewScope creates a Scope initialized with an empty Graph.
+// NewScope creates a Scope initialized with an empty graph
 func NewScope() *Scope {
-	return &Scope{graph: tf.NewGraph(), namemap: make(map[string]int), err: new(scopeErr)}
+	return &Scope{
+		graph:     tf.NewGraph(),
+		namemap:   &opNameMap{},
+		outTagMap: &outTagMap{},
+		err:       new(scopeErr),
+	}
 }
 
-// NewScopeWithGraph creates a Scope initialized with the Graph thats passed in
-func NewScopeWithGraph(g *tf.Graph) *Scope {
-	return &Scope{graph: g, namemap: make(map[string]int), err: new(scopeErr)}
+// NewScopeWithGraph creates a Scope initialized with the graph thats passed in
+func NewScopeWithGraph(graph *tf.Graph) *Scope {
+	return &Scope{
+		graph:     graph,
+		namemap:   &opNameMap{},
+		outTagMap: &outTagMap{},
+		err:       new(scopeErr),
+	}
 }
 
 // Finalize returns the [tf.Graph] on which this scope operates on and renders s
@@ -77,8 +91,8 @@ func (s *Scope) AddOperation(args tf.OpSpec) *tf.Operation {
 		return nil
 	}
 	if args.Name == "" {
-		s.namemap[args.Type]++
-		args.Name += fmt.Sprintf("%s_%d", args.Type, s.namemap[args.Type])
+		(*s.namemap)[args.Type]++
+		args.Name += fmt.Sprintf("%s_%d", args.Type, (*s.namemap)[args.Type])
 	}
 	if s.namespace != "" {
 		args.Name = s.namespace + "/" + args.Name
@@ -102,9 +116,10 @@ func (s *Scope) SubScope(namespace string) *Scope {
 	}
 	return &Scope{
 		graph:               s.graph,
-		namemap:             make(map[string]int),
+		namemap:             &opNameMap{},
 		namespace:           namespace,
 		controlDependencies: s.controlDependencies,
+		outTagMap:           s.outTagMap,
 		device:              s.device,
 		err:                 s.err,
 	}
@@ -128,6 +143,7 @@ func (s *Scope) WithControlDependencies(ops ...*tf.Operation) *Scope {
 		namemap:             s.namemap,
 		namespace:           s.namespace,
 		controlDependencies: deps,
+		outTagMap:           s.outTagMap,
 		device:              s.device,
 		err:                 s.err,
 	}
@@ -146,6 +162,7 @@ func (s *Scope) WithDevice(device string) *Scope {
 		namemap:             s.namemap,
 		namespace:           s.namespace,
 		controlDependencies: s.controlDependencies,
+		outTagMap:           s.outTagMap,
 		device:              device,
 		err:                 s.err,
 	}
@@ -172,11 +189,8 @@ func (s *Scope) UpdateErr(op string, err error) {
 }
 
 func (s *Scope) uniqueName(name string) string {
-	count := s.namemap[name]
-	s.namemap[name]++
-	if count == 0 {
-		return name
-	}
+	count := (*s.namemap)[name]
+	(*s.namemap)[name]++
 	return fmt.Sprint(name, "_", count)
 }
 

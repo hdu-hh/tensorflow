@@ -48,10 +48,10 @@ func TestScopeSubScope(t *testing.T) {
 		name  string
 	}{
 		{root, "Const_1"},
-		{sub1, "x/Const_1"},
-		{sub1a, "x/y/Const_1"},
+		{sub1, "x_0/Const_1"},
+		{sub1a, "x_0/y_0/Const_1"},
 		{sub2, "x_1/Const_1"},
-		{sub2a, "x_1/y/Const_1"},
+		{sub2a, "x_1/y_0/Const_1"},
 	}
 	for _, test := range testdata {
 		c := Const(test.scope, int64(1))
@@ -205,5 +205,5 @@ func ExampleSubScope() {
 		panic(s.Err())
 	}
 	fmt.Println(c1.Op.Name(), c2.Op.Name())
-	// Output: x/Const_1 x_1/Const_1
+	// Output: x_0/Const_1 x_1/Const_1
 }
