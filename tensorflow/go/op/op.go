@@ -33,7 +33,6 @@ import (
 func Const(scope *Scope, value interface{}) (output tf.Output) {
 	if err := scope.Err(); err != nil {
 		panic(err)
-		return
 	}
 	t, ok := value.(*tf.Tensor)
 	if !ok {
@@ -125,3 +124,27 @@ func Flatten(s *Scope, x tf.Output) tf.Output {
 
 // ActFunc is the function type of an activation
 type ActFunc func(*Scope, tf.Output) tf.Output
+
+// Swish returns `x * sigmoid(x)`
+func Swish(s *Scope, x tf.Output) tf.Output {
+	return Mul(s, x, Sigmoid(s, x))
+}
+
+// Mish returns `x * tanh(softplus(x))`
+func Mish(s *Scope, x tf.Output) tf.Output {
+	return Mul(s, x, Tanh(s, Softplus(s, x)))
+}
+
+// Gelu implements the Gaussian error linear unit activation function
+// and returns `0.5 * x * (1 + tanh(sqrt(2 / pi) * (x + 0.044715 * x^3)))`
+func Gelu(s *Scope, x tf.Output) tf.Output {
+	c1 := Const(s, float32(1.0))
+	c2 := Const(s, float32(0.5))
+	c3 := Const(s, float32(0.7978845608028654))
+	c4 := Const(s, float32(0.044715))
+	y := Mul(s, c4, Mul(s, x, Mul(s, x, x)))
+	y = Mul(s, c3, Add(s, x, y))
+	z := Mul(s, c2, x)
+	y = Mul(s, z, Add(s, c1, Tanh(s, y)))
+	return y
+}
