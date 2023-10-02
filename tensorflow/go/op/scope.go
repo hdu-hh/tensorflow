@@ -194,13 +194,6 @@ func (s *Scope) uniqueName(name string) string {
 	return fmt.Sprint(name, "_", count)
 }
 
-func (s *Scope) opName(typ string) string {
-	if s.namespace == "" {
-		return typ
-	}
-	return s.namespace + "/" + typ
-}
-
 // RegisterFunc copies and registers the [tf.Func] function and its eventual
 // gradient into the graph and makes it available to be used in the graph.
 // The function must not be nil.

@@ -41,8 +41,14 @@ func Gradients(scope *Scope, y []tf.Output, x []tf.Output, dx ...tf.Output) (out
 		return
 	}
 
+	opType := "Gradients"
+	(*scope.namemap)[opType]++
+	opName := fmt.Sprintf("Gradients_%d", (*scope.namemap)[opType])
+	if scope.namespace != "" {
+		opName = scope.namespace + "/" + opName
+	}
 	var err error
-	if output, err = scope.graph.AddGradients(scope.opName("Gradients"), y, x, dx); err != nil {
+	if output, err = scope.graph.AddGradients(opName, y, x, dx); err != nil {
 		scope.UpdateErr("Gradients", err)
 		return
 	}

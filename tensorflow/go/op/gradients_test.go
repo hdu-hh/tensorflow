@@ -196,8 +196,8 @@ func TestValidateGradientsNames(t *testing.T) {
 	if err := s.Err(); err != nil {
 		t.Fatal(err)
 	}
-	if !strings.HasPrefix(grads0[0].Op.Name(), "Gradients/") {
-		t.Fatalf("Got name %v, wanted started with Gradients/", grads0[0].Op.Name())
+	if !strings.HasPrefix(grads0[0].Op.Name(), "Gradients_") {
+		t.Fatalf("Got name %v, wanted started with Gradients_", grads0[0].Op.Name())
 	}
 
 	sub := s.SubScope("sub")
@@ -205,16 +205,10 @@ func TestValidateGradientsNames(t *testing.T) {
 	if err := s.Err(); err != nil {
 		t.Fatal(err)
 	}
-	if !strings.HasPrefix(grads1[0].Op.Name(), "sub/Gradients/") {
-		t.Fatalf("Got name %v, wanted started with sub/Gradients/", grads1[0].Op.Name())
+	if !strings.HasPrefix(grads1[0].Op.Name(), "sub_0/Gradients_") {
+		t.Fatalf("Got name %v, wanted started with sub/Gradients_", grads1[0].Op.Name())
 	}
 
-	// prepare to recover from expected panic
-	defer func() {
-		if e := recover(); e == nil {
-			t.Error("Gradients should have failed if executed more than once for scope of the same namespace")
-		}
-	}()
 	Gradients(sub, []tf.Output{y0}, []tf.Output{x})
 }
 
