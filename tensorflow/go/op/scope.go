@@ -203,3 +203,37 @@ func (s *Scope) RegisterFunc(fn, grad *tf.Func) error {
 	}
 	return nil
 }
+
+type VarTag string
+
+const ( // parameter tags
+	TagTrainable VarTag = "TagTrainable"
+	TagDecayL1   VarTag = "TagDecayL1"
+	TagDecayL2   VarTag = "TagDecayL2"
+)
+
+func (s *Scope) tagVariable(x tf.Output, tags ...VarTag) {
+	for _, t := range tags {
+		(*s.outTagMap)[t] = append((*s.outTagMap)[t], x)
+	}
+}
+
+// GetParams returns all parameters in scope which have any of the requested tags.
+// If no tags are provided then "TagTrainable" is assumed.
+func (s *Scope) GetParams(tags ...VarTag) (params []tf.Output) {
+	if len(tags) == 0 {
+		tags = []VarTag{TagTrainable}
+	}
+	for _, t := range tags {
+		params = append(params, (*s.outTagMap)[t]...)
+	}
+	return
+}
+
+// mustGetParams returns GetParams() and panics when no match is found
+func (s *Scope) mustGetParams(tags ...VarTag) (params []tf.Output) {
+	if params = s.GetParams(tags...); len(params) == 0 {
+		panic(fmt.Errorf("no matching parameters found for tags: %v", tags))
+	}
+	return
+}

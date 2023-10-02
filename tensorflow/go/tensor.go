@@ -71,6 +71,15 @@ const (
 	Variant      DataType = C.TF_VARIANT
 )
 
+// DeRef returns the underlying data type of a reference type
+func (dtype DataType) DeRef() DataType {
+	const RefOffset = 100
+	if n := int(dtype); n >= RefOffset {
+		dtype = DataType(n - RefOffset)
+	}
+	return dtype
+}
+
 // Tensor holds a multi-dimensional array of elements of a single data type.
 type Tensor struct {
 	c     *C.TF_Tensor
