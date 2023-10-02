@@ -125,6 +125,8 @@ func (s *Session) ListDevices() ([]Device, error) {
 	return deviceSliceFromDeviceList(devicesList)
 }
 
+type FeedMap map[Output]*Tensor
+
 // Run the graph with the associated session starting with the supplied feeds
 // to compute the value of the requested fetches. Runs, but does not return
 // Tensors for operations specified in targets.
@@ -132,7 +134,7 @@ func (s *Session) ListDevices() ([]Device, error) {
 // On success, returns the fetched Tensors in the same order as supplied in
 // the fetches argument. If fetches is set to nil, the returned Tensor fetches
 // is empty.
-func (s *Session) Run(feeds map[Output]*Tensor, fetches []Output, targets []*Operation) ([]*Tensor, error) {
+func (s *Session) Run(feeds FeedMap, fetches []Output, targets []*Operation) ([]*Tensor, error) {
 	s.mu.Lock()
 	if s.c == nil {
 		s.mu.Unlock()
@@ -181,7 +183,7 @@ type PartialRun struct {
 
 // Run resumes execution of the graph to compute the requested fetches and
 // targets with the provided feeds.
-func (pr *PartialRun) Run(feeds map[Output]*Tensor, fetches []Output, targets []*Operation) ([]*Tensor, error) {
+func (pr *PartialRun) Run(feeds FeedMap, fetches []Output, targets []*Operation) ([]*Tensor, error) {
 	var (
 		c      = newCRunArgs(feeds, fetches, targets)
 		status = newStatus()
