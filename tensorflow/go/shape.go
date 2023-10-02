@@ -54,12 +54,17 @@ func (s Shape) NumDimensions() int {
 	return len(s.dims)
 }
 
-// Size returns the size of the dim-th dimension of the shape, or -1 if it
-// is unknown.
-//
-// REQUIRES: 0 <= dim < s.NumDimensions()
+// Size returns the size of the dim-th dimension of the shape.
+// For a negative dim argument the dim+NumDimension dimension is returned.
+// Returns -1 if the dimension is unknown.
 func (s Shape) Size(dim int) int64 {
-	if dim < 0 || dim >= s.NumDimensions() {
+	if dim < 0 {
+		if len(s.dims) == 0 {
+			return 0
+		}
+		dim += s.NumDimensions()
+	}
+	if dim >= s.NumDimensions() {
 		return -1
 	}
 	return s.dims[dim]
@@ -104,6 +109,16 @@ func (s Shape) MustSlice() []int64 {
 		}
 	}
 	return append([]int64{}, s.dims...)
+}
+
+// MustSlice32 returns the shape as an int32 slice.
+func (s Shape) MustSlice32() []int32 {
+	dims64 := s.MustSlice()
+	dims32 := make([]int32, len(dims64))
+	for i, d := range dims64 {
+		dims32[i] = int32(d)
+	}
+	return dims32
 }
 
 // MustNumElements returns the number of elements of a shape.
