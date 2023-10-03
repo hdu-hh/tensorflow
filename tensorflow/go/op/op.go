@@ -29,8 +29,8 @@ import (
 	tf "github.com/hdu-hh/tensorflow/tensorflow/go"
 )
 
-// Const adds an operation to graph that produces value as output.
-func Const(scope *Scope, value interface{}) (output tf.Output) {
+// Const adds an operation to the graph that outputs the value.
+func Const(scope *Scope, value any) (output tf.Output) {
 	if err := scope.Err(); err != nil {
 		panic(err)
 	}
@@ -43,11 +43,32 @@ func Const(scope *Scope, value interface{}) (output tf.Output) {
 		}
 	}
 	return scope.AddOperation(tf.OpSpec{
-		Type: "Const",
-		Attrs: map[string]interface{}{
-			"dtype": t.DataType(),
-			"value": t,
-		}}).Output(0)
+		Type:  "Const",
+		Attrs: map[string]any{"dtype": t.DataType(), "value": t},
+	}).Output(0)
+}
+
+// ConstT adds an operation to the graph that outputs the value as specified datatype.
+func ConstT(scope *Scope, dtype tf.DataType, value interface{}) (output tf.Output) {
+	if err := scope.Err(); err != nil {
+		panic(err)
+	}
+	t, ok := value.(*tf.Tensor)
+	var err error
+	if !ok {
+		if t, err = tf.NewTensor(value); err != nil {
+			scope.UpdateErr("ConstT", err)
+			return
+		}
+	}
+	if t, err = tf.CastTensor(dtype, t); err != nil {
+		scope.UpdateErr("ConstT cast", err)
+		return
+	}
+	return scope.AddOperation(tf.OpSpec{
+		Type:  "Const",
+		Attrs: map[string]any{"dtype": dtype, "value": t},
+	}).Output(0)
 }
 
 // Func adds the tensorflow function to the graph
