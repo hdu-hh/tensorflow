@@ -34,10 +34,7 @@ func TestCastWorker(t *testing.T) {
 		{"f8_e4m3", 120, Float8e4m3fn},
 	} {
 		t.Run(sample.name, func(t *testing.T) {
-			x1, err := NewTypedTensor(sample.dtype, V)
-			if err != nil {
-				t.Fatal(err)
-			}
+			x1 := sample.dtype.NewTensor(V)
 			x2, err := CastTensor(Double, x1)
 			if err != nil {
 				t.Fatal(err)

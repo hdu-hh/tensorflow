@@ -1,4 +1,4 @@
-// workerGraph is used e.g. for converting tensors
+// worker is used e.g. for converting tensors
 package tensorflow
 
 import "fmt"
