@@ -137,6 +137,17 @@ func NewTensor(value any) (*Tensor, error) {
 	return t, nil
 }
 
+// NewTypedTensor converts from a Go value to a Tensor with the requested type.
+// Valid values are scalars, slices, and arrays. For slices every element must
+// have the same length so that the resulting Tensor has a valid shape.
+func NewTypedTensor(dtype DataType, value any) (*Tensor, error) {
+	t, err := NewTensor(value)
+	if err != nil {
+		return nil, err
+	}
+	return CastTensor(dtype, t)
+}
+
 // isAllArray returns true if type is a primitive type or an array of primitive
 // types or an array of ... etc.. When this is true the data we want is
 // contiguous in RAM.
