@@ -53,10 +53,11 @@ func NewTensor(value any) (*Tensor, error) {
 	if err != nil {
 		return nil, err
 	}
-	nflattened := numElements(shape)
-	nbytes := typeOf(dataType, nil).Size() * uintptr(nflattened)
+	nbytes := numElements(shape)
 	if dataType == String {
-		nbytes = uintptr(nflattened) * C.sizeof_TF_TString
+		nbytes *= int64(C.sizeof_TF_TString)
+	} else {
+		nbytes *= int64(dtype2bytesize[dataType])
 	}
 	var shapePtr *C.int64_t
 	if len(shape) > 0 {
@@ -89,7 +90,7 @@ func NewTensor(value any) (*Tensor, error) {
 		}
 	}
 
-	if uintptr(buf.Len()) != nbytes {
+	if int64(buf.Len()) != nbytes {
 		return nil, bug("NewTensor incorrectly calculated the size of a tensor with type %v and shape %v as %v bytes instead of %v", dataType, shape, nbytes, buf.Len())
 	}
 	return t, nil
@@ -162,7 +163,8 @@ func ReadTensor(dataType DataType, shape []int64, r io.Reader) (*Tensor, error) 
 		shapePtr = (*C.int64_t)(unsafe.Pointer(&shape[0]))
 	}
 
-	nbytes := typeOf(dataType, nil).Size() * uintptr(numElements(shape))
+	nbytes := numElements(shape)
+	nbytes *= int64(dtype2bytesize[dataType])
 	t := &Tensor{
 		c:     C.TF_AllocateTensor(C.TF_DataType(dataType), shapePtr, C.int(len(shape)), C.size_t(nbytes)),
 		shape: shape,
